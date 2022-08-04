@@ -1,0 +1,31 @@
+.burger {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 600px;
+}
+
+.burger__tabs {
+  display: flex;
+}
+
+.burger__container {
+  display: grid;
+  gap: 0 24px;
+  grid-template-columns: 1fr 1fr;
+  overflow-y: scroll;
+}
+
+.burger__comps {
+  grid-column: span 2;
+}
+
+.burger__ingredient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.burger__price {
+  display: flex;
+  align-items: center;
+}

@@ -5,14 +5,16 @@ import './App.css';
 import AppHeader from './components/AppHeader/AppHeader';
 import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from './components/BurgerConstructor/BurgerConstructor';
+import { data } from './utils/data.js';
 
 export default function App () {
   return (
-    <>
-      <h1>bleh</h1>
+    <div className="page">
       <AppHeader />
-      <BurgerIngredients />
-      <BurgerConstructor />
-    </>
+      <main className="main pb-10">
+        <BurgerIngredients data={data} />
+        <BurgerConstructor />
+      </main>
+    </div>
   );
 }

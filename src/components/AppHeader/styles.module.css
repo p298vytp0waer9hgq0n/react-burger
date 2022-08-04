@@ -1,14 +1,15 @@
 .header {
-  margin: auto;
   display: grid;
   grid-template-columns: repeat(3, min(33vw, 432px));
   justify-content: center;
+  justify-items: center;
   align-items: center;
   background: var(--background);
 }
 
 .header__order {
   display: flex;
+  justify-self: flex-start;
 }
 
 .header__button {
@@ -19,8 +20,4 @@
   border: none;
   border-radius: 40px;
   color: inherit;
-}
-
-.header__logo {
-  justify-self: center;
 }
