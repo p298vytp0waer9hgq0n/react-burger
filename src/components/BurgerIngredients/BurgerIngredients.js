@@ -7,15 +7,14 @@ import styles from './styles.module.css';
 export default function BurgerIngredients (props) {
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
   const [current, setCurrent] = React.useState('buns');
-  const bunsElements = props.data.filter((item) => item.type === 'bun').map((bun) => {
-    return <Ingredient key={bun._id} {...bun} />
+  const elements = props.data.map((item) => {
+    return <Ingredient key={item._id} {...item} quantity={props.test.reduce((count, cur) => {
+      return (cur._id === item._id) ? count + 1 : count;
+    }, 0)} />
   });
-  const mainElements = props.data.filter((item) => item.type === 'main').map((main) => {
-    return <Ingredient key={main._id} {...main} />
-  });
-  const sauceElements = props.data.filter((item) => item.type === 'sauce').map((sauce) => {
-    return <Ingredient key={sauce._id} {...sauce} />
-  });
+  const bunsElements = elements.filter((elem) => elem.props.type === 'bun');
+  const mainElements = elements.filter((elem) => elem.props.type === 'main');
+  const sauceElements = elements.filter((elem) => elem.props.type === 'sauce');
 
   return (
     <section className={`${styles.burger}`}>
@@ -25,7 +24,7 @@ export default function BurgerIngredients (props) {
         <Tab value="sauces" active={current === 'sauces'} onClick={setCurrent}>Соусы</Tab>
         <Tab value="stuff" active={current === 'stuff'} onClick={setCurrent}>Начинки</Tab>
       </div>
-      <div className={`${styles.burger__container} custom-scroll mt-8 pl-4 pr-1`}>
+      <div className={`${styles.burger__container} custom-scroll mt-8`}>
         <h2 className={titleIngrStyle}>Булки</h2>
         {bunsElements}
         <h2 className={titleIngrStyle}>Соусы</h2>

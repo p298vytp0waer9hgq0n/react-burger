@@ -1,14 +1,44 @@
 .constructor {
   display: flex;
+  align-items: flex-end;
   /* align-self: flex-start; */
   flex-direction: column;
   gap: 16px;
   flex: 1 1 600px;
-  overflow-y: scroll;
+}
+
+.constructor__list {
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.constructor__draggable {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .constructor__order {
   display: flex;
   align-self: flex-end;
-  margin-bottom: 70px;
+}
+
+.constructor__total {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.constructor__bigicon {
+  position: relative;
+  zoom: 1.5;
+  top: 2px;
 }

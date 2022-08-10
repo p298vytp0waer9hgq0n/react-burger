@@ -10,16 +10,19 @@
 
 .burger__container {
   display: grid;
-  gap: 0 24px;
+  /* gap: 0 24px; */
   grid-template-columns: 1fr 1fr;
   overflow-y: scroll;
+  text-align: center;
 }
 
 .burger__comps {
   grid-column: span 2;
+  text-align: left;
 }
 
 .burger__ingredient {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,4 +31,8 @@
 .burger__price {
   display: flex;
   align-items: center;
+}
+
+.burger__name {
+  min-height: 48px;
 }
