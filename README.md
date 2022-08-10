@@ -1,4 +1,4 @@
-# Проект: Место
+# Проект: React-Burger
 
 ### Обзор
 
@@ -10,4 +10,4 @@
 
 **Gh-pages**
 
-* [Страница гх-пэйджес](https://p298vytp0waer9hgq0n.github.io/mesto-project/)
+* [Страница гх-пэйджес](https://p298vytp0waer9hgq0n.github.io/react-burger/)
