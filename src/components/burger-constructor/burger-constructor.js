@@ -1,8 +1,9 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import './burger-constructor.css';
+import styles from './burger-constructor.module.css';
 import Order from "./order";
 
 import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/types";
 
 export default function BurgerConstructor (props) {
   const burgerBun = props.data.find((item) => item.type === 'bun');
@@ -26,14 +27,13 @@ export default function BurgerConstructor (props) {
   const burgerElems = props.data.map((item, index) => {
     if (item.type !== 'bun') {
       return (
-        <li className="constructor__draggable">
+        <li className={styles.constructor__draggable} key={index}>
           <DragIcon />
           <ConstructorElement
             isLocked={false}
             text={item.name}
             price={item.price}
             thumbnail={item.image}
-            key={index} // !!поменять на что-то другое позже
           />
         </li>
       )
@@ -41,23 +41,17 @@ export default function BurgerConstructor (props) {
     return null;
   });
   return (
-    <>
-      <section className="constructor mt-25 pl-4">
-        <div className="constructor__term pl-8 pr-4">{burgerTop}</div>
-        <ul className="constructor__list pr-1 custom-scroll">
-          {burgerElems}
-        </ul>
-        <div className="constructor__term pl-8 pr-4">{burgerBottom}</div>
-        <Order total={total} />
-      </section>
-    </>
+    <section className={`${styles.constructor} mt-25 pl-4`}>
+      <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>
+      <ul className={`${styles.constructor__list} pr-1 custom-scroll`}>
+        {burgerElems}
+      </ul>
+      <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>
+      <Order total={total} />
+    </section>
   );
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string,
-  }))
+  data: PropTypes.arrayOf(ingredientType)
 }
