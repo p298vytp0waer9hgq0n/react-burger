@@ -9,15 +9,21 @@
 }
 
 .burger__container {
-  display: grid;
-  /* gap: 0 24px; */
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
+}
+
+.burger__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   text-align: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .burger__comps {
-  grid-column: span 2;
   text-align: left;
 }
 

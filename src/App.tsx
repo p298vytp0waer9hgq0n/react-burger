@@ -2,9 +2,9 @@ import React from 'react';
 
 import './App.css';
 
-import AppHeader from './components/AppHeader/AppHeader';
-import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from './components/BurgerConstructor/BurgerConstructor';
+import AppHeader from './components/app-header/app-header';
+import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
+import BurgerConstructor from './components/burger-constructor/burger-constructor';
 import { data, test } from './utils/data.js';
 
 export default function App () {

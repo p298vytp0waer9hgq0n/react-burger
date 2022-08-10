@@ -1,6 +1,6 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './styles.module.css';
-import Order from "./Order";
+import './burger-constructor.css';
+import Order from "./order";
 
 export default function BurgerConstructor (props) {
   const burgerBun = props.test.find((item) => item.type === 'bun');
@@ -12,7 +12,6 @@ export default function BurgerConstructor (props) {
       text={`${burgerBun.name} (верх)`}
       price={burgerBun.price}
       thumbnail={burgerBun.image}
-      key='t'
     />;
   const burgerBottom =
     <ConstructorElement
@@ -21,19 +20,18 @@ export default function BurgerConstructor (props) {
       text={`${burgerBun.name} (низ)`}
       price="0"
       thumbnail={burgerBun.image}
-      key='b'
     />;
   const burgerElems = props.test.map((item, index) => {
     if (item.type !== 'bun') {
       return (
-        <li className={styles.constructor__draggable}>
+        <li className="constructor__draggable">
           <DragIcon />
           <ConstructorElement
             isLocked={false}
             text={item.name}
             price={item.price}
             thumbnail={item.image}
-            key={index}
+            key={index} // !!поменять на что-то другое позже
           />
         </li>
       )
@@ -42,13 +40,13 @@ export default function BurgerConstructor (props) {
   });
   return (
     <>
-      <section className={`${styles.constructor} mt-25 pl-4`}>
-        <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>
-        <ul className={`${styles.constructor__list} pr-1 custom-scroll`}>
+      <section className="constructor mt-25 pl-4">
+        <div className="constructor__term pl-8 pr-4">{burgerTop}</div>
+        <ul className="constructor__list pr-1 custom-scroll">
           {burgerElems}
         </ul>
-        <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>
-        <Order total={total}/>
+        <div className="constructor__term pl-8 pr-4">{burgerBottom}</div>
+        <Order total={total} />
       </section>
     </>
   );

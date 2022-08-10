@@ -1,7 +1,6 @@
 .constructor {
   display: flex;
   align-items: flex-end;
-  /* align-self: flex-start; */
   flex-direction: column;
   gap: 16px;
   flex: 1 1 600px;
