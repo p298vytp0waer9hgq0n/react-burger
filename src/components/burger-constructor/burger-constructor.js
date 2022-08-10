@@ -2,9 +2,11 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import './burger-constructor.css';
 import Order from "./order";
 
+import PropTypes from 'prop-types';
+
 export default function BurgerConstructor (props) {
-  const burgerBun = props.test.find((item) => item.type === 'bun');
-  const total = props.test.reduce((cum, ele) => cum + ele.price, 0);
+  const burgerBun = props.data.find((item) => item.type === 'bun');
+  const total = props.data.reduce((cum, ele) => cum + ele.price, 0);
   const burgerTop =
     <ConstructorElement
       type='top'
@@ -21,7 +23,7 @@ export default function BurgerConstructor (props) {
       price="0"
       thumbnail={burgerBun.image}
     />;
-  const burgerElems = props.test.map((item, index) => {
+  const burgerElems = props.data.map((item, index) => {
     if (item.type !== 'bun') {
       return (
         <li className="constructor__draggable">
@@ -50,4 +52,12 @@ export default function BurgerConstructor (props) {
       </section>
     </>
   );
+}
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string,
+  }))
 }
