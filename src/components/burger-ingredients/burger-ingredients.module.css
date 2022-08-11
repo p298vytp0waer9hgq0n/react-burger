@@ -1,0 +1,44 @@
+.burger {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 600px;
+}
+
+.burger__tabs {
+  display: flex;
+}
+
+.burger__container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.burger__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.burger__comps {
+  text-align: left;
+}
+
+.burger__ingredient {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.burger__price {
+  display: flex;
+  align-items: center;
+}
+
+.burger__name {
+  min-height: 48px;
+}
