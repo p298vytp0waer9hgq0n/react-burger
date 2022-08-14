@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import styles from './burger-ingredients.module.css';
 
 export default function BurgerIngredients (props) {
+  console.log(props.data);
   const bunsRef = useRef();
   const sauceRef = useRef();
   const stuffRef = useRef();

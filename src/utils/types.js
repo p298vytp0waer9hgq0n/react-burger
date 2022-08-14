@@ -5,7 +5,7 @@ const ingredientType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   image: PropTypes.string,
   type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired
+  price: PropTypes.number.isRequired,
 });
 
 export { ingredientType }
