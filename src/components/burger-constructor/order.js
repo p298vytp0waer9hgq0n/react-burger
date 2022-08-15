@@ -1,9 +1,14 @@
+
 import burgerConstructor from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import PropTypes from 'prop-types';
+import Modal from '../modal/modal';
 
 export default function Order (props) {
+
+
+
   return (
     <div className={`${burgerConstructor.constructor__order} mt-10 mr-4 mb-10`}>
       <div className={`${burgerConstructor.constructor__total} mr-10`}>

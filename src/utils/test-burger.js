@@ -1,6 +1,5 @@
 export default function generateTestBurger(data) {
   if (data) {
-    console.log(data);
     const testBurger = [];
     testBurger[0] = 0.5 < Math.random() ? data[0] : data[1];
     for (let i = 0; i < 3; i++) {

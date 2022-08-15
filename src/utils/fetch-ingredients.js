@@ -3,7 +3,6 @@ import generateTestBurger from "./test-burger";
 
 export default function fetchIngredients(url, callLoading, callError, callIngr, callTest) {
   callLoading(true);
-  console.log('Loading ingredients');
   fetch(url)
     .then((resp) => {
       if (resp.ok) {
@@ -18,9 +17,9 @@ export default function fetchIngredients(url, callLoading, callError, callIngr, 
       callIngr(resp.data);
       callTest(generateTestBurger(resp.data)); // test-burger
     })
+    .finally(() => callLoading(false))
     .catch((err) => {
       console.log('Ошибка загрузки ингредиентов: ', err);
       callError(true);
-    })
-    .finally(() => callLoading(false));
+    });
 }

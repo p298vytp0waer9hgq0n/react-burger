@@ -4,6 +4,8 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import fetchIngredients from '../../utils/fetch-ingredients';
 
+import { url } from '../../utils/constants';
+
 import app from './app.module.css';
 
 
@@ -15,7 +17,7 @@ export default function App () {
 
   useEffect(() => {
     fetchIngredients(
-      'https://norma.nomoreparties.space/api/ingredients',
+      url,
       setLoading,
       setError,
       setIngredients,
