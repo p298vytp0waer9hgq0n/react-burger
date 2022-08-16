@@ -1,6 +1,8 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
 
+import PropTypes from 'prop-types';
+
 import styles from "./order-details.module.css";
 
 export default function OrderDetail (props) {
@@ -15,4 +17,10 @@ export default function OrderDetail (props) {
       <p className="text text_type_main-default text_color_inactive mb-20">Дождитесь готовности на орибитальной станции</p>
   </Modal>
   )
+}
+
+OrderDetail.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
+  _id: PropTypes.string.isRequired
 }

@@ -1,3 +1,5 @@
+// Функция-генератор бургера при загрузке страницы
+
 export default function generateTestBurger(data) {
   if (data) {
     const testBurger = [];

@@ -1,6 +1,5 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientType } from '../../utils/types';
-import Modal from '../modal/modal';
 import styles from './burger-ingredients.module.css';
 
 export default function Ingredient (props) {

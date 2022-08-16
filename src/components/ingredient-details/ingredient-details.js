@@ -1,4 +1,7 @@
+import { ingredientType } from "../../utils/types";
 import Modal from "../modal/modal";
+
+import PropTypes from 'prop-types';
 
 import styles from "./ingredient-details.module.css";
 
@@ -32,4 +35,10 @@ export default function IngredientDetails (props) {
       </div>
     </Modal>
   )
+}
+
+IngredientDetails.propTypes = {
+  ingr: ingredientType,
+  visible: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired
 }

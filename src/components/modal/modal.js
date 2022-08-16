@@ -1,6 +1,8 @@
 import { createPortal } from "react-dom";
 import ModalOverlay from "./modal-overlay";
 
+import PropTypes from 'prop-types';
+
 import styles from "./modals.module.css";
 
 import { modalRoot } from "../../utils/constants";
@@ -41,4 +43,10 @@ export default function Modal (props) {
       </div>
     </ModalOverlay>
   ), modalRoot);
+}
+
+Modal.propTypes = {
+  title: PropTypes.string,
+  visible: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired
 }
