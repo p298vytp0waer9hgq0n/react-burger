@@ -3,21 +3,30 @@ import burgerConstructor from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import PropTypes from 'prop-types';
-import Modal from '../modal/modal';
+import OrderDetail from '../order-details/order-details';
+import { useState } from 'react';
 
 export default function Order (props) {
+  const [orderVisible, setOrderVisible] = useState(false);
 
+  function handleOrderClick () {
+    setOrderVisible(true);
+  }
 
+  function closeModal () {
+    setOrderVisible(false);
+  }
 
   return (
     <div className={`${burgerConstructor.constructor__order} mt-10 mr-4 mb-10`}>
+      <OrderDetail close={closeModal} visible={orderVisible} _id="034536" />
       <div className={`${burgerConstructor.constructor__total} mr-10`}>
         <p className="text text_type_digits-medium">{props.total}&nbsp;</p>
         <div className={burgerConstructor.constructor__bigicon}>
           <CurrencyIcon />
         </div>
       </div>
-        <Button type="primary" size="large">Оформить заказ</Button>
+        <Button type="primary" size="large" onClick={handleOrderClick}>Оформить заказ</Button>
     </div>
   );
 }

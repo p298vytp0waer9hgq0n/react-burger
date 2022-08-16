@@ -28,8 +28,8 @@ export default function BurgerIngredients (props) {
   }
 
   function closeModal () {
+    ingRef.current = null;
     setIngVisible(false);
-    console.log('bleh');
   }
 
   const [current, setCurrent] = useState('buns');
@@ -52,7 +52,7 @@ export default function BurgerIngredients (props) {
 
   return (
     <section className={styles.burger}>
-      <IngredientDetails ingr={ingRef.current} visible={ingVisible} onClose={closeModal}></IngredientDetails>
+      <IngredientDetails ingr={ingRef.current} visible={ingVisible} close={closeModal}></IngredientDetails>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <div className={styles.burger__tabs}>
         <Tab value="buns" active={current === 'buns'} onClick={handleClick}>Булки</Tab>

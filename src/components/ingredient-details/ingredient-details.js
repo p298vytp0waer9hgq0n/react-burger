@@ -6,9 +6,9 @@ export default function IngredientDetails (props) {
   if (!props.ingr) return null;
   return (
     <Modal
-      title={props.ingr.name}
+      title="Детали ингредиента"
       visible={props.visible}
-      onClose={props.onClose}
+      close={props.close}
     >
       <img src={props.ingr.image_large} alt={props.ingr.name} />
       <p className="text text_type_main-medium pt-4">{props.ingr.name}</p>

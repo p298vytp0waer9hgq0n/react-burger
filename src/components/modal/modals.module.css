@@ -43,6 +43,7 @@
 
 .modal__closeBtn {
   padding: 0;
+  margin-left: auto;
   background: none;
   border: none;
   cursor: pointer;
