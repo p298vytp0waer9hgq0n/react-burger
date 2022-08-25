@@ -3,8 +3,12 @@ import { ingredientType } from '../../utils/types';
 import styles from './burger-ingredients.module.css';
 
 export default function Ingredient (props) {
+  function handleClick () {
+    props.callback(props);
+  }
+
   return (
-    <li className={`${styles.burger__ingredient} ml-4 mr-1 mb-8`}>
+    <li className={`${styles.burger__ingredient} ml-4 mr-1 mb-8`} onClick={handleClick}>
       {props.quantity > 0 && <Counter count={props.quantity} size="default" />}
       <img src={props.image} alt={props.name} />
       <div className={`${styles.burger__price} mt-2 mb-2`}>

@@ -6,11 +6,15 @@ import { ingredientType } from "../../utils/types";
 import PropTypes from 'prop-types';
 
 import styles from './burger-ingredients.module.css';
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import Modal from "../modal/modal";
 
 export default function BurgerIngredients (props) {
   const bunsRef = useRef();
   const sauceRef = useRef();
   const stuffRef = useRef();
+  const ingRef = useRef();
+  const [ingVisible, setIngVisible] = useState(false);
 
   function handleClick (tab) {
     setCurrent(tab);
@@ -19,11 +23,21 @@ export default function BurgerIngredients (props) {
     if (tab === 'stuff') stuffRef.current.scrollIntoView({behavior: 'smooth'});
   }
 
+  function handleIngClick (ingDetails) {
+    ingRef.current = ingDetails;
+    setIngVisible(true);
+  }
+
+  function closeModal () {
+    setIngVisible(false);
+  }
+
   const [current, setCurrent] = useState('buns');
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
   const elements = props.data.map((item) => {
     return (
       <Ingredient
+        callback={handleIngClick}
         key={item._id}
         {...item}
         quantity={props.test.reduce((count, cur) => {
@@ -38,6 +52,13 @@ export default function BurgerIngredients (props) {
 
   return (
     <section className={styles.burger}>
+      <Modal
+        title="Детали ингредиента"
+        visible={ingVisible}
+        close={closeModal}
+      >
+        <IngredientDetails ingr={ingRef.current}></IngredientDetails>
+      </Modal>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <div className={styles.burger__tabs}>
         <Tab value="buns" active={current === 'buns'} onClick={handleClick}>Булки</Tab>
