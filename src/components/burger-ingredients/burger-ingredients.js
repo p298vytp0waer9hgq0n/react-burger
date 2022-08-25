@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 import styles from './burger-ingredients.module.css';
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import Modal from "../modal/modal";
 
 export default function BurgerIngredients (props) {
   const bunsRef = useRef();
@@ -51,7 +52,13 @@ export default function BurgerIngredients (props) {
 
   return (
     <section className={styles.burger}>
-      <IngredientDetails ingr={ingRef.current} visible={ingVisible} close={closeModal}></IngredientDetails>
+      <Modal
+        title="Детали ингредиента"
+        visible={ingVisible}
+        close={closeModal}
+      >
+        <IngredientDetails ingr={ingRef.current}></IngredientDetails>
+      </Modal>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <div className={styles.burger__tabs}>
         <Tab value="buns" active={current === 'buns'} onClick={handleClick}>Булки</Tab>

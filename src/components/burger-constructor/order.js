@@ -5,6 +5,7 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import PropTypes from 'prop-types';
 import OrderDetail from '../order-details/order-details';
 import { useState } from 'react';
+import Modal from '../modal/modal';
 
 export default function Order (props) {
   const [orderVisible, setOrderVisible] = useState(false);
@@ -19,7 +20,9 @@ export default function Order (props) {
 
   return (
     <div className={`${burgerConstructor.constructor__order} mt-10 mr-4 mb-10`}>
-      <OrderDetail close={closeModal} visible={orderVisible} _id="034536" />
+    <Modal title="" close={closeModal} visible={orderVisible}>
+      <OrderDetail _id="034536" />
+    </Modal>
       <div className={`${burgerConstructor.constructor__total} mr-10`}>
         <p className="text text_type_digits-medium">{props.total}&nbsp;</p>
         <div className={burgerConstructor.constructor__bigicon}>
