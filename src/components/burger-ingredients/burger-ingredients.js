@@ -28,7 +28,6 @@ export default function BurgerIngredients (props) {
   }
 
   function closeModal () {
-    // ingRef.current = null;
     setIngVisible(false);
   }
 
