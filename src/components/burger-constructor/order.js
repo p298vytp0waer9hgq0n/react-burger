@@ -7,14 +7,17 @@ import OrderDetail from '../order-details/order-details';
 import placeOrder from '../../utils/place-order';
 import { ConstructorContext, orderUrl } from '../../utils/constants';
 
-export default function Order (props) {
+export default function Order () {
   const [orderVisible, setOrderVisible] = useState(false);
   const {burger} = useContext(ConstructorContext);
+  const [order, setOrder] = useState({});
 
   function handleOrderClick () {
     const ingredients = burger.map((item) => item._id);
-    console.log(ingredients);
-    placeOrder(orderUrl, ingredients);
+    placeOrder(orderUrl, ingredients)
+      .then((data) => {
+        setOrder(data);
+      });
     setOrderVisible(true);
   }
 
@@ -29,7 +32,7 @@ export default function Order (props) {
   return (
     <div className={`${burgerConstructor.constructor__order} mt-10 mr-4 mb-10`}>
     <Modal title="" close={closeModal} visible={orderVisible}>
-      <OrderDetail _id="034536" />
+      <OrderDetail {...order} />
     </Modal>
       <div className={`${burgerConstructor.constructor__total} mr-10`}>
         <p className="text text_type_digits-medium">{total}&nbsp;</p>

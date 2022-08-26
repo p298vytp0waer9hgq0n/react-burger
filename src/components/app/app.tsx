@@ -25,10 +25,10 @@ export default function App () {
         }
         return [...prev, action.value];
       case 'remove':
-        // не требуется
+        // n/a
         break;
       case 'rearrange':
-        // не требуется
+        // n/a
         break;
       case 'clear':
         return [];
@@ -44,7 +44,7 @@ export default function App () {
         setLoading,
         setError,
         setIngredients,
-        burgerDispatch);
+        burgerDispatch); // для наполнения рандомного бургера при загрузке, убрать из окончательного варианта
     }
     return () => { fetchRan.current = true };
   }, []);

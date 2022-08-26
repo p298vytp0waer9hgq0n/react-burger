@@ -1,16 +1,19 @@
 export default function placeOrder(url, ingredient) {
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      ingredients: ingredient
+      "ingredients": ingredient
     })
   })
     .then((resp) => {
       if (resp.ok) {
-        console.log(resp.json());
+        return resp.json();
+      } else {
+        return Promise.reject(`${resp.status} ${resp.statusText}`);
       }
     })
-    .catch((resp) => {
-      console.log(`Ошибка размещения заказа: ${resp.status}`);
+    .catch((err) => {
+      console.log(`Ошибка размещения заказа: ${err}`);
     })
 }
