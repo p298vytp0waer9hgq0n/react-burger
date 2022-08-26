@@ -1,7 +1,7 @@
 // test-burger
 import generateTestBurger from "./test-burger";
 
-export default function fetchIngredients(url, callLoading, callError, callIngr, callTest) {
+export default function fetchIngredients(url, callLoading, callError, callIngr, callBurger) {
   callLoading(true);
   fetch(url)
     .then((resp) => {
@@ -15,7 +15,8 @@ export default function fetchIngredients(url, callLoading, callError, callIngr, 
     .then((resp) => {
       callError(false);
       callIngr(resp.data);
-      callTest(generateTestBurger(resp.data)); // test-burger
+      const testBurger = generateTestBurger(resp.data);
+      testBurger.forEach((item) => callBurger({type: 'add', value: item}));
     })
     .finally(() => callLoading(false))
     .catch((err) => {

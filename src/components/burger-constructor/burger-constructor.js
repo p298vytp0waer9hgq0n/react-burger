@@ -1,31 +1,32 @@
+import { useContext } from "react";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
 import Order from "./order";
 
-import PropTypes from 'prop-types';
-import { ingredientType } from "../../utils/types";
+import { ConstructorContext } from "../../utils/constants";
 
-export default function BurgerConstructor (props) {
-  const burgerBun = props.data.find((item) => item.type === 'bun');
-  const total = props.data.reduce((cum, ele) => cum + ele.price, 0);
-  const burgerTop =
+export default function BurgerConstructor () {
+  const { burger } = useContext(ConstructorContext);
+
+  const burgerBun = burger.find((item) => item.type === 'bun');
+  const burgerTop = burgerBun ?
     <ConstructorElement
       type='top'
       isLocked={true}
       text={`${burgerBun.name} (верх)`}
       price={burgerBun.price}
       thumbnail={burgerBun.image}
-    />;
-  const burgerBottom =
+    /> : null;
+  const burgerBottom = burgerBun ?
     <ConstructorElement
       type='bottom'
       isLocked={true}
       text={`${burgerBun.name} (низ)`}
-      price="0"
+      price={burgerBun.price} // по заданию вроде выходит, что мы берём за булку дважды, как жлобы
       thumbnail={burgerBun.image}
-    />;
-  const burgerElems = props.data.map((item, index) => {
-    if (item.type !== 'bun') {
+    /> : null;
+  const burgerElems = burger.map((item, index) => {
+    if (item && item.type !== 'bun') {
       return (
         <li className={styles.constructor__draggable} key={index}>
           <DragIcon />
@@ -40,6 +41,7 @@ export default function BurgerConstructor (props) {
     }
     return null;
   });
+
   return (
     <section className={`${styles.constructor} mt-25 pl-4`}>
       <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>
@@ -47,11 +49,7 @@ export default function BurgerConstructor (props) {
         {burgerElems}
       </ul>
       <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>
-      <Order total={total} />
+      <Order />
     </section>
   );
-}
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired // пока необходим.
 }

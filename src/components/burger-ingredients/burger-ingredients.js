@@ -1,13 +1,16 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredients";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+
 import { ingredientType } from "../../utils/types";
+import { ConstructorContext } from '../../utils/constants';
 
 import PropTypes from 'prop-types';
 
 import styles from './burger-ingredients.module.css';
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import Modal from "../modal/modal";
+
 
 export default function BurgerIngredients (props) {
   const bunsRef = useRef();
@@ -15,6 +18,7 @@ export default function BurgerIngredients (props) {
   const stuffRef = useRef();
   const ingRef = useRef();
   const [ingVisible, setIngVisible] = useState(false);
+  const { burger } = useContext(ConstructorContext);
 
   function handleClick (tab) {
     setCurrent(tab);
@@ -40,7 +44,7 @@ export default function BurgerIngredients (props) {
         callback={handleIngClick}
         key={item._id}
         {...item}
-        quantity={props.test.reduce((count, cur) => {
+        quantity={burger.reduce((count, cur) => {
           return (cur._id === item._id) ? count + 1 : count;
         }, 0)}
       />
@@ -79,9 +83,4 @@ export default function BurgerIngredients (props) {
 
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(ingredientType).isRequired,
-  // С помощью массива test сейчас наполняется бургер
-  // в заказе, чтобы не хардкодить данные в верстку.
-  // Это самое простое решение, которое я нашел,
-  // чтобы все элементы были в достаточном количестве.
-  test: PropTypes.arrayOf(ingredientType)
 }
