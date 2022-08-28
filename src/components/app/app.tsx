@@ -4,12 +4,13 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import fetchIngredients from '../../utils/fetch-ingredients';
 
-import { ConstructorContext, ingredientsUrl } from '../../utils/constants';
+import { ConstructorContext, baseUrl, ingredientsUrl } from '../../utils/constants';
 
 import app from './app.module.css';
+import generateTestBurger from '../../utils/test-burger';
 
 
-export default function App () {
+export default function App() {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
   const [ingredients, setIngredients] = useState<any>(null);
@@ -17,10 +18,10 @@ export default function App () {
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
 
-  function burgerReducer (prev:any, action:any) {
+  function burgerReducer(prev: any, action: any) {
     switch (action.type) {
       case 'add':
-        if (action.value.type === 'bun' && prev.findIndex((item:any) => item.type === 'bun') !== -1) {
+        if (action.value.type === 'bun' && prev.findIndex((item: any) => item.type === 'bun') !== -1) {
           return prev;
         }
         return [...prev, action.value];
@@ -39,20 +40,30 @@ export default function App () {
 
   useEffect(() => {
     if (fetchRan.current === false) {
-      fetchIngredients(
-        ingredientsUrl,
-        setLoading,
-        setError,
-        setIngredients,
-        burgerDispatch); // для наполнения рандомного бургера при загрузке, убрать из окончательного варианта
+      setLoading(true);
+      fetchIngredients(baseUrl + ingredientsUrl)
+        .then((resp) => {
+          setError(false);
+          setIngredients(resp.data);
+          const testBurger = generateTestBurger(resp.data);
+          testBurger?.forEach((item) => burgerDispatch({ type: 'add', value: item }));
+        })
+        .catch((err) => {
+          setError(true);
+          console.log("Ошибка загрузки ингредиентов: ", err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
     return () => { fetchRan.current = true };
   }, []);
 
   if (isLoading) {
     return (
-    <p>Loading...</p>
-  )}
+      <p>Loading...</p>
+    )
+  }
 
   if (hasError) return (
     <p>Ошибка приложения</p>
@@ -62,8 +73,8 @@ export default function App () {
     <div className={app.page}>
       <AppHeader />
       <main className={`${app.main} pb-10`}>
-        <ConstructorContext.Provider value={{burger, burgerDispatch}}>
-        <BurgerIngredients data={ingredients} />
+        <ConstructorContext.Provider value={{ burger, burgerDispatch }}>
+          <BurgerIngredients data={ingredients} />
           <BurgerConstructor />
         </ConstructorContext.Provider>
       </main>

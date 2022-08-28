@@ -1,3 +1,5 @@
+import checkResponse from "./check-response";
+
 export default function placeOrder(url, ingredient) {
   return fetch(url, {
     method: 'POST',
@@ -6,14 +8,5 @@ export default function placeOrder(url, ingredient) {
       "ingredients": ingredient
     })
   })
-    .then((resp) => {
-      if (resp.ok) {
-        return resp.json();
-      } else {
-        return Promise.reject(`${resp.status} ${resp.statusText}`);
-      }
-    })
-    .catch((err) => {
-      console.log(`Ошибка размещения заказа: ${err}`);
-    })
+    .then(checkResponse);
 }

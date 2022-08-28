@@ -5,7 +5,7 @@ import Modal from '../modal/modal';
 import OrderDetail from '../order-details/order-details';
 
 import placeOrder from '../../utils/place-order';
-import { ConstructorContext, orderUrl } from '../../utils/constants';
+import { ConstructorContext, baseUrl, orderUrl } from '../../utils/constants';
 
 export default function Order () {
   const [orderVisible, setOrderVisible] = useState(false);
@@ -14,9 +14,12 @@ export default function Order () {
 
   function handleOrderClick () {
     const ingredients = burger.map((item) => item._id);
-    placeOrder(orderUrl, ingredients)
+    placeOrder(baseUrl + orderUrl, ingredients)
       .then((data) => {
         setOrder(data);
+      })
+      .catch((err) => {
+        console.log(`Ошибка размещения заказа: ${err}`);
       });
     setOrderVisible(true);
   }
