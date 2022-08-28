@@ -17,11 +17,11 @@ export default function Order () {
     placeOrder(baseUrl + orderUrl, ingredients)
       .then((data) => {
         setOrder(data);
+        setOrderVisible(true);
       })
       .catch((err) => {
         console.log(`Ошибка размещения заказа: ${err}`);
       });
-    setOrderVisible(true);
   }
 
   function closeModal () {

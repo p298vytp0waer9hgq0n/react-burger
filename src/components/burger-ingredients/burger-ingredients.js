@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useMemo } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredients";
 import Modal from "../modal/modal";
@@ -38,18 +38,22 @@ export default function BurgerIngredients (props) {
 
   const [current, setCurrent] = useState('buns');
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
-  const elements = props.data.map((item) => {
-    return (
-      <Ingredient
-        callback={handleIngClick}
-        key={item._id}
-        {...item}
-        quantity={burger.reduce((count, cur) => {
-          return (cur._id === item._id) ? count + 1 : count;
-        }, 0)}
-      />
-    );
-  });
+  const ingredients = props.data;
+  const elements = useMemo(() => {
+    return ingredients.map((item) => {
+      return (
+        <Ingredient
+          callback={handleIngClick}
+          key={item._id}
+          {...item}
+          quantity={burger.reduce((count, cur) => {
+            return (cur._id === item._id) ? count + 1 : count;
+          }, 0)}
+        />
+      );
+    });
+  }, [ingredients, burger]);
+
   const bunsElements = elements.filter((elem) => elem.props.type === 'bun');
   const mainElements = elements.filter((elem) => elem.props.type === 'main');
   const sauceElements = elements.filter((elem) => elem.props.type === 'sauce');
@@ -83,4 +87,4 @@ export default function BurgerIngredients (props) {
 
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(ingredientType).isRequired,
-}
+}.isRequired

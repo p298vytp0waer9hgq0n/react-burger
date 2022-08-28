@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
 import Order from "./order";
@@ -25,22 +25,24 @@ export default function BurgerConstructor () {
       price={burgerBun.price} // по заданию вроде выходит, что мы берём за булку дважды, как жлобы
       thumbnail={burgerBun.image}
     /> : null;
-  const burgerElems = burger.map((item, index) => {
-    if (item && item.type !== 'bun') {
-      return (
-        <li className={styles.constructor__draggable} key={index}>
-          <DragIcon />
-          <ConstructorElement
-            isLocked={false}
-            text={item.name}
-            price={item.price}
-            thumbnail={item.image}
-          />
-        </li>
-      )
-    }
-    return null;
-  });
+  const burgerElems = useMemo(() => {
+    return burger.map((item, index) => {
+      if (item && item.type !== 'bun') {
+        return (
+          <li className={styles.constructor__draggable} key={index}>
+            <DragIcon />
+            <ConstructorElement
+              isLocked={false}
+              text={item.name}
+              price={item.price}
+              thumbnail={item.image}
+            />
+          </li>
+        )
+      }
+      return null;
+    });
+  }, [burger]);
 
   return (
     <section className={`${styles.constructor} mt-25 pl-4`}>

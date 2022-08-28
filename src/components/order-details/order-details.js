@@ -7,7 +7,10 @@ import styles from "./order-details.module.css";
 export default function OrderDetail (props) {
   if (!props.success) {
     return (
-      <div className={`${styles.thingy} mt-7 mb-8`}></div>
+      <>
+        <p className="text text_type_main-medium mt-8">Something went wrong on server side</p>
+        <div className={`${styles.thingy} mt-7 mb-8`}></div>
+      </>
     );
   }
   return (
@@ -24,8 +27,8 @@ export default function OrderDetail (props) {
 }
 
 OrderDetail.propTypes = {
-  success: PropTypes.bool,
+  success: PropTypes.bool.isRequired,
   order: PropTypes.shape({
-    number: PropTypes.number
-  })
-}
+    number: PropTypes.number.isRequired
+  }).isRequired
+}.isRequired

@@ -49,4 +49,4 @@ Modal.propTypes = {
   title: PropTypes.string,
   visible: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired
-}
+}.isRequired
