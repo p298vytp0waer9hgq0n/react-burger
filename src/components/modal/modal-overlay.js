@@ -16,4 +16,4 @@ export default function ModalOverlay (props) {
 ModalOverlay.propTypes = {
   visible: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func.isRequired
-}
+}.isRequired
