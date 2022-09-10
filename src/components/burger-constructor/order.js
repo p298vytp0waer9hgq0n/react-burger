@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerConstructor from './burger-constructor.module.css';
 import Modal from '../modal/modal';
 import OrderDetail from '../order-details/order-details';
 
 import placeOrder from '../../utils/place-order';
-import { ConstructorContext, baseUrl, orderUrl } from '../../utils/constants';
+import { baseUrl, orderUrl } from '../../utils/constants';
 
 export default function Order () {
   const [orderVisible, setOrderVisible] = useState(false);
-  const {burger} = useContext(ConstructorContext);
+  const burger = useSelector((store) => store.burger);
   const [order, setOrder] = useState({});
 
   function handleOrderClick () {
@@ -28,8 +29,8 @@ export default function Order () {
     setOrderVisible(false);
   }
 
-  const total = burger.reduce((cum, cur) => {
-    return cur.type !== 'bun' ? cum + cur.price : cum + (cur.price * 2)
+  const total = (burger.bun.price * 2) + burger.components.reduce((cum, cur) => {
+    return cum + cur.price;
   }, 0);
 
   return (

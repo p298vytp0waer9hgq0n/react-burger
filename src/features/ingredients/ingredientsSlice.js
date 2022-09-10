@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import fetchData from '../../utils/fetch-data';
-import generateTestBurger from "../../utils/test-burger";
 
 const initialState = {
   ingredients: [],
@@ -20,7 +19,6 @@ export const ingredientsSlice = createSlice({
     [getIngredients.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.ingredients = action.payload.data;
-      generateTestBurger(action.payload.data);
     },
     [getIngredients.rejected]: (state) => {
       state.isLoading = false;

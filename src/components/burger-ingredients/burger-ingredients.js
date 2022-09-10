@@ -1,16 +1,11 @@
-import { useState, useRef, useContext, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredients";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
-import { ingredientType } from "../../utils/types";
-import { ConstructorContext } from '../../utils/constants';
-
-import PropTypes from 'prop-types';
-
 import styles from './burger-ingredients.module.css';
-import { useSelector } from "react-redux";
 
 
 export default function BurgerIngredients (props) {
@@ -19,7 +14,7 @@ export default function BurgerIngredients (props) {
   const stuffRef = useRef();
   const ingRef = useRef();
   const [ingVisible, setIngVisible] = useState(false);
-  const { burger } = useContext(ConstructorContext);
+  const burger = useSelector((store) => store.burger);
 
   function handleClick (tab) {
     setCurrent(tab);
@@ -47,7 +42,8 @@ export default function BurgerIngredients (props) {
           callback={handleIngClick}
           key={item._id}
           {...item}
-          quantity={burger.reduce((count, cur) => {
+          quantity={
+            item._id === burger.bun._id ? 1 : burger.components.reduce((count, cur) => {
             return (cur._id === item._id) ? count + 1 : count;
           }, 0)}
         />
@@ -85,7 +81,3 @@ export default function BurgerIngredients (props) {
     </section>
   );
 }
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired,
-}.isRequired

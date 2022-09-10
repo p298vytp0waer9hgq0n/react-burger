@@ -1,14 +1,14 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
 import Order from "./order";
 
-import { ConstructorContext } from "../../utils/constants";
-
 export default function BurgerConstructor () {
-  const { burger } = useContext(ConstructorContext);
+  // const { burger } = useContext(ConstructorContext);
+  const burger = useSelector((store) => store.burger);
 
-  const burgerBun = burger.find((item) => item.type === 'bun');
+  const burgerBun = burger.bun;
   const burgerTop = burgerBun ?
     <ConstructorElement
       type='top'
@@ -26,7 +26,7 @@ export default function BurgerConstructor () {
       thumbnail={burgerBun.image}
     /> : null;
   const burgerElems = useMemo(() => {
-    return burger.map((item, index) => {
+    return burger.components.map((item, index) => {
       if (item && item.type !== 'bun') {
         return (
           <li className={styles.constructor__draggable} key={index}>
