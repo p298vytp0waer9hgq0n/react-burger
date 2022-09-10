@@ -10,6 +10,7 @@ import { ConstructorContext } from '../../utils/constants';
 import PropTypes from 'prop-types';
 
 import styles from './burger-ingredients.module.css';
+import { useSelector } from "react-redux";
 
 
 export default function BurgerIngredients (props) {
@@ -38,7 +39,7 @@ export default function BurgerIngredients (props) {
 
   const [current, setCurrent] = useState('buns');
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
-  const ingredients = props.data;
+  const { ingredients } = useSelector((store) => store.ingredients);
   const elements = useMemo(() => {
     return ingredients.map((item) => {
       return (

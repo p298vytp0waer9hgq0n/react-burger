@@ -1,19 +1,20 @@
-import { useEffect, useRef, useState, useReducer } from 'react';
+import { useEffect, useRef, useReducer } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import fetchIngredients from '../../utils/fetch-ingredients';
 
 import { ConstructorContext, baseUrl, ingredientsUrl } from '../../utils/constants';
 
 import app from './app.module.css';
 import generateTestBurger from '../../utils/test-burger';
+import { getIngredients } from '../../features/ingredients/ingredientsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import type {} from 'redux-thunk/extend-redux';
 
 
 export default function App() {
-  const [isLoading, setLoading] = useState(true);
-  const [hasError, setError] = useState(false);
-  const [ingredients, setIngredients] = useState<any>(null);
+  const dispatch = useDispatch();
+  const { isLoading, ingredients, hasError } = useSelector((store: any) => store.ingredients);
   const [burger, burgerDispatch] = useReducer(burgerReducer, []);
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
@@ -39,25 +40,18 @@ export default function App() {
   }
 
   useEffect(() => {
+    if (ingredients.length > 0) {
+      const testBurger = generateTestBurger(ingredients);
+      testBurger?.forEach((item) => burgerDispatch({ type: 'add', value: item }));
+      }
+  }, [ingredients]);
+
+  useEffect(() => {
     if (fetchRan.current === false) {
-      setLoading(true);
-      fetchIngredients(baseUrl + ingredientsUrl)
-        .then((resp) => {
-          setError(false);
-          setIngredients(resp.data);
-          const testBurger = generateTestBurger(resp.data);
-          testBurger?.forEach((item) => burgerDispatch({ type: 'add', value: item }));
-        })
-        .catch((err) => {
-          setError(true);
-          console.log("Ошибка загрузки ингредиентов: ", err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      dispatch(getIngredients(baseUrl + ingredientsUrl));
     }
     return () => { fetchRan.current = true };
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return (
@@ -74,7 +68,7 @@ export default function App() {
       <AppHeader />
       <main className={`${app.main} pb-10`}>
         <ConstructorContext.Provider value={{ burger, burgerDispatch }}>
-          <BurgerIngredients data={ingredients} />
+          <BurgerIngredients />
           <BurgerConstructor />
         </ConstructorContext.Provider>
       </main>
