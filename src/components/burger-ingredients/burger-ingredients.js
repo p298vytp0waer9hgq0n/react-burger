@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredients";
@@ -55,6 +55,25 @@ export default function BurgerIngredients (props) {
   const mainElements = elements.filter((elem) => elem.props.type === 'main');
   const sauceElements = elements.filter((elem) => elem.props.type === 'sauce');
 
+  const sauceTrans = useRef(null);
+  const stuffTrans = useRef(null);
+  useEffect(() => {
+    sauceTrans.current = (sauceRef.current.offsetTop - bunsRef.current.offsetTop) / 2;
+    stuffTrans.current = (stuffRef.current.offsetTop - bunsRef.current.offsetTop + sauceRef.current.offsetTop) / 2;
+  }, [])
+
+  function onScroll (evt) {
+    if (evt.target.scrollTop < sauceTrans.current && current !== 'buns') {
+      setCurrent('buns');
+    }
+    if (evt.target.scrollTop >= sauceTrans.current && evt.target.scrollTop < stuffTrans.current && current !== 'sauces') {
+      setCurrent('sauces');
+    }
+    if (evt.target.scrollTop >= stuffTrans.current && current !== 'stuff') {
+      setCurrent('stuff');
+    }
+  }
+
   return (
     <section className={styles.burger}>
       <Modal
@@ -70,7 +89,7 @@ export default function BurgerIngredients (props) {
         <Tab value="sauces" active={current === 'sauces'} onClick={handleClick}>Соусы</Tab>
         <Tab value="stuff" active={current === 'stuff'} onClick={handleClick}>Начинки</Tab>
       </div>
-      <div className={`${styles.burger__container} custom-scroll mt-8`}>
+      <div className={`${styles.burger__container} custom-scroll mt-8`} onScroll={onScroll}>
         <h2 className={titleIngrStyle} ref={bunsRef}>Булки</h2>
         <ul className={styles.burger__list}>{bunsElements}</ul>
         <h2 className={titleIngrStyle} ref={sauceRef}>Соусы</h2>
