@@ -24,6 +24,9 @@ export const burgerSlice = createSlice({
   extraReducers: {
     [orderBurger.fulfilled]: (state, action) => {
       state.placedOrder = action.payload;
+    },
+    [orderBurger.rejected]: (state, action) => {
+      console.log(`Ошибка размещения заказа: `, action.error.message);
     }
   }
 })
