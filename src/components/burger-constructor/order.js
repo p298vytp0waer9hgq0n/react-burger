@@ -1,28 +1,22 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerConstructor from './burger-constructor.module.css';
 import Modal from '../modal/modal';
 import OrderDetail from '../order-details/order-details';
 
-import placeOrder from '../../utils/place-order';
 import { baseUrl, orderUrl } from '../../utils/constants';
+import { orderBurger } from '../../features/burger/burgerSlice';
 
 export default function Order () {
+  const dispatch = useDispatch();
   const [orderVisible, setOrderVisible] = useState(false);
   const burger = useSelector((store) => store.burger);
-  const [order, setOrder] = useState({});
 
   function handleOrderClick () {
-    const ingredients = burger.map((item) => item._id);
-    placeOrder(baseUrl + orderUrl, ingredients)
-      .then((data) => {
-        setOrder(data);
-        setOrderVisible(true);
-      })
-      .catch((err) => {
-        console.log(`Ошибка размещения заказа: ${err}`);
-      });
+    const ingredients = [...burger.components, burger.bun].map((item) => item._id);
+    dispatch(orderBurger({ url: baseUrl + orderUrl, data: ingredients}));
+    setOrderVisible(true);
   }
 
   function closeModal () {
@@ -36,7 +30,7 @@ export default function Order () {
   return (
     <div className={`${burgerConstructor.constructor__order} mt-10 mr-4 mb-10`}>
     <Modal title="" close={closeModal} visible={orderVisible}>
-      <OrderDetail {...order} />
+      <OrderDetail />
     </Modal>
       <div className={`${burgerConstructor.constructor__total} mr-10`}>
         <p className="text text_type_digits-medium">{total}&nbsp;</p>

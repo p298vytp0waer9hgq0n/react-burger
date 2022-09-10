@@ -3,6 +3,7 @@ import fetchData from '../../utils/fetch-data';
 
 const initialState = {
   ingredients: [],
+  currentIngredient: {},
   isLoading: false,
   hasError: false,
 }
@@ -12,6 +13,11 @@ export const getIngredients = createAsyncThunk('ingredients/getIngredients', fet
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
+  reducers: {
+    setCurrentIngredient: (state, action) => {
+      state.currentIngredient = action.payload;
+    }
+  },
   extraReducers: {
     [getIngredients.pending]: (state) => {
       state.isLoading = true;
@@ -28,3 +34,5 @@ export const ingredientsSlice = createSlice({
 })
 
 export default ingredientsSlice.reducer;
+
+export const { setCurrentIngredient } = ingredientsSlice.actions;

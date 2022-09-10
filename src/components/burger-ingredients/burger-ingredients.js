@@ -1,18 +1,19 @@
 import { useState, useRef, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./ingredients";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 import styles from './burger-ingredients.module.css';
+import { setCurrentIngredient } from "../../features/ingredients/ingredientsSlice";
 
 
 export default function BurgerIngredients (props) {
+  const dispatch = useDispatch();
   const bunsRef = useRef();
   const sauceRef = useRef();
   const stuffRef = useRef();
-  const ingRef = useRef();
   const [ingVisible, setIngVisible] = useState(false);
   const burger = useSelector((store) => store.burger);
 
@@ -21,11 +22,6 @@ export default function BurgerIngredients (props) {
     if (tab === 'sauces') sauceRef.current.scrollIntoView({behavior: 'smooth'});
     if (tab === 'buns') bunsRef.current.scrollIntoView({behavior: 'smooth'});
     if (tab === 'stuff') stuffRef.current.scrollIntoView({behavior: 'smooth'});
-  }
-
-  function handleIngClick (ingDetails) {
-    ingRef.current = ingDetails;
-    setIngVisible(true);
   }
 
   function closeModal () {
@@ -39,7 +35,10 @@ export default function BurgerIngredients (props) {
     return ingredients.map((item) => {
       return (
         <Ingredient
-          callback={handleIngClick}
+          callback={() => {
+            dispatch(setCurrentIngredient(item));
+            setIngVisible(true);
+          }}
           key={item._id}
           {...item}
           quantity={
@@ -49,7 +48,7 @@ export default function BurgerIngredients (props) {
         />
       );
     });
-  }, [ingredients, burger]);
+  }, [ingredients, burger, dispatch]);
 
   const bunsElements = elements.filter((elem) => elem.props.type === 'bun');
   const mainElements = elements.filter((elem) => elem.props.type === 'main');
@@ -62,7 +61,7 @@ export default function BurgerIngredients (props) {
         visible={ingVisible}
         close={closeModal}
       >
-        <IngredientDetails ingr={ingRef.current}></IngredientDetails>
+        <IngredientDetails></IngredientDetails>
       </Modal>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <div className={styles.burger__tabs}>
