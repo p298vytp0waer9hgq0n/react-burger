@@ -17,11 +17,17 @@ export const burgerSlice = createSlice({
       if (action.payload.type === 'bun') {
         state.bun = action.payload;
       } else {
-        state.components.push(action.payload);
+        const uid = new Date().getTime() + state.components.length;
+        state.components.push({ uid, ...action.payload });
       }
     },
     burgerRemove: (state, action) => {
-      state.components.splice(action.payload, 1);
+      state.components = state.components.filter((item) => item.uid !== action.payload);
+    },
+    burgerMove: (state, action) => {
+      const oldIndex = state.components.findIndex((item) => item.uid === action.payload.draggedUid);
+      const newIndex = state.components.findIndex((item) => item.uid === action.payload.uid);
+      state.components.splice(newIndex, 0, state.components.splice(oldIndex, 1)[0]);
     }
   },
   extraReducers: {
@@ -36,4 +42,4 @@ export const burgerSlice = createSlice({
 
 export default burgerSlice.reducer;
 
-export const { burgerAdd, burgerRemove } = burgerSlice.actions;
+export const { burgerAdd, burgerRemove, burgerMove } = burgerSlice.actions;

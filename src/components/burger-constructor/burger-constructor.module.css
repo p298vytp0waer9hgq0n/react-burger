@@ -26,6 +26,10 @@
   justify-content: space-between;
 }
 
+.constructor__dragHandle {
+  cursor: grab;
+}
+
 .constructor__order {
   display: flex;
   align-self: flex-end;

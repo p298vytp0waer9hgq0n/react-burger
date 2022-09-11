@@ -8,12 +8,9 @@ export default function Ingredient ({callback, ...props}) {
     callback();
   }
 
-  const [{ beingDragged }, dragRef] = useDrag({
+  const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: {...props},
-    collect: (monitor) => ({
-      beingDragged: monitor.isDragging()
-    })
+    item: { ...props },
   });
 
   return (

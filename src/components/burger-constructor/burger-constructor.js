@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
 import Order from "./order";
 import { useDrop } from "react-dnd";
-import { burgerAdd, burgerRemove } from "../../features/burger/burgerSlice";
+import { burgerAdd } from "../../features/burger/burgerSlice";
+import Component from "./component";
 
 export default function BurgerConstructor () {
   function dropHandler (item) {
@@ -35,21 +36,12 @@ export default function BurgerConstructor () {
     return burger.components.map((item, index) => {
       if (item && item.type !== 'bun') {
         return (
-          <li className={styles.constructor__draggable} key={index} draggable>
-            <DragIcon />
-            <ConstructorElement
-              isLocked={false}
-              text={item.name}
-              price={item.price}
-              thumbnail={item.image}
-              handleClose={(evt) => dispatch(burgerRemove(index))}
-            />
-          </li>
+          <Component key={item.uid} item={item} />
         )
       }
       return null;
     });
-  },[burger.components, dispatch]);
+  },[burger.components]);
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
