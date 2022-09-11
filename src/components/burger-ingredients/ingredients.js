@@ -5,7 +5,7 @@ import styles from './burger-ingredients.module.css';
 
 export default function Ingredient ({callback, ...props}) {
   function handleClick () {
-    props.callback(callback);
+    callback();
   }
 
   const [{ beingDragged }, dragRef] = useDrag({
@@ -21,8 +21,6 @@ export default function Ingredient ({callback, ...props}) {
       className={`${styles.burger__ingredient} ml-4 mr-1 mb-8`}
       onClick={handleClick}
       ref={dragRef}
-      draggable
-      onDrag={(e) => e.preventDefault()}
     >
       {props.quantity > 0 && <Counter count={props.quantity} size="default" />}
       <img src={props.image} alt={props.name} />

@@ -25,7 +25,7 @@ export default function BurgerIngredients (props) {
   }
 
   function closeModal () {
-    setTimeout(() => dispatch(setCurrentIngredient({})), 600);
+    setTimeout(() => dispatch(setCurrentIngredient({})), 300);
     setIngVisible(false);
   }
 
