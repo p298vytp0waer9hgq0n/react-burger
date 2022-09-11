@@ -1,4 +1,5 @@
 .constructor {
+  min-width: 548px;
   display: flex;
   align-items: flex-end;
   flex-direction: column;

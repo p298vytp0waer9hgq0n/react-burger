@@ -19,6 +19,9 @@ export const burgerSlice = createSlice({
       } else {
         state.components.push(action.payload);
       }
+    },
+    burgerRemove: (state, action) => {
+      state.components.splice(action.payload, 1);
     }
   },
   extraReducers: {
@@ -33,4 +36,4 @@ export const burgerSlice = createSlice({
 
 export default burgerSlice.reducer;
 
-export const { burgerAdd } = burgerSlice.actions;
+export const { burgerAdd, burgerRemove } = burgerSlice.actions;
