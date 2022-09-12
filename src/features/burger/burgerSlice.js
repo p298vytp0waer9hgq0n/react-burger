@@ -17,7 +17,7 @@ export const burgerSlice = createSlice({
       if (action.payload.type === 'bun') {
         state.bun = action.payload;
       } else {
-        const uid = new Date().getTime() + state.components.length;
+        const uid = new Date().getTime() - state.components.length;
         state.components.push({ uid, ...action.payload });
       }
     },

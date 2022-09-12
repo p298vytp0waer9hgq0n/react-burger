@@ -23,7 +23,7 @@ export default function Order () {
     setOrderVisible(false);
   }
 
-  const total = (burger.bun.price * 2) + burger.components.reduce((cum, cur) => {
+  const total = (burger.bun.price || 0 * 2) + burger.components.reduce((cum, cur) => {
     return cum + cur.price;
   }, 0);
 
