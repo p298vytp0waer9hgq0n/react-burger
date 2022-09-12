@@ -33,7 +33,7 @@ export default function BurgerConstructor () {
       thumbnail={burgerBun.image}
     /> : null;
   const burgerElems = useMemo(() => {
-    return burger.components.map((item) => {
+    return burger.components.map((item, index) => {
       if (item && item.type !== 'bun') {
         return (
           <Component key={item.uid} item={item} />
