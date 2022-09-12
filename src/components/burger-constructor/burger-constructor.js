@@ -9,6 +9,8 @@ import { burgerAdd } from "../../services/burger/burger-slice";
 import Order from "../order/order";
 import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
 
+import { dragTypes } from "../../utils/constants";
+
 import styles from './burger-constructor.module.css';
 
 export default function BurgerConstructor () {
@@ -46,7 +48,7 @@ export default function BurgerConstructor () {
   },[burger.ingredients]);
 
   const [, dropTarget] = useDrop({
-    accept: 'ingredient',
+    accept: dragTypes.ingredient,
     drop (item) {
       dropHandler(item);
     }

@@ -1,24 +1,25 @@
-import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { burgerMove, burgerRemove } from "../../services/burger/burger-slice";
+import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
+import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import { burgerMove, burgerRemove } from "../../services/burger/burger-slice";
+import { dragTypes } from "../../utils/constants";
 import styles from './burger-constructor-element.module.css';
-import { useEffect, useRef } from "react";
 
 export default function BurgerConstructorElement ({ item }) {
   const dispatch = useDispatch();
   const ref = useRef();
 
   const [{ opacity }, dragRef, dragPreview] = useDrag(() => ({
-    type: 'ingredient/sort',
+    type: dragTypes.sorting,
     item: { ...item },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0 : 1
     })
   }));
   const [, dropRef] = useDrop({
-    accept: 'ingredient/sort',
+    accept: dragTypes.sorting,
     hover({ uid: draggedUid }) {
       if (item.uid !== draggedUid) {
         dispatch(burgerMove({ uid: item.uid, draggedUid: draggedUid }));

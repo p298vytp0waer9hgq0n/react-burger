@@ -27,7 +27,7 @@ export default function BurgerIngredients () {
   }
 
   function closeModal () {
-    setTimeout(() => dispatch(setCurrentIngredient({})), 300);
+    setTimeout(() => dispatch(setCurrentIngredient({})), 350);
     setIngVisible(false);
   }
 
@@ -38,7 +38,7 @@ export default function BurgerIngredients () {
     return ingredients.map((item) => {
       return (
         <Ingredient
-          callback={() => {
+          openIngredientDetails={() => {
             dispatch(setCurrentIngredient(item));
             setIngVisible(true);
           }}
