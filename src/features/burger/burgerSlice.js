@@ -36,6 +36,7 @@ export const burgerSlice = createSlice({
     },
     [orderBurger.rejected]: (state, action) => {
       console.log(`Ошибка размещения заказа: `, action.error.message);
+      state.placedOrder = {};
     }
   }
 })
