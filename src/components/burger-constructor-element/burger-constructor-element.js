@@ -3,8 +3,11 @@ import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import PropTypes from 'prop-types';
+
 import { burgerMove, burgerRemove } from "../../services/burger/burger-slice";
 import { dragTypes } from "../../utils/constants";
+import { ingredientType } from "../../utils/types";
 import styles from './burger-constructor-element.module.css';
 
 export default function BurgerConstructorElement ({ item }) {
@@ -46,3 +49,11 @@ export default function BurgerConstructorElement ({ item }) {
     </li>
   )
 }
+
+
+BurgerConstructorElement.propTypes = {
+  item: PropTypes.shape({
+  uid: PropTypes.string.isRequired,
+  ...ingredientType
+  })
+};
