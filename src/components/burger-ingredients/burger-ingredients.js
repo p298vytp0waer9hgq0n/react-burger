@@ -9,7 +9,7 @@ import styles from './burger-ingredients.module.css';
 import { setCurrentIngredient } from "../../features/ingredients/ingredientsSlice";
 
 
-export default function BurgerIngredients (props) {
+export default function BurgerIngredients () {
   const dispatch = useDispatch();
   const bunsRef = useRef();
   const sauceRef = useRef();

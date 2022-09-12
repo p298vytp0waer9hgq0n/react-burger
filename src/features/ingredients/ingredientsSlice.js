@@ -16,14 +16,6 @@ export const ingredientsSlice = createSlice({
   reducers: {
     setCurrentIngredient: (state, action) => {
       state.currentIngredient = action.payload;
-    },
-// в задании зачем-то сказано добавить экшены на добавление и удаление из списка ингредиентов;
-// они нигде не используются.
-    addIngredient: (state, action) => {
-      state.ingredients.push(action.payload);
-    },
-    removeIngredient: (state, action) => {
-      state.ingredients = state.ingredients.filter((item) => item._id !== action.payload._id);
     }
   },
   extraReducers: {
@@ -43,4 +35,4 @@ export const ingredientsSlice = createSlice({
 
 export default ingredientsSlice.reducer;
 
-export const { setCurrentIngredient, addIngredient, removeIngredient } = ingredientsSlice.actions;
+export const { setCurrentIngredient } = ingredientsSlice.actions;

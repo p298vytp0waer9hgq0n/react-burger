@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './order.module.css';
@@ -23,9 +23,11 @@ export default function Order () {
     setOrderVisible(false);
   }
 
-  const total = (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum, cur) => {
-    return cum + cur.price;
-  }, 0);
+  const total = useMemo(() => {
+    return (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum, cur) => {
+      return cum + cur.price;
+    }, 0);
+  }, [burger.bun, burger.ingredients]);
 
   return (
     <div className={`${styles.constructor__order} mt-10 mr-4 mb-10`}>
