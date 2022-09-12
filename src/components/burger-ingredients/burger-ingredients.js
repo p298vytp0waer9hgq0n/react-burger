@@ -6,7 +6,7 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 import styles from './burger-ingredients.module.css';
-import { setCurrentIngredient } from "../../features/ingredients/ingredientsSlice";
+import { setCurrentIngredient } from "../../services/ingredient-modal/ingredient-modal-slice";
 
 
 export default function BurgerIngredients () {
@@ -43,7 +43,7 @@ export default function BurgerIngredients () {
           key={item._id}
           {...item}
           quantity={
-            item._id === burger.bun._id ? 1 : burger.ingredients.reduce((count, cur) => {
+            item._id === burger.bun._id ? 2 : burger.ingredients.reduce((count, cur) => {
             return (cur._id === item._id) ? count + 1 : count;
           }, 0)}
         />

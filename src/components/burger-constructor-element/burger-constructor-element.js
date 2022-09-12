@@ -1,5 +1,5 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { burgerMove, burgerRemove } from "../../features/burger/burgerSlice";
+import { burgerMove, burgerRemove } from "../../services/burger/burger-slice";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 

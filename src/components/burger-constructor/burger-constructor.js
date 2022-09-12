@@ -4,7 +4,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import styles from './burger-constructor.module.css';
 import Order from "../order/order";
 import { useDrop } from "react-dnd";
-import { burgerAdd } from "../../features/burger/burgerSlice";
+import { burgerAdd } from "../../services/burger/burger-slice";
 import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
 
 export default function BurgerConstructor () {

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styles from "./ingredient-details.module.css";
 
 export default function IngredientDetails () {
-  const ingredient = useSelector((store) => store.ingredients.currentIngredient);
+  const ingredient = useSelector((store) => store.ingredientModal.ingredientModal);
 
   if (!ingredient) return null;
   return (

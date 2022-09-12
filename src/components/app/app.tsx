@@ -9,7 +9,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { baseUrl, ingredientsUrl } from '../../utils/constants';
 
 import app from './app.module.css';
-import { getIngredients } from '../../features/ingredients/ingredientsSlice';
+import { getIngredients } from '../../services/ingredients/ingredients-slice';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styles from "./order-details.module.css";
 
 export default function OrderDetail () {
-  const order = useSelector((store) => store.burger.placedOrder);
+  const order = useSelector((store) => store.order.placedOrder);
   if (!order.success) {
     return (
       <>

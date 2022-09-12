@@ -6,7 +6,7 @@ import Modal from '../modal/modal';
 import OrderDetail from '../order-details/order-details';
 
 import { baseUrl, orderUrl } from '../../utils/constants';
-import { orderBurger } from '../../features/burger/burgerSlice';
+import { orderBurger } from '../../services/order/order-slice';
 
 export default function Order () {
   const dispatch = useDispatch();
