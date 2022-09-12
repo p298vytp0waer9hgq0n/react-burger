@@ -14,11 +14,15 @@ export default function BurgerConstructorElement ({ item }) {
   const dispatch = useDispatch();
   const ref = useRef();
 
-  const [{ opacity }, dragRef, dragPreview] = useDrag(() => ({
+  function removeIngredient () {
+    dispatch(burgerRemove(item.uid));
+  }
+
+  const [{ isVisible }, dragRef, dragPreview] = useDrag(() => ({
     type: dragTypes.sorting,
     item: { ...item },
     collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0 : 1
+      isVisible: !monitor.isDragging()
     })
   }));
   const [, dropRef] = useDrop({
@@ -30,12 +34,14 @@ export default function BurgerConstructorElement ({ item }) {
     }
   });
 
+  const elementStyle = `${styles.constructor__draggable} ${isVisible ? '' : styles.constructor__draggable_drag}`;
+
   useEffect(() => {
     dragPreview(dropRef(ref));
   }, [dragPreview, dropRef]);
 
   return (
-    <li className={styles.constructor__draggable} style={{opacity}} ref={ref}>
+    <li className={elementStyle} ref={ref}>
       <div className={styles.constructor__dragHandle} ref={dragRef}>
         <DragIcon />
       </div>
@@ -44,7 +50,7 @@ export default function BurgerConstructorElement ({ item }) {
         text={item.name}
         price={item.price}
         thumbnail={item.image}
-        handleClose={(evt) => dispatch(burgerRemove(item.uid))}
+        handleClose={removeIngredient}
       />
     </li>
   )
