@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import fetchData from '../../utils/fetch-data';
+import fetchIngredients from '../../utils/fetch-ingredients';
 
 const initialState = {
   ingredients: [],
@@ -7,7 +7,7 @@ const initialState = {
   hasError: false,
 }
 
-export const getIngredients = createAsyncThunk('ingredients/getIngredients', fetchData);
+export const getIngredients = createAsyncThunk('ingredients/getIngredients', fetchIngredients);
 
 export const ingredientsSlice = createSlice({
   name: 'ingredients',

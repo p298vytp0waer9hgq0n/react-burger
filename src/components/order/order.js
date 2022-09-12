@@ -5,7 +5,6 @@ import styles from './order.module.css';
 import Modal from '../modal/modal';
 import OrderDetail from '../order-details/order-details';
 
-import { baseUrl, orderUrl } from '../../utils/constants';
 import { orderBurger } from '../../services/order/order-slice';
 
 export default function Order () {
@@ -15,7 +14,7 @@ export default function Order () {
 
   function handleOrderClick () {
     const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
-    dispatch(orderBurger({ url: baseUrl + orderUrl, data: ingredients}));
+    dispatch(orderBurger(ingredients));
     setOrderVisible(true);
   }
 

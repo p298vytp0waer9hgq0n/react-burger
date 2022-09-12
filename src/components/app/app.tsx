@@ -6,8 +6,6 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-import { baseUrl, ingredientsUrl } from '../../utils/constants';
-
 import app from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
 import { DndProvider } from 'react-dnd';
@@ -22,7 +20,7 @@ export default function App() {
 
   useEffect(() => {
     if (fetchRan.current === false) {
-      dispatch(getIngredients(baseUrl + ingredientsUrl));
+      dispatch(getIngredients());
     }
     return () => { fetchRan.current = true };
   }, [dispatch]);
