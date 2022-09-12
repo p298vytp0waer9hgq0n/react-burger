@@ -52,8 +52,8 @@ export default function BurgerConstructor () {
 
   if (!burger.bun._id && burger.components.length < 1) {
     return (
-      <section className={`${styles.constructor} mt-25 pl-4`} ref={dropTarget}>
-        <p>dnd here</p>
+      <section className={`${styles.constructor} ${styles.constructor_empty} mt-25 pl-4`} ref={dropTarget}>
+        <p className="text text_type_main-large">Перетащите ингредиенты</p>
       </section>
     )
   }

@@ -4,11 +4,9 @@ import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
 import styles from './burger-constructor.module.css';
-import { useRef } from "react";
 
 export default function Component ({ item }) {
   const dispatch = useDispatch();
-  const ref = useRef(null);
 
   const [{ beingDragged }, dragRef, dragPreview] = useDrag({
     type: 'ingredient/sort',
@@ -20,14 +18,14 @@ export default function Component ({ item }) {
   const [, dropRef] = useDrop({
     accept: 'ingredient/sort',
     hover({ uid: draggedUid }) {
-      dispatch(burgerMove({ uid: item.uid, draggedUid: draggedUid }));
+      if (item.uid !== draggedUid) {
+        dispatch(burgerMove({ uid: item.uid, draggedUid: draggedUid }));
+      }
     }
   });
 
-  dropRef(dragPreview(ref));
-
   return (
-    <li className={styles.constructor__draggable} style={{opacity: `${beingDragged ? 0 : 1}`}} ref={ref}>
+    <li className={styles.constructor__draggable} style={{opacity: `${beingDragged ? 0 : 1}`}} ref={(elem) => dragPreview(dropRef(elem))}>
       <div className={styles.constructor__dragHandle} ref={dragRef}>
         <DragIcon />
       </div>

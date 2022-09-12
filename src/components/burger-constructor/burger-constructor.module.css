@@ -7,6 +7,11 @@
   flex: 1 1 600px;
 }
 
+.constructor_empty {
+  align-items: center;
+  justify-content: center;
+}
+
 .constructor__list {
   display: flex;
   align-self: stretch;
