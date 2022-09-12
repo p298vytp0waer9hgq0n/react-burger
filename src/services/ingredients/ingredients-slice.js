@@ -3,7 +3,6 @@ import fetchData from '../../utils/fetch-data';
 
 const initialState = {
   ingredients: [],
-  currentIngredient: {},
   isLoading: false,
   hasError: false,
 }

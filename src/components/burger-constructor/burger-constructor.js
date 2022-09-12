@@ -1,15 +1,20 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './burger-constructor.module.css';
-import Order from "../order/order";
 import { useDrop } from "react-dnd";
+import uuid from 'react-uuid';
+
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import { burgerAdd } from "../../services/burger/burger-slice";
+import Order from "../order/order";
 import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
+
+import styles from './burger-constructor.module.css';
 
 export default function BurgerConstructor () {
   function dropHandler (item) {
-    dispatch(burgerAdd(item));
+    const uid = uuid();
+    dispatch(burgerAdd({ uid, ...item }));
   }
 
   const dispatch = useDispatch();

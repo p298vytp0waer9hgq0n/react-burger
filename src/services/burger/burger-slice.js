@@ -14,8 +14,7 @@ export const burgerSlice = createSlice({
       if (action.payload.type === 'bun') {
         state.bun = action.payload;
       } else {
-        const uid = new Date().getTime() - state.ingredients.length;
-        state.ingredients.push({ uid, ...action.payload });
+        state.ingredients.push(action.payload);
       }
     },
     burgerRemove: (state, action) => {
