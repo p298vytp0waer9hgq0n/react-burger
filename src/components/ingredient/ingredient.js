@@ -1,7 +1,7 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import { ingredientType } from '../../utils/types';
-import styles from './burger-ingredients.module.css';
+import styles from './ingredient.module.css';
 
 export default function Ingredient ({callback, ...props}) {
   function handleClick () {

@@ -23,31 +23,3 @@
   overflow-y: auto;
   scrollbar-gutter: stable;
 }
-
-.constructor__draggable {
-  display: flex;
-  align-self: stretch;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.constructor__dragHandle {
-  cursor: grab;
-}
-
-.constructor__order {
-  display: flex;
-  align-self: flex-end;
-}
-
-.constructor__total {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.constructor__bigicon {
-  position: relative;
-  zoom: 1.5;
-  top: 2px;
-}

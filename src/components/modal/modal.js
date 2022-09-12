@@ -1,9 +1,10 @@
 import { createPortal } from "react-dom";
-import ModalOverlay from "./modal-overlay";
+import ModalOverlay from "../modal-overlay/modal-overlay";
 
 import PropTypes from 'prop-types';
 
-import styles from "./modals.module.css";
+import styles from "./modal.module.css";
+import overlayStyles from "../modal-overlay/modal-overlay.module.css";
 
 import { modalRoot } from "../../utils/constants";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -12,7 +13,7 @@ import { useEffect } from "react";
 export default function Modal (props) {
 
   function handleClick (evt) {
-    if (evt.target.classList.contains(styles.modal)) {
+    if (evt.target.classList.contains(overlayStyles.modal)) {
       props.close();
     }
   }

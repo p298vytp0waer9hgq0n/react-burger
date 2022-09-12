@@ -12,12 +12,6 @@
   opacity: 0;
   transition: visibility .4s, opacity .4s;
 }
-
-.modal_visible {
-  visibility: visible;
-  opacity: 1;
-}
-
 .modal__container {
   box-sizing: border-box;
   min-width: 720px;

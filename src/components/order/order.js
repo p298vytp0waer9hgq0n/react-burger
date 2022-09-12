@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import burgerConstructor from './burger-constructor.module.css';
+import styles from './order.module.css';
 import Modal from '../modal/modal';
 import OrderDetail from '../order-details/order-details';
 
@@ -28,13 +28,13 @@ export default function Order () {
   }, 0);
 
   return (
-    <div className={`${burgerConstructor.constructor__order} mt-10 mr-4 mb-10`}>
+    <div className={`${styles.constructor__order} mt-10 mr-4 mb-10`}>
     <Modal title="" close={closeModal} visible={orderVisible}>
       <OrderDetail />
     </Modal>
-      <div className={`${burgerConstructor.constructor__total} mr-10`}>
+      <div className={`${styles.constructor__total} mr-10`}>
         <p className="text text_type_digits-medium">{total}&nbsp;</p>
-        <div className={burgerConstructor.constructor__bigicon}>
+        <div className={styles.constructor__bigicon}>
           <CurrencyIcon />
         </div>
       </div>

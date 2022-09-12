@@ -3,10 +3,10 @@ import { burgerMove, burgerRemove } from "../../features/burger/burgerSlice";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
-import styles from './burger-constructor.module.css';
+import styles from './burger-constructor-element.module.css';
 import { useEffect, useRef } from "react";
 
-export default function Component ({ item }) {
+export default function BurgerConstructorElement ({ item }) {
   const dispatch = useDispatch();
   const ref = useRef();
 

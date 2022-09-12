@@ -2,10 +2,10 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
-import Order from "./order";
+import Order from "../order/order";
 import { useDrop } from "react-dnd";
 import { burgerAdd } from "../../features/burger/burgerSlice";
-import Component from "./component";
+import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
 
 export default function BurgerConstructor () {
   function dropHandler (item) {
@@ -35,7 +35,7 @@ export default function BurgerConstructor () {
   const burgerElems = useMemo(() => {
     return burger.ingredients.map((item) => {
         return (
-          <Component key={item.uid} item={item} />
+          <BurgerConstructorElement key={item.uid} item={item} />
         )
     });
   },[burger.ingredients]);

@@ -26,20 +26,3 @@
 .burger__comps {
   text-align: left;
 }
-
-.burger__ingredient {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: grab;
-}
-
-.burger__price {
-  display: flex;
-  align-items: center;
-}
-
-.burger__name {
-  min-height: 48px;
-}

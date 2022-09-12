@@ -1,4 +1,4 @@
-import styles from './modals.module.css';
+import styles from './modal-overlay.module.css';
 
 import PropTypes from 'prop-types';
 
