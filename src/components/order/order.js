@@ -14,7 +14,7 @@ export default function Order () {
   const burger = useSelector((store) => store.burger);
 
   function handleOrderClick () {
-    const ingredients = [...burger.ingredients, burger.bun].map((item) => item._id);
+    const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
     dispatch(orderBurger({ url: baseUrl + orderUrl, data: ingredients}));
     setOrderVisible(true);
   }
@@ -23,7 +23,7 @@ export default function Order () {
     setOrderVisible(false);
   }
 
-  const total = (burger.bun.price || 0 * 2) + burger.ingredients.reduce((cum, cur) => {
+  const total = (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum, cur) => {
     return cum + cur.price;
   }, 0);
 
