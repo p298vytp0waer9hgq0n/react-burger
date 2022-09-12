@@ -33,15 +33,12 @@ export default function BurgerConstructor () {
       thumbnail={burgerBun.image}
     /> : null;
   const burgerElems = useMemo(() => {
-    return burger.components.map((item, index) => {
-      if (item && item.type !== 'bun') {
+    return burger.ingredients.map((item) => {
         return (
           <Component key={item.uid} item={item} />
         )
-      }
-      return null;
     });
-  },[burger.components]);
+  },[burger.ingredients]);
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
@@ -50,7 +47,7 @@ export default function BurgerConstructor () {
     }
   });
 
-  if (!burger.bun._id && burger.components.length < 1) {
+  if (!burger.bun._id && burger.ingredients.length < 1) {
     return (
       <section className={`${styles.constructor} ${styles.constructor_empty} mt-25 pl-4`} ref={dropTarget}>
         <p className="text text_type_main-large">Перетащите ингредиенты</p>

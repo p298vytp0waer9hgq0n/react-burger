@@ -3,7 +3,7 @@ import placeOrder from "../../utils/place-order";
 
 const initialState = {
   bun: {},
-  components: [],
+  ingredients: [],
   placedOrder: {}
 };
 
@@ -17,17 +17,17 @@ export const burgerSlice = createSlice({
       if (action.payload.type === 'bun') {
         state.bun = action.payload;
       } else {
-        const uid = new Date().getTime() - state.components.length;
-        state.components.push({ uid, ...action.payload });
+        const uid = new Date().getTime() - state.ingredients.length;
+        state.ingredients.push({ uid, ...action.payload });
       }
     },
     burgerRemove: (state, action) => {
-      state.components = state.components.filter((item) => item.uid !== action.payload);
+      state.ingredients = state.ingredients.filter((item) => item.uid !== action.payload);
     },
     burgerMove: (state, action) => {
-      const oldIndex = state.components.findIndex((item) => item.uid === action.payload.draggedUid);
-      const newIndex = state.components.findIndex((item) => item.uid === action.payload.uid);
-      state.components.splice(newIndex, 0, state.components.splice(oldIndex, 1)[0]);
+      const oldIndex = state.ingredients.findIndex((item) => item.uid === action.payload.draggedUid);
+      const newIndex = state.ingredients.findIndex((item) => item.uid === action.payload.uid);
+      state.ingredients.splice(newIndex, 0, state.ingredients.splice(oldIndex, 1)[0]);
     }
   },
   extraReducers: {

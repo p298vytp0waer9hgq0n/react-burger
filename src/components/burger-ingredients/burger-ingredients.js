@@ -43,7 +43,7 @@ export default function BurgerIngredients (props) {
           key={item._id}
           {...item}
           quantity={
-            item._id === burger.bun._id ? 1 : burger.components.reduce((count, cur) => {
+            item._id === burger.bun._id ? 1 : burger.ingredients.reduce((count, cur) => {
             return (cur._id === item._id) ? count + 1 : count;
           }, 0)}
         />
