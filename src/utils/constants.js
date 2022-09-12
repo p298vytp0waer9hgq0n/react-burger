@@ -8,7 +8,7 @@ export const dragTypes = {
   sorting: 'ingredient/sort'
 }
 
-export const ingTypes = {
+export const ingrTypes = {
   bun: 'bun',
   sauce: 'sauce',
   main: 'main'

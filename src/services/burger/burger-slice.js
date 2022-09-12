@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ingTypes } from "../../utils/constants";
+import { ingrTypes } from "../../utils/constants";
 
 const initialState = {
   bun: {},
@@ -12,7 +12,7 @@ export const burgerSlice = createSlice({
   initialState,
   reducers: {
     burgerAdd: (state, action) => {
-      if (action.payload.type === ingTypes.bun) {
+      if (action.payload.type === ingrTypes.bun) {
         state.bun = action.payload;
       } else {
         state.ingredients.push(action.payload);
