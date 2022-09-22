@@ -19,6 +19,7 @@ export default function BurgerIngredients () {
   const [ingVisible, setIngVisible] = useState(false);
   const burger = useSelector((store) => store.burger);
 
+
   function handleClick (tab) {
     setCurrent(tab);
     if (tab === ingrTypes.sauce) sauceRef.current.scrollIntoView({behavior: 'smooth'});
@@ -30,6 +31,14 @@ export default function BurgerIngredients () {
     setTimeout(() => dispatch(setCurrentIngredient({})), 350);
     setIngVisible(false);
   }
+
+  const ingredientCounters = useMemo(() => {
+    const counters = {};
+    burger.ingredients.forEach((item) => {
+      counters[item._id] = counters[item._id] + 1 || 1;
+    });
+    return counters;
+  }, [burger.ingredients]);
 
   const [current, setCurrent] = useState(ingrTypes.bun);
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
@@ -43,15 +52,14 @@ export default function BurgerIngredients () {
             setIngVisible(true);
           }}
           key={item._id}
-          {...item}
           quantity={
-            item._id === burger.bun._id ? 2 : burger.ingredients.reduce((count, cur) => {
-            return (cur._id === item._id) ? count + 1 : count;
-          }, 0)}
+            item._id === burger.bun._id ? 2 : ingredientCounters[item._id]
+          }
+          {...item}
         />
       );
     });
-  }, [ingredients, burger, dispatch]);
+  }, [ingredients, burger, dispatch, ingredientCounters]);
 
   const bunsElements = elements.filter((elem) => elem.props.type === ingrTypes.bun);
   const mainElements = elements.filter((elem) => elem.props.type === ingrTypes.main);
