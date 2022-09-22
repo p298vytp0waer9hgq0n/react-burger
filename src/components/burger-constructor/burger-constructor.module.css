@@ -1,9 +1,15 @@
 .constructor {
+  min-width: 548px;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   gap: 16px;
   flex: 1 1 600px;
+}
+
+.constructor_empty {
+  align-items: center;
+  justify-content: center;
 }
 
 .constructor__list {
@@ -16,28 +22,4 @@
   padding-left: 0;
   overflow-y: auto;
   scrollbar-gutter: stable;
-}
-
-.constructor__draggable {
-  display: flex;
-  align-self: stretch;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.constructor__order {
-  display: flex;
-  align-self: flex-end;
-}
-
-.constructor__total {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.constructor__bigicon {
-  position: relative;
-  zoom: 1.5;
-  top: 2px;
 }

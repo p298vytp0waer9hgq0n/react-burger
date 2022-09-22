@@ -1,14 +1,28 @@
-import { useContext, useMemo } from "react";
-import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './burger-constructor.module.css';
-import Order from "./order";
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import uuid from 'react-uuid';
 
-import { ConstructorContext } from "../../utils/constants";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+
+import { burgerAdd } from "../../services/burger/burger-slice";
+import Order from "../order/order";
+import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
+
+import { dragTypes } from "../../utils/constants";
+
+import styles from './burger-constructor.module.css';
 
 export default function BurgerConstructor () {
-  const { burger } = useContext(ConstructorContext);
+  function dropHandler (item) {
+    const uid = uuid();
+    dispatch(burgerAdd({ uid, ...item }));
+  }
 
-  const burgerBun = burger.find((item) => item.type === 'bun');
+  const dispatch = useDispatch();
+  const burger = useSelector((store) => store.burger);
+
+  const burgerBun = burger.bun;
   const burgerTop = burgerBun ?
     <ConstructorElement
       type='top'
@@ -26,31 +40,35 @@ export default function BurgerConstructor () {
       thumbnail={burgerBun.image}
     /> : null;
   const burgerElems = useMemo(() => {
-    return burger.map((item, index) => {
-      if (item && item.type !== 'bun') {
+    return burger.ingredients.map((item) => {
         return (
-          <li className={styles.constructor__draggable} key={index}>
-            <DragIcon />
-            <ConstructorElement
-              isLocked={false}
-              text={item.name}
-              price={item.price}
-              thumbnail={item.image}
-            />
-          </li>
+          <BurgerConstructorElement key={item.uid} item={item} />
         )
-      }
-      return null;
     });
-  }, [burger]);
+  },[burger.ingredients]);
+
+  const [, dropTarget] = useDrop({
+    accept: dragTypes.ingredient,
+    drop (item) {
+      dropHandler(item);
+    }
+  });
+
+  if (!burger.bun._id && burger.ingredients.length < 1) {
+    return (
+      <section className={`${styles.constructor} ${styles.constructor_empty} mt-25 pl-4`} ref={dropTarget}>
+        <p className="text text_type_main-large">Перетащите ингредиенты</p>
+      </section>
+    )
+  }
 
   return (
-    <section className={`${styles.constructor} mt-25 pl-4`}>
-      <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>
+    <section className={`${styles.constructor} mt-25 pl-4`} ref={dropTarget}>
+      {burger.bun._id && <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>}
       <ul className={`${styles.constructor__list} pr-1 custom-scroll`}>
         {burgerElems}
       </ul>
-      <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>
+      {burger.bun._id && <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>}
       <Order />
     </section>
   );

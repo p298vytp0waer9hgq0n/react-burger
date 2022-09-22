@@ -1,0 +1,15 @@
+.constructor__draggable {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 1;
+}
+
+.constructor__draggable_drag {
+  opacity: 0;
+}
+
+.constructor__dragHandle {
+  cursor: grab;
+}

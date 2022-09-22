@@ -1,0 +1,16 @@
+.constructor__order {
+  display: flex;
+  align-self: flex-end;
+}
+
+.constructor__total {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.constructor__bigicon {
+  position: relative;
+  zoom: 1.5;
+  top: 2px;
+}
