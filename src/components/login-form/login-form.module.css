@@ -1,0 +1,11 @@
+.login__form {
+  min-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--offset-base-size) * 6);
+}
+
+.login__form > div > div {
+  min-width: 480px;
+}
