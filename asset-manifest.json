@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/css/main.6b73b05c.css",
-    "main.js": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/js/main.95a75e6c.js",
+    "main.js": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/js/main.1d7e5842.js",
     "static/js/787.2b4cbca8.chunk.js": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/js/787.2b4cbca8.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -12,11 +12,11 @@
     "static/media/vector-merged-p.svg": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/media/vector-merged-p.fb8935012f51b7346499.svg",
     "index.html": "https://p298vytp0waer9hgq0n.github.io/react-burger/index.html",
     "main.6b73b05c.css.map": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/css/main.6b73b05c.css.map",
-    "main.95a75e6c.js.map": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/js/main.95a75e6c.js.map",
+    "main.1d7e5842.js.map": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/js/main.1d7e5842.js.map",
     "787.2b4cbca8.chunk.js.map": "https://p298vytp0waer9hgq0n.github.io/react-burger/static/js/787.2b4cbca8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6b73b05c.css",
-    "static/js/main.95a75e6c.js"
+    "static/js/main.1d7e5842.js"
   ]
 }
