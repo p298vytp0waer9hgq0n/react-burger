@@ -1,15 +1,13 @@
 import { useEffect, useRef } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type {} from 'redux-thunk/extend-redux';
 
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
+import HomePage from '../../pages/home';
 
-import app from './app.module.css';
+import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
 export default function App() {
@@ -36,14 +34,13 @@ export default function App() {
   )
 
   return (
-    <div className={app.page}>
+    <div className={styles.page}>
       <AppHeader />
-      <main className={`${app.main} pb-10`}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </DndProvider>
-      </main>
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+      </Switch>
     </div>
   );
 }

@@ -1,0 +1,8 @@
+.main {
+  max-width: 1240px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  overflow: hidden;
+}

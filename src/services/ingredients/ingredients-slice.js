@@ -12,7 +12,6 @@ export const getIngredients = createAsyncThunk('ingredients/getIngredients', fet
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {},
   extraReducers: {
     [getIngredients.pending]: (state) => {
       state.isLoading = true;

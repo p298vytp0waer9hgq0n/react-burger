@@ -10,7 +10,6 @@ const initialState = {
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
-  reducers: {},
   extraReducers: {
     [orderBurger.fulfilled]: (state, action) => {
       state.placedOrder = action.payload;
