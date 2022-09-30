@@ -1,4 +1,4 @@
-.login {
+.page {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -6,13 +6,13 @@
   align-items: center;
 }
 
-.login__container {
+.formContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login__link {
+.formContainer__link {
   text-decoration: none;
   color: var(--colors-interface-accent);
 }

@@ -5,10 +5,13 @@ import type {} from 'redux-thunk/extend-redux';
 
 import AppHeader from '../app-header/app-header';
 import HomePage from '../../pages/home';
+import LoginPage from '../../pages/login';
+import RegisterPage from '../../pages/register';
+import ForgotPasswordPage from '../../pages/forgot-password';
+import ResetPasswordPage from '../../pages/reset-password';
 
 import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
-import LoginPage from '../../pages/login';
 
 
 export default function App() {
@@ -43,6 +46,15 @@ export default function App() {
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/register">
+          <RegisterPage />
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotPasswordPage />
+        </Route>
+        <Route path="/reset-password">
+          <ResetPasswordPage />
         </Route>
       </Switch>
     </div>
