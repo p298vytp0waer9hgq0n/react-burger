@@ -1,0 +1,22 @@
+.main {
+  width: 1240px;
+  margin: auto;
+}
+
+.profile {
+  margin-top: 120px;
+  display: flex;
+}
+
+.profile__link {
+  min-width: 320px;
+  padding: 17px 0;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.profile__note {
+  width: 320px;
+  opacity: .4;
+}

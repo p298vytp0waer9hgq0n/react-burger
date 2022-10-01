@@ -9,6 +9,7 @@ import LoginPage from '../../pages/login';
 import RegisterPage from '../../pages/register';
 import ForgotPasswordPage from '../../pages/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password';
+import ProfilePage from '../../pages/profile';
 
 import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
@@ -55,6 +56,9 @@ export default function App() {
         </Route>
         <Route path="/reset-password">
           <ResetPasswordPage />
+        </Route>
+        <Route path="/profile">
+          <ProfilePage />
         </Route>
       </Switch>
     </div>
