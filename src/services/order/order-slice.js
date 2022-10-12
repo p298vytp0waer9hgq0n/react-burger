@@ -15,7 +15,7 @@ export const orderSlice = createSlice({
       state.placedOrder = action.payload;
     },
     [orderBurger.rejected]: (state, action) => {
-      console.log(`Ошибка размещения заказа: `, action.error.message);
+      console.error(`Ошибка размещения заказа: `, action.error.message);
       state.placedOrder = {};
     }
   }

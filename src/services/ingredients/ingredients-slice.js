@@ -20,9 +20,10 @@ export const ingredientsSlice = createSlice({
       state.isLoading = false;
       state.ingredients = action.payload.data;
     },
-    [getIngredients.rejected]: (state) => {
+    [getIngredients.rejected]: (state, action) => {
       state.isLoading = false;
       state.hasError = true;
+      console.error('Ошибка загрузки конструктора: ', action.error.message)
     }
   }
 })

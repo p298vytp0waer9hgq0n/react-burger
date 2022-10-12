@@ -34,25 +34,25 @@ export const userSlice = createSlice({
       state.resetEmail = '';
     },
     [requestReset.rejected]: (state, action) => {
-      console.log('Ошибка восстановления пароля: ', action.error.message);
+      console.error('Ошибка восстановления пароля: ', action.error.message);
     },
     [reset.fulfilled]: (state, action) => {
       console.log(action.payload);
     },
     [reset.rejected]: (state, action) => {
-      console.log('Ошибка восстановления пароля: ', action.error.message);
+      console.error('Ошибка восстановления пароля: ', action.error.message);
     },
     [loginUser.fulfilled]: (state, action) => {
       console.log(action.payload);
     },
     [loginUser.rejected]: (state, action) => {
-      console.log('Ошибка входа: ', action.error.message);
+      console.error('Ошибка входа: ', action.error.message);
     },
     [registerUser.fulfilled]: (state, action) => {
       console.log(action.payload);
     },
     [registerUser.rejected]: (state, action) => {
-      console.log('Ошибка регистрации: ', action.error.message);
+      console.error('Ошибка регистрации: ', action.error.message);
     }
   }
 })
