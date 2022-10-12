@@ -1,13 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import requestPwReset from "../../utils/request-pw-reset";
 import resetPassword from "../../utils/reset-pw";
+import login from "../../utils/login";
+import register from "../../utils/register";
 
 export const requestReset = createAsyncThunk('user/requestReset', requestPwReset);
 export const reset = createAsyncThunk('user/reset', resetPassword);
+export const loginUser = createAsyncThunk('user/login', login);
+export const registerUser = createAsyncThunk('user/register', register);
 
 const initialState = {
   userName: '',
   email: '',
+  roles: '',
+  authToken: ''
 }
 
 
@@ -36,6 +42,18 @@ export const userSlice = createSlice({
     [reset.rejected]: (state, action) => {
       console.log('Ошибка восстановления пароля: ', action.error.message);
     },
+    [loginUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
+    },
+    [loginUser.rejected]: (state, action) => {
+      console.log('Ошибка входа: ', action.error.message);
+    },
+    [registerUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
+    },
+    [registerUser.rejected]: (state, action) => {
+      console.log('Ошибка регистрации: ', action.error.message);
+    }
   }
 })
 
