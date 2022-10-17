@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import requestPwReset from "../../utils/request-pw-reset";
-import resetPassword from "../../utils/reset-pw";
-import login from "../../utils/login";
-import register from "../../utils/register";
-import getUserDetails from "../../utils/get-user-details";
+import requestPwReset from "../../utils/api/request-pw-reset";
+import resetPassword from "../../utils/api/reset-pw";
+import login from "../../utils/api/login";
+import register from "../../utils/api/register";
+import getUserDetails from "../../utils/api/get-user-details";
 import parseTokenExp from "../../utils/parse-token-exp";
 
 export const requestReset = createAsyncThunk('user/requestReset', requestPwReset);

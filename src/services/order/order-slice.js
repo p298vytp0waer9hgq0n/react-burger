@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import placeOrder from "../../utils/place-order";
+import placeOrder from "../../utils/api/place-order";
 
 export const orderBurger = createAsyncThunk('burger/order', placeOrder);
 

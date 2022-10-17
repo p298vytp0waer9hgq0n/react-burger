@@ -1,5 +1,5 @@
-import checkResponse from "./check-response";
-import { baseUrl, userUrl } from "./constants";
+import checkResponse from "../check-response";
+import { baseUrl, userUrl } from "../constants";
 
 export default function getUserDetails (token) {
   return fetch(`${baseUrl}${userUrl}`, {

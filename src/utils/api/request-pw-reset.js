@@ -1,5 +1,5 @@
-import checkResponse from "./check-response";
-import { baseUrl, resetUrl } from "./constants";
+import checkResponse from "../check-response";
+import { baseUrl, resetUrl } from "../constants";
 
 export default function requestPwReset (email) {
   return fetch(`${baseUrl}${resetUrl}`, {

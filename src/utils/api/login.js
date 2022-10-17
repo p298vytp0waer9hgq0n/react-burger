@@ -1,5 +1,5 @@
-import checkResponse from "./check-response";
-import { baseUrl, loginUrl } from "./constants";
+import checkResponse from "../check-response";
+import { baseUrl, loginUrl } from "../constants";
 
 export default function login ({email, password}) {
   return fetch(`${baseUrl}${loginUrl}`, {

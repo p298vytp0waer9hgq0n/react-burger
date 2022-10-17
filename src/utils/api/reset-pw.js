@@ -1,5 +1,5 @@
-import checkResponse from "./check-response";
-import { baseUrl, newPwUrl } from "./constants";
+import checkResponse from "../check-response";
+import { baseUrl, newPwUrl } from "../constants";
 
 export default function resetPassword ({ password, token }) {
   console.log(password, token);

@@ -1,5 +1,5 @@
-import checkResponse from "./check-response";
-import { baseUrl, orderUrl } from "./constants";
+import checkResponse from "../check-response";
+import { baseUrl, orderUrl } from "../constants";
 
 export default function placeOrder(data) {
   return fetch(`${baseUrl}${orderUrl}`, {
