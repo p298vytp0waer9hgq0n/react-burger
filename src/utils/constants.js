@@ -4,6 +4,7 @@ export const ingredientsUrl = 'ingredients';
 export const orderUrl = 'orders';
 export const registerUrl = 'auth/register';
 export const loginUrl = 'auth/login';
+export const userUrl = 'auth/user';
 export const resetUrl = 'password-reset';
 export const newPwUrl = 'password-reset/reset';
 export const modalRoot = document.getElementById('modal-root');
