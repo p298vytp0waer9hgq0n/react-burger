@@ -13,6 +13,7 @@ import ProfilePage from '../../pages/profile';
 
 import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
+import Protected from '../protected/protected';
 
 
 export default function App() {
@@ -57,9 +58,9 @@ export default function App() {
         <Route path="/reset-password">
           <ResetPasswordPage />
         </Route>
-        <Route path="/profile">
+        <Protected path="/profile">
           <ProfilePage />
-        </Route>
+        </Protected>
       </Switch>
     </div>
   );

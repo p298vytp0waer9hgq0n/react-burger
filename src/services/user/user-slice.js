@@ -5,17 +5,18 @@ import login from "../../utils/api/login";
 import register from "../../utils/api/register";
 import getUserDetails from "../../utils/api/get-user-details";
 import parseTokenExp from "../../utils/parse-token-exp";
+import getNewToken from "../../utils/api/get-new-token";
 
 export const requestReset = createAsyncThunk('user/requestReset', requestPwReset);
 export const reset = createAsyncThunk('user/reset', resetPassword);
 export const loginUser = createAsyncThunk('user/login', login);
 export const registerUser = createAsyncThunk('user/register', register);
 export const getUser = createAsyncThunk('user/get', getUserDetails);
+export const refreshToken = createAsyncThunk('user/refresh', getNewToken);
 
 const initialState = {
   userName: '',
   email: '',
-  roles: '',
   accToken: '',
   expire: 0
 }
@@ -30,6 +31,10 @@ export const userSlice = createSlice({
     },
     setEmail: (state, action) => {
       state.email = action.payload;
+    },
+    setAccToken: (state, action) => {
+      console.log(action.payload);
+      state.accToken = action.payload;
     }
   },
   extraReducers: {
@@ -56,6 +61,14 @@ export const userSlice = createSlice({
     [loginUser.rejected]: (state, action) => {
       console.error('Ошибка входа: ', action.error.message);
     },
+    [refreshToken.fulfilled]: (state, action) => {
+      state.accToken = action.payload.accessToken;
+      state.expire = parseTokenExp(action.payload.accessToken);
+      document.cookie = `refToken=${action.payload.refreshToken}`;
+    },
+    [refreshToken.rejected]: (state, action) => {
+      console.error('refresh error', action.error.message);
+    },
     [getUser.fulfilled]: (state, action) => {
       console.log(action.payload);
     },
@@ -73,4 +86,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setUserName, setEmail } = userSlice.actions;
+export const { setUserName, setEmail, setAccToken } = userSlice.actions;
