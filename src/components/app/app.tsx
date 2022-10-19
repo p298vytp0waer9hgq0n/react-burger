@@ -46,19 +46,19 @@ export default function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/login">
+        <Protected path="/login" auth={false} redirect="/">
           <LoginPage />
-        </Route>
-        <Route path="/register">
+        </Protected>
+        <Protected path="/register" auth={false} redirect="/">
           <RegisterPage />
-        </Route>
-        <Route path="/forgot-password">
+        </Protected>
+        <Protected path="/forgot-password" auth={false} redirect="/">
           <ForgotPasswordPage />
-        </Route>
-        <Route path="/reset-password">
+        </Protected>
+        <Protected path="/reset-password" auth={false} redirect="/">
           <ResetPasswordPage />
-        </Route>
-        <Protected path="/profile">
+        </Protected>
+        <Protected path="/profile" auth={true} redirect="/login">
           <ProfilePage />
         </Protected>
       </Switch>

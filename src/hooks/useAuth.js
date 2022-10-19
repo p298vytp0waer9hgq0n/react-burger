@@ -9,16 +9,19 @@ export function useAuth () {
 
   async function getUser () {
     if (user.accToken && user.expire > Date.now()) {
-      console.log('reuse auth');
       return;
     }
     dispatch(setIsLoading(true));
     let newToken = user.accToken;
     if (!user.accToken || user.expire <= Date.now()) {
-      const token = document.cookie.match('refToken').input.split('=')[1];
-      if (!token) return;
-      const data = await dispatch(refreshToken(token)).unwrap();
-      newToken = data.accessToken;
+      try {
+        const token = document.cookie.match('refToken').input.split('=')[1];
+        const data = await dispatch(refreshToken(token)).unwrap();
+        newToken = data.accessToken;
+      } catch {
+        dispatch(setIsLoading(false));
+        return;
+      }
     }
     getUserDetails(newToken).then((resp) => {
       dispatch(setUserName(resp.user.name));
@@ -30,7 +33,7 @@ export function useAuth () {
 
   function logoutUser () {
     const token = document.cookie.match('refToken').input.split('=')[1];
-    logout(token).then((resp) => {
+    logout(token).then(() => {
       dispatch(setLogoff);
       document.cookie = 'refToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/react-burger';
     }).catch((err) => console.error('Ошибка выхода из системы: ', err));

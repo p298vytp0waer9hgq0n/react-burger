@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-export default function Protected ({ children, path }) {
+export default function Protected ({ children, path, auth, redirect }) {
   const { getUser, user } = useAuth();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Protected ({ children, path }) {
 
   return (
     <Route path={path}>
-      { user.userName ? children : <Redirect to={{ pathname: '/login' }} /> }
+      { Boolean(user.userName) === auth ? children : <Redirect to={{ pathname: redirect }} /> }
     </Route>
   );
 }
