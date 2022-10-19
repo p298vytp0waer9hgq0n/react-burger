@@ -10,7 +10,7 @@ export default function login ({email, password}) {
       "password": password
     })
   }).then(checkResponse).then((resp) => {
-    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}`;
+    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}; path=/react-burger`;
     return resp;
   });
 }

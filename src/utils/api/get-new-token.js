@@ -9,7 +9,7 @@ export default function getNewToken (token) {
       'token': token
     })
   }).then(checkResponse).then((resp) => {
-    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}`;
+    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}; path=/react-burger`;
     return resp;
   });
 }

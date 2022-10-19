@@ -8,6 +8,7 @@ export const refreshUrl = 'auth/token';
 export const userUrl = 'auth/user';
 export const resetUrl = 'password-reset';
 export const newPwUrl = 'password-reset/reset';
+export const logoutUrl = 'auth/logout';
 export const modalRoot = document.getElementById('modal-root');
 
 export const dragTypes = {
