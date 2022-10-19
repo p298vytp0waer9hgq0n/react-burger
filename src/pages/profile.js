@@ -1,19 +1,13 @@
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUser, setEmail, setUserName } from "../services/user/user-slice";
+import { setEmail, setUserName } from "../services/user/user-slice";
 
 import styles from './profile.module.css';
 
 export default function ProfilePage () {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-
-  useEffect(() => {
-    // console.log(user.userName);
-    dispatch(getUser(user.accToken));
-  }, []);
 
   return (
     <main className={styles.main}>

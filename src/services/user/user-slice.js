@@ -3,7 +3,6 @@ import requestPwReset from "../../utils/api/request-pw-reset";
 import resetPassword from "../../utils/api/reset-pw";
 import login from "../../utils/api/login";
 import register from "../../utils/api/register";
-import getUserDetails from "../../utils/api/get-user-details";
 import parseTokenExp from "../../utils/parse-token-exp";
 import getNewToken from "../../utils/api/get-new-token";
 
@@ -11,14 +10,14 @@ export const requestReset = createAsyncThunk('user/requestReset', requestPwReset
 export const reset = createAsyncThunk('user/reset', resetPassword);
 export const loginUser = createAsyncThunk('user/login', login);
 export const registerUser = createAsyncThunk('user/register', register);
-export const getUser = createAsyncThunk('user/get', getUserDetails);
 export const refreshToken = createAsyncThunk('user/refresh', getNewToken);
 
 const initialState = {
   userName: '',
   email: '',
   accToken: '',
-  expire: 0
+  expire: 0,
+  isLoading: true
 }
 
 
@@ -33,8 +32,10 @@ export const userSlice = createSlice({
       state.email = action.payload;
     },
     setAccToken: (state, action) => {
-      console.log(action.payload);
       state.accToken = action.payload;
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     }
   },
   extraReducers: {
@@ -56,7 +57,6 @@ export const userSlice = createSlice({
       state.email = action.payload.user.email;
       state.accToken = action.payload.accessToken;
       state.expire = parseTokenExp(action.payload.accessToken);
-      document.cookie = `refToken=${action.payload.refreshToken}`;
     },
     [loginUser.rejected]: (state, action) => {
       console.error('Ошибка входа: ', action.error.message);
@@ -64,19 +64,15 @@ export const userSlice = createSlice({
     [refreshToken.fulfilled]: (state, action) => {
       state.accToken = action.payload.accessToken;
       state.expire = parseTokenExp(action.payload.accessToken);
-      document.cookie = `refToken=${action.payload.refreshToken}`;
     },
     [refreshToken.rejected]: (state, action) => {
       console.error('refresh error', action.error.message);
     },
-    [getUser.fulfilled]: (state, action) => {
-      console.log(action.payload);
-    },
-    [getUser.rejected]: (state, action) => {
-      console.error('Ошибка загрузки информации о пользователе: ', action.error.message);
-    },
     [registerUser.fulfilled]: (state, action) => {
-      console.log(action.payload);
+      state.userName = action.payload.user.name;
+      state.email = action.payload.user.email;
+      state.accToken = action.payload.accessToken;
+      state.expire = parseTokenExp(action.payload.accessToken);
     },
     [registerUser.rejected]: (state, action) => {
       console.error('Ошибка регистрации: ', action.error.message);
@@ -86,4 +82,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setUserName, setEmail, setAccToken } = userSlice.actions;
+export const { setUserName, setEmail, setAccToken, setIsLoading } = userSlice.actions;

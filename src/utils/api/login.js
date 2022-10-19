@@ -9,6 +9,8 @@ export default function login ({email, password}) {
       "email": email,
       "password": password
     })
-  })
-    .then(checkResponse);
+  }).then(checkResponse).then((resp) => {
+    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}`;
+    return resp;
+  });
 }

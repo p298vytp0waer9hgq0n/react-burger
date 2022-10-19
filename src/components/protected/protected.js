@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux"
+import { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function Protected ({ children, path }) {
-  const { userName } = useSelector((store) => store.user);
-  const { getUser } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
+  const { getUser, user } = useAuth();
 
   useEffect(() => {
-    async function init() {
-      await getUser();
-    }
-
-    init();
+    getUser();
   }, [])
 
-  useEffect(() => {
-    if (userName) setIsLoading(false)
-  }, [userName])
-
-  if (isLoading) {
+  if (user.isLoading) {
     return (
       <p>loading</p>
     )
@@ -28,7 +17,7 @@ export default function Protected ({ children, path }) {
 
   return (
     <Route path={path}>
-      { userName ? children : <Redirect to={{ pathname: '/login' }} /> }
+      { user.userName ? children : <Redirect to={{ pathname: '/login' }} /> }
     </Route>
   );
 }

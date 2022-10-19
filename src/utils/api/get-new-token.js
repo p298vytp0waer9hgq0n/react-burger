@@ -8,5 +8,8 @@ export default function getNewToken (token) {
     body: JSON.stringify({
       'token': token
     })
-  }).then(checkResponse);
+  }).then(checkResponse).then((resp) => {
+    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}`;
+    return resp;
+  });
 }
