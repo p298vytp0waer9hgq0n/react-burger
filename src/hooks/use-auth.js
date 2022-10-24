@@ -1,34 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import { refreshToken, setEmail, setIsLoading, setLogoff, setUserName } from "../services/user/user-slice";
+import { setEmail, setIsLoading, setLogoff, setUserName } from "../services/user/user-slice";
 import getUserDetails from "../utils/api/get-user-details";
 import logout from "../utils/api/logout";
+import useCheckToken from "./use-check-token";
 
 export function useAuth () {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
+  const { checkToken } = useCheckToken();
+
   async function getUser () {
-    if (user.accToken && user.expire > Date.now()) {
+    dispatch(setIsLoading(true));
+    const token = await checkToken();
+    if (typeof token !== 'string') {
+      // either user is not logged in or access token is fine, no action necessary
+      dispatch(setIsLoading(false));
       return;
     }
-    dispatch(setIsLoading(true));
-    let newToken = user.accToken;
-    if (!user.accToken || user.expire <= Date.now()) {
-      try {
-        const token = document.cookie.match('refToken').input.split('=')[1];
-        const data = await dispatch(refreshToken(token)).unwrap();
-        newToken = data.accessToken;
-      } catch {
-        dispatch(setIsLoading(false));
-        return;
-      }
-    }
-    getUserDetails(newToken).then((resp) => {
+    getUserDetails(token).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));
       dispatch(setIsLoading(false));
       return resp.success;
-    }).catch((err) => console.error('Ошибка загрузки профиля пользователя: ', err));
+    }).catch((err) => {
+      console.error('Ошибка загрузки профиля пользователя: ', err)
+    });
   }
 
   function logoutUser () {
