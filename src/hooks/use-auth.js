@@ -45,7 +45,6 @@ export function useAuth () {
 
   function logoutUser () {
     dispatch(setIsLoading(true));
-    console.log('logout');
     const token = document.cookie.match('refToken').input.split('=')[1];
     logout(token).then(() => {
       dispatch(setLogoff());

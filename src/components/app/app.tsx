@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type {} from 'redux-thunk/extend-redux';
 
@@ -20,6 +20,8 @@ import LogoutPage from '../../pages/logout';
 export default function App() {
   const dispatch = useDispatch();
   const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
+  const location = useLocation();
+  console.log(location);
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
 
@@ -46,6 +48,9 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route path="/ingredients/:id">
+
         </Route>
         <Protected path="/login" auth={false} redirect="/">
           <LoginPage />
