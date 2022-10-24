@@ -2,13 +2,14 @@ import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-component
 import { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
 
+import styles from "./forms.module.css";
+
 export default function ProfileForm() {
-  const { user } = useAuth();
+  const { user, postUser } = useAuth();
   const [activeInput, setActiveInput] = useState(null);
   const [newName, setNewName] = useState(user.userName);
   const [newEmail, setNewEmail] = useState(user.email);
   const [newPassword, setNewPassword] = useState('');
-  const { postUser } = useAuth();
 
   function submitProfile (evt) {
     evt.preventDefault();
@@ -16,8 +17,15 @@ export default function ProfileForm() {
     setActiveInput(null);
   }
 
+  function resetForm () {
+    setNewName(user.userName);
+    setNewEmail(user.email);
+    setNewPassword('');
+    setActiveInput(null);
+  }
+
   return (
-    <form className="ml-15" onSubmit={submitProfile}>
+    <form className={`ml-15 ${styles.profileForm}`} onSubmit={submitProfile}>
       <Input
         disabled={activeInput !== 'name'}
         extraClass="mb-6"
@@ -49,6 +57,7 @@ export default function ProfileForm() {
         value={newPassword}
         onChange={(evt) => setNewPassword(evt.target.value)}
       />
+      <Button onClick={() => resetForm()} type="secondary" htmlType="button">Отмена</Button>
       <Button htmlType="submit">Сохранить</Button>
     </form>
   )
