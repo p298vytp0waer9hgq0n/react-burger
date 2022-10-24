@@ -42,7 +42,7 @@ export const userSlice = createSlice({
       state.hasError = action.payload;
     },
     setLogoff: (state) => {
-      state = initialState;
+      return initialState;
     }
   },
   extraReducers: {

@@ -14,7 +14,6 @@ export default function useCheckToken() {
     if (token) {
       newToken = renewToken(token);
     } else {
-      console.warn('no refresh token, user is not logged in');
       return;
     }
     return newToken;

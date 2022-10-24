@@ -14,6 +14,7 @@ import ProfilePage from '../../pages/profile';
 import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
 import Protected from '../protected/protected';
+import LogoutPage from '../../pages/logout';
 
 
 export default function App() {
@@ -58,8 +59,11 @@ export default function App() {
         <Protected path="/reset-password" auth={false} redirect="/">
           <ResetPasswordPage />
         </Protected>
-        <Protected path="/profile" auth={true} redirect="/login">
+        <Protected exact path="/profile" auth={true} redirect="/login">
           <ProfilePage />
+        </Protected>
+        <Protected path="/profile/logout" auth={true} redirect="/login">
+          <LogoutPage />
         </Protected>
       </Switch>
     </div>

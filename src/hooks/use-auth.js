@@ -44,10 +44,13 @@ export function useAuth () {
   }
 
   function logoutUser () {
+    dispatch(setIsLoading(true));
+    console.log('logout');
     const token = document.cookie.match('refToken').input.split('=')[1];
     logout(token).then(() => {
-      dispatch(setLogoff);
+      dispatch(setLogoff());
       document.cookie = 'refToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/react-burger';
+      dispatch(setIsLoading(false));
     }).catch((err) => console.error('Ошибка выхода из системы: ', err));
   }
 
