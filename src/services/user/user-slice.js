@@ -17,7 +17,8 @@ const initialState = {
   email: '',
   accToken: '',
   expire: 0,
-  isLoading: true
+  isLoading: true,
+  hasError: false
 }
 
 
@@ -37,7 +38,10 @@ export const userSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-    setLogoff: (state, action) => {
+    setHasError: (state, action) => {
+      state.hasError = action.payload;
+    },
+    setLogoff: (state) => {
       state = initialState;
     }
   },
@@ -85,4 +89,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { setUserName, setEmail, setAccToken, setIsLoading, setLogoff } = userSlice.actions;
+export const { setUserName, setEmail, setAccToken, setIsLoading, setLogoff, setHasError } = userSlice.actions;

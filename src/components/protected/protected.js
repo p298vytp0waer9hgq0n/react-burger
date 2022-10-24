@@ -15,6 +15,12 @@ export default function Protected ({ children, path, auth, redirect }) {
     )
   }
 
+  if (user.hasError) {
+    return (
+      <p>error</p>
+    )
+  }
+
   return (
     <Route path={path}>
       { Boolean(user.userName) === auth ? children : <Redirect to={{ pathname: redirect }} /> }

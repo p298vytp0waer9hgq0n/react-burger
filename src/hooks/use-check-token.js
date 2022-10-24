@@ -7,7 +7,7 @@ export default function useCheckToken() {
 
   function checkToken() {
     if (user.accToken && user.expire > Date.now()) {
-      return true;
+      return user.accToken;
     }
     let newToken = user.accToken;
     const token = document.cookie.match('refToken')?.input.split('=')[1] || null;
@@ -15,7 +15,7 @@ export default function useCheckToken() {
       newToken = renewToken(token);
     } else {
       console.warn('no refresh token, user is not logged in');
-      return
+      return;
     }
     return newToken;
   }

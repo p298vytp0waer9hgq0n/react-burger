@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setIsLoading, setLogoff, setUserName } from "../services/user/user-slice";
+import { setEmail, setHasError, setIsLoading, setLogoff, setUserName } from "../services/user/user-slice";
 import getUserDetails from "../utils/api/get-user-details";
 import logout from "../utils/api/logout";
+import updateUserInfo from "../utils/api/update-user-info";
 import useCheckToken from "./use-check-token";
 
 export function useAuth () {
@@ -13,7 +14,7 @@ export function useAuth () {
   async function getUser () {
     dispatch(setIsLoading(true));
     const token = await checkToken();
-    if (typeof token !== 'string') {
+    if (typeof token !== 'string' || token === user.accToken) {
       // either user is not logged in or access token is fine, no action necessary
       dispatch(setIsLoading(false));
       return;
@@ -24,8 +25,22 @@ export function useAuth () {
       dispatch(setIsLoading(false));
       return resp.success;
     }).catch((err) => {
+      dispatch(setHasError(true));
       console.error('Ошибка загрузки профиля пользователя: ', err)
     });
+  }
+
+  async function postUser(newName, newEmail, newPassword) {
+    dispatch(setIsLoading(true));
+    const token = await checkToken();
+    updateUserInfo(token, newName, newEmail, newPassword).then((resp) => {
+      dispatch(setUserName(resp.user.name));
+      dispatch(setEmail(resp.user.email));
+      dispatch(setIsLoading(false));
+      }).catch((err) => {
+        dispatch(setHasError(true));
+        console.error('Ошибка обновления профиля пользователя: ', err);
+      });
   }
 
   function logoutUser () {
@@ -38,6 +53,7 @@ export function useAuth () {
 
   return {
     getUser,
+    postUser,
     logoutUser,
     user
   };

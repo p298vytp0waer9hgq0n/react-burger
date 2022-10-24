@@ -17,7 +17,7 @@ export default function ProfilePage () {
           <Link className={`${styles.profile__link} text text_type_main-medium text_color_primary`}>Профиль</Link>
           <Link className={`${styles.profile__link} text text_type_main-medium text_color_inactive`}>История заказов</Link>
           <Link className={`${styles.profile__link} text text_type_main-medium text_color_inactive`}>Выход</Link>
-    <p className={`${styles.profile__note} text text_type_main-default text_color_inactive mt-20`}>В этом разделе вы можете изменить&nbsp;свои персональные данные</p>
+          <p className={`${styles.profile__note} text text_type_main-default text_color_inactive mt-20`}>В этом разделе вы можете изменить&nbsp;свои персональные данные</p>
         </div>
         <ProfileForm />
       </div>
