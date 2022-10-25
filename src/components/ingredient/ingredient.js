@@ -1,4 +1,5 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
 
 import { ingredientType } from '../../utils/types';
@@ -8,18 +9,18 @@ import styles from './ingredient.module.css';
 
 import PropTypes from 'prop-types';
 
-export default function Ingredient ({openIngredientDetails, ...props}) {
-
+export default function Ingredient (props) {
+  const location = useLocation();
   const [, dragRef] = useDrag({
     type: dragTypes.ingredient,
     item: { ...props },
   });
 
   return (
-    <li
+    <Link
       className={`${styles.burger__ingredient} ml-4 mr-1 mb-8`}
-      onClick={openIngredientDetails}
       ref={dragRef}
+      to={{pathname: `/ingredients/${props._id}`, state: { background: location }}}
     >
       {props.quantity > 0 && <Counter count={props.quantity} size="default" />}
       <img src={props.image} alt={props.name} />
@@ -28,11 +29,10 @@ export default function Ingredient ({openIngredientDetails, ...props}) {
         <CurrencyIcon type="primary" />
       </div>
       <p className={`${styles.burger__name} text text_type_main-default`}>{props.name}</p>
-    </li>
+    </Link>
   )
 }
 
 Ingredient.propTypes = {
-  openIngredientDetails: PropTypes.func.isRequired,
   ...ingredientType
 }

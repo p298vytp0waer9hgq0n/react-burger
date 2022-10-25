@@ -15,13 +15,16 @@ import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
 import Protected from '../protected/protected';
 import LogoutPage from '../../pages/logout';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import Modal from '../modal/modal';
 
 
 export default function App() {
   const dispatch = useDispatch();
   const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
-  const location = useLocation();
-  console.log(location);
+  const location:any = useLocation();
+  const background = location.state && location.state.background;
+  const orderBackground = location.state && location.state.orderBackground;
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
 
@@ -45,12 +48,9 @@ export default function App() {
   return (
     <div className={styles.page}>
       <AppHeader />
-      <Switch>
+      <Switch location={ background || location }>
         <Route exact path="/">
           <HomePage />
-        </Route>
-        <Route path="/ingredients/:id">
-
         </Route>
         <Protected path="/login" auth={false} redirect="/">
           <LoginPage />
@@ -71,6 +71,8 @@ export default function App() {
           <LogoutPage />
         </Protected>
       </Switch>
+      { background && <Route path="/ingredients/:id" children={<Modal />} /> }
+      { background && <Route path="/order" children={<Modal />} /> }
     </div>
   );
 }

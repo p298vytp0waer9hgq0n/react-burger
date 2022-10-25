@@ -2,8 +2,9 @@ import { useSelector } from "react-redux";
 
 import styles from "./ingredient-details.module.css";
 
-export default function IngredientDetails () {
-  const ingredient = useSelector((store) => store.ingredientModal.ingredientModal);
+export default function IngredientDetails (props) {
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  const ingredient = ingredients.find((elem) => elem._id === props.id);
 
   if (!ingredient) return null;
   return (
