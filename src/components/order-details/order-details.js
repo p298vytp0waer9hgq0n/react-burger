@@ -11,9 +11,10 @@ export default function OrderDetail () {
   const burger = useSelector((store) => store.burger);
   const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
   const dispatch = useDispatch();
+  const { accToken } = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch(orderBurger(ingredients));
+    if (!order.isLoading) dispatch(orderBurger({ ingredients, accToken }));
   }, [])
 
   if (order.isLoading) {

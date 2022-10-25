@@ -16,6 +16,7 @@ import { getIngredients } from '../../services/ingredients/ingredients-slice';
 import Protected from '../protected/protected';
 import LogoutPage from '../../pages/logout';
 import Modal from '../modal/modal';
+import IngredientPage from '../../pages/ingredient';
 
 
 export default function App() {
@@ -49,6 +50,9 @@ export default function App() {
       <Switch location={ background || location }>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route path="/ingredients/:id">
+          <IngredientPage />
         </Route>
         <Protected path="/login" auth={false} redirect="/">
           <LoginPage />

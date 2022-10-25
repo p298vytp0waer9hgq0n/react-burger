@@ -24,6 +24,7 @@ export const orderSlice = createSlice({
     },
     [orderBurger.rejected]: (state, action) => {
       console.error(`Ошибка размещения заказа: `, action.error.message);
+      state.isLoading = false;
       state.hasError = true;
       state.placedOrder = {};
     }
