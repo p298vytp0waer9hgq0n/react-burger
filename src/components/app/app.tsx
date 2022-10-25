@@ -15,7 +15,6 @@ import styles from './app.module.css';
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
 import Protected from '../protected/protected';
 import LogoutPage from '../../pages/logout';
-import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 
 
@@ -24,7 +23,6 @@ export default function App() {
   const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
   const location:any = useLocation();
   const background = location.state && location.state.background;
-  const orderBackground = location.state && location.state.orderBackground;
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
 
@@ -72,7 +70,7 @@ export default function App() {
         </Protected>
       </Switch>
       { background && <Route path="/ingredients/:id" children={<Modal />} /> }
-      { background && <Route path="/order" children={<Modal />} /> }
+      { background && <Protected auth={true} redirect="/login" path="/order" children={<Modal />} /> }
     </div>
   );
 }
