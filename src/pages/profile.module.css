@@ -8,13 +8,6 @@
   display: flex;
 }
 
-.profile__link {
-  min-width: 320px;
-  padding: 17px 0;
-  display: block;
-  text-decoration: none;
-}
-
 .profile__note {
   width: 320px;
   opacity: .4;

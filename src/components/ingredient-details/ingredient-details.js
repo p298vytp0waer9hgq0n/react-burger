@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 
 import styles from "./ingredient-details.module.css";
 
+import PropTypes from 'prop-types';
+
 export default function IngredientDetails (props) {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const ingredient = ingredients.find((elem) => elem._id === props.id);
@@ -32,3 +34,7 @@ export default function IngredientDetails (props) {
     </>
   )
 }
+
+IngredientDetails.propTypes = {
+  id: PropTypes.string.isRequired
+};

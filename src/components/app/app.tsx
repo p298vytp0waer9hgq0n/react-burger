@@ -10,17 +10,17 @@ import RegisterPage from '../../pages/register';
 import ForgotPasswordPage from '../../pages/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password';
 import ProfilePage from '../../pages/profile';
-
-import styles from './app.module.css';
-import { getIngredients } from '../../services/ingredients/ingredients-slice';
-import Protected from '../protected/protected';
 import LogoutPage from '../../pages/logout';
-import Modal from '../modal/modal';
 import IngredientPage from '../../pages/ingredient';
 import OrdersPage from '../../pages/orders';
 import MissingPage from '../../pages/missing';
 import LoadingPage from '../../pages/loading';
 
+import { getIngredients } from '../../services/ingredients/ingredients-slice';
+import Protected from '../protected/protected';
+import Modal from '../modal/modal';
+
+import styles from './app.module.css';
 
 export default function App() {
   const dispatch = useDispatch();
