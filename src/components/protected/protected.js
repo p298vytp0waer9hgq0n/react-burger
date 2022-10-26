@@ -1,7 +1,7 @@
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 import { Redirect, Route, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
+import LoadingPage from "../../pages/loading";
 
 export default function Protected ({ children, path, auth, redirect, ...rest }) {
   const { getUser, user } = useAuth();
@@ -13,7 +13,7 @@ export default function Protected ({ children, path, auth, redirect, ...rest }) 
 
   if (user.isLoading) {
     return (
-      <p>loading</p>
+      <LoadingPage />
     )
   }
 

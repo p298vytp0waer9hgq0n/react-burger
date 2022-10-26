@@ -18,7 +18,7 @@ export default function ForgotPasswordForm () {
   }
 
   if (success) return (
-    <Redirect to="/reset-password" />
+    <Redirect to={{ pathname: '/reset-password', state: { tokenSent: true } }} />
   )
 
   return (

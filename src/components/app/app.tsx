@@ -18,13 +18,16 @@ import LogoutPage from '../../pages/logout';
 import Modal from '../modal/modal';
 import IngredientPage from '../../pages/ingredient';
 import OrdersPage from '../../pages/orders';
+import MissingPage from '../../pages/missing';
+import LoadingPage from '../../pages/loading';
 
 
 export default function App() {
   const dispatch = useDispatch();
   const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
   const location:any = useLocation();
-  const background = location.state && location.state.background;
+  const background = location.state?.background;
+  const tokenSent = location.state?.tokenSent;
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
 
@@ -37,7 +40,7 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <p>Loading...</p>
+      <LoadingPage />
     )
   }
 
@@ -64,9 +67,10 @@ export default function App() {
         <Protected path="/forgot-password" auth={false} redirect="/">
           <ForgotPasswordPage />
         </Protected>
+        { tokenSent &&
         <Protected path="/reset-password" auth={false} redirect="/">
           <ResetPasswordPage />
-        </Protected>
+        </Protected> }
         <Protected exact path="/profile" auth={true} redirect="/login" comeback>
           <ProfilePage />
         </Protected>
@@ -76,6 +80,9 @@ export default function App() {
         <Protected path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
         </Protected>
+        <Route path="*">
+          <MissingPage />
+        </Route>
       </Switch>
       { background && <Route path="/ingredients/:id" children={<Modal />} /> }
       { background && <Protected auth={true} redirect="/login" path="/order" children={<Modal />} /> }
