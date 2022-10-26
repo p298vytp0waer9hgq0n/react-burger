@@ -26,7 +26,7 @@ export default function LoginForm () {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1 className="text text_type_main-medium">Вход</h1>
-      <Input placeholder="E-mail" size="default" value={email} onChange={(evt) => setEmail(evt.target.value)} />
+      <Input type="email" placeholder="E-mail" size="default" value={email} onChange={(evt) => setEmail(evt.target.value)} />
       <PasswordInput value={password} onChange={(evt) => setPassword(evt.target.value)} />
       <Button htmlType="submit">Войти</Button>
     </form>

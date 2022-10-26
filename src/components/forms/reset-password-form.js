@@ -1,6 +1,7 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { reset } from "../../services/user/user-slice";
 
 import styles from './forms.module.css';
@@ -9,11 +10,17 @@ export default function ResetPasswordForm () {
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
   const [safeNumber, setSafeNumber] = useState('');
+  const [success, setSuccess] = useState(false);
 
-  function submitHandler (evt) {
+  async function submitHandler (evt) {
     evt.preventDefault();
-    dispatch(reset({ password: password, token: safeNumber }));
+    const reply = await dispatch(reset({ password: password, token: safeNumber })).unwrap();
+    setSuccess(reply.success);
   }
+
+  if (success) return (
+    <Redirect to="/login" />
+  )
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>

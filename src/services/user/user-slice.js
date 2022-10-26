@@ -17,7 +17,7 @@ const initialState = {
   email: '',
   accToken: '',
   expire: 0,
-  isLoading: true,
+  isLoading: false,
   hasError: false
 }
 

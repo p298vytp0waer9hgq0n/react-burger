@@ -6,7 +6,7 @@ export default function Protected ({ children, path, auth, redirect, ...rest }) 
   const { getUser, user } = useAuth();
 
   useEffect(() => {
-    getUser();
+    if (!user.isLoading) getUser();
   }, [])
 
   if (user.isLoading) {

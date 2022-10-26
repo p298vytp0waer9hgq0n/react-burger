@@ -57,8 +57,12 @@ export default function ProfileForm() {
         value={newPassword}
         onChange={(evt) => setNewPassword(evt.target.value)}
       />
-      <Button onClick={() => resetForm()} type="secondary" htmlType="button">Отмена</Button>
-      <Button htmlType="submit">Сохранить</Button>
+    { (newName !== user.userName || newEmail !== user.email || newPassword) &&
+      <>
+        <Button onClick={() => resetForm()} type="secondary" htmlType="button">Отмена</Button>
+        <Button htmlType="submit">Сохранить</Button>
+      </>
+    }
     </form>
   )
 }
