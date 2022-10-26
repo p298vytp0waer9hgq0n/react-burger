@@ -26,6 +26,7 @@ export function useAuth () {
       return resp.success;
     }).catch((err) => {
       dispatch(setHasError(true));
+      dispatch(setIsLoading(false));
       console.error('Ошибка загрузки профиля пользователя: ', err)
     });
   }
@@ -39,6 +40,7 @@ export function useAuth () {
       dispatch(setIsLoading(false));
       }).catch((err) => {
         dispatch(setHasError(true));
+        dispatch(setIsLoading(false));
         console.error('Ошибка обновления профиля пользователя: ', err);
       });
   }

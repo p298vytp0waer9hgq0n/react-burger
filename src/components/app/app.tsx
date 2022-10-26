@@ -17,6 +17,7 @@ import Protected from '../protected/protected';
 import LogoutPage from '../../pages/logout';
 import Modal from '../modal/modal';
 import IngredientPage from '../../pages/ingredient';
+import OrdersPage from '../../pages/orders';
 
 
 export default function App() {
@@ -66,11 +67,14 @@ export default function App() {
         <Protected path="/reset-password" auth={false} redirect="/">
           <ResetPasswordPage />
         </Protected>
-        <Protected exact path="/profile" auth={true} redirect="/login">
+        <Protected exact path="/profile" auth={true} redirect="/login" comeback>
           <ProfilePage />
         </Protected>
         <Protected path="/profile/logout" auth={true} redirect="/login">
           <LogoutPage />
+        </Protected>
+        <Protected path="/profile/orders" auth={true} redirect="/login" comeback>
+          <OrdersPage />
         </Protected>
       </Switch>
       { background && <Route path="/ingredients/:id" children={<Modal />} /> }
