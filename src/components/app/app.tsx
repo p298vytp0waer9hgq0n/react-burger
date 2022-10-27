@@ -17,7 +17,7 @@ import MissingPage from '../../pages/missing';
 import LoadingPage from '../../pages/loading';
 
 import { getIngredients } from '../../services/ingredients/ingredients-slice';
-import Protected from '../protected/protected';
+import ProtectedRoute from '../protected/protected-route';
 import Modal from '../modal/modal';
 
 import styles from './app.module.css';
@@ -58,34 +58,34 @@ export default function App() {
         <Route path="/ingredients/:id">
           <IngredientPage />
         </Route>
-        <Protected path="/login" auth={false} redirect="/">
+        <ProtectedRoute path="/login" auth={false} redirect="/">
           <LoginPage />
-        </Protected>
-        <Protected path="/register" auth={false} redirect="/">
+        </ProtectedRoute>
+        <ProtectedRoute path="/register" auth={false} redirect="/">
           <RegisterPage />
-        </Protected>
-        <Protected path="/forgot-password" auth={false} redirect="/">
+        </ProtectedRoute>
+        <ProtectedRoute path="/forgot-password" auth={false} redirect="/">
           <ForgotPasswordPage />
-        </Protected>
+        </ProtectedRoute>
         { tokenSent &&
-        <Protected path="/reset-password" auth={false} redirect="/">
+        <ProtectedRoute path="/reset-password" auth={false} redirect="/">
           <ResetPasswordPage />
-        </Protected> }
-        <Protected exact path="/profile" auth={true} redirect="/login" comeback>
+        </ProtectedRoute> }
+        <ProtectedRoute exact path="/profile" auth={true} redirect="/login" comeback>
           <ProfilePage />
-        </Protected>
-        <Protected path="/profile/logout" auth={true} redirect="/login">
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/logout" auth={true} redirect="/login">
           <LogoutPage />
-        </Protected>
-        <Protected path="/profile/orders" auth={true} redirect="/login" comeback>
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
-        </Protected>
+        </ProtectedRoute>
         <Route path="*">
           <MissingPage />
         </Route>
       </Switch>
       { background && <Route path="/ingredients/:id" children={<Modal />} /> }
-      { background && <Protected auth={true} redirect="/login" path="/order" children={<Modal />} /> }
+      { background && <ProtectedRoute auth={true} redirect="/login" path="/order" children={<Modal />} /> }
     </div>
   );
 }

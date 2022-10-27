@@ -5,7 +5,7 @@ import LoadingPage from "../../pages/loading";
 
 import PropTypes from 'prop-types';
 
-export default function Protected ({ children, path, auth, redirect, ...rest }) {
+export default function ProtectedRoute ({ children, path, auth, redirect, ...rest }) {
   const { getUser, user } = useAuth();
   const location = useLocation();
 
@@ -35,7 +35,7 @@ export default function Protected ({ children, path, auth, redirect, ...rest }) 
   );
 }
 
-Protected.propTypes = {
+ProtectedRoute.propTypes = {
   children: PropTypes.any,
   path: PropTypes.string.isRequired,
   auth: PropTypes.bool.isRequired,
