@@ -21,6 +21,8 @@ import ProtectedRoute from '../protected/protected-route';
 import Modal from '../modal/modal';
 
 import styles from './app.module.css';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrderDetail from '../order-details/order-details';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -84,8 +86,20 @@ export default function App() {
           <MissingPage />
         </Route>
       </Switch>
-      { background && <Route path="/ingredients/:id" children={<Modal />} /> }
-      { background && <ProtectedRoute auth={true} redirect="/login" path="/order" children={<Modal />} /> }
+      {background &&
+        <Route path="/ingredients/:id">
+          <Modal title="Детали ингредиента">
+            <IngredientDetails />
+          </Modal>
+        </Route>
+      }
+      {background &&
+        <ProtectedRoute auth={true} redirect="/login" path="/order">
+          <Modal title="">
+            <OrderDetail />
+          </Modal>
+        </ProtectedRoute>
+      }
     </div>
   );
 }

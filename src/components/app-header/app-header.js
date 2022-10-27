@@ -18,7 +18,9 @@ export default function AppHeader () {
           <p className={`ml-2 text text_type_main-default ${location.pathname === '/somethin' ? '' : 'text_color_inactive'}`}>Лента заказов</p>
         </Link>
       </nav>
-      <Logo className={styles.header__logo} />
+      <Link to="/">
+        <Logo className={styles.header__logo} />
+      </Link>
       <Link to="/profile" className={`${styles.header__button} pt-4 pb-4 pl-5 pr-5 mr-2 mt-4 mb-4`}>
         <ProfileIcon type={location.pathname.startsWith('/profile') ? 'primary' : 'secondary'} />
         <p className={`ml-2 text text_type_main-default ${location.pathname.startsWith('/profile') ? '' : 'text_color_inactive'}`}>Личный кабинет</p>

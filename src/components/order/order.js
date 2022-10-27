@@ -23,7 +23,7 @@ export default function Order () {
           <CurrencyIcon />
         </div>
       </div>
-        <Link to={{pathname: "/order", state: { background: location, modal: 'order' }}}><Button type="primary" size="large" htmlType="button">Оформить заказ</Button></Link>
+        <Link to={{pathname: "/order", state: { background: location }}}><Button type="primary" size="large" htmlType="button">Оформить заказ</Button></Link>
     </div>
   );
 }

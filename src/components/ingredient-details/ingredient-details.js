@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 
-import PropTypes from 'prop-types';
-
-export default function IngredientDetails (props) {
+export default function IngredientDetails () {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  const ingredient = ingredients.find((elem) => elem._id === props.id);
+  const { id } = useParams();
+  const ingredient = ingredients.find((elem) => elem._id === id);
 
   if (!ingredient) return null;
   return (
@@ -34,7 +34,3 @@ export default function IngredientDetails (props) {
     </>
   )
 }
-
-IngredientDetails.propTypes = {
-  id: PropTypes.string.isRequired
-};
