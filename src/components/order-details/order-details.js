@@ -1,22 +1,44 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useEffect } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { burgerClear } from "../../services/burger/burger-slice";
+import { orderBurger } from "../../services/order/order-slice";
 
 import styles from "./order-details.module.css";
 
 export default function OrderDetail () {
-  const order = useSelector((store) => store.order.placedOrder);
-  if (!order.success) {
+  const order = useSelector((store) => store.order);
+  const burger = useSelector((store) => store.burger);
+  const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
+  const dispatch = useDispatch();
+  const { accToken } = useSelector((store) => store.user);
+
+  useEffect(() => {
+    dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear()));
+  }, [])
+
+  if (order.isLoading) {
     return (
       <>
-        <p className="text text_type_main-medium mt-8">Something went wrong on server side</p>
+        <p className="text text_type_main-medium mt-8">Processing...</p>
+        <div className={`${styles.thingy} mt-7 mb-8`}></div>
+      </>
+    )
+  }
+
+  if (order.hasError) {
+    return (
+      <>
+        <p className="text text_type_main-medium mt-8">Something went wrong</p>
         <div className={`${styles.thingy} mt-7 mb-8`}></div>
       </>
     );
   }
+
   return (
     <>
-      <p className={`${styles.number} text text_type_digits-large mt-4`}>{order.order.number}</p>
+      <p className={`${styles.number} text text_type_digits-large mt-4`}>{order.placedOrder.order?.number}</p>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <div className={`${styles.thingy} mt-7 mb-8`}>
         <CheckMarkIcon type="primary" />

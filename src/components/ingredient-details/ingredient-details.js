@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 
 export default function IngredientDetails () {
-  const ingredient = useSelector((store) => store.ingredientModal.ingredientModal);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  const { id } = useParams();
+  const ingredient = ingredients.find((elem) => elem._id === id);
 
   if (!ingredient) return null;
   return (

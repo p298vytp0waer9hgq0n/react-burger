@@ -25,10 +25,13 @@ export const burgerSlice = createSlice({
       const oldIndex = state.ingredients.findIndex((item) => item.uid === action.payload.draggedUid);
       const newIndex = state.ingredients.findIndex((item) => item.uid === action.payload.uid);
       state.ingredients.splice(newIndex, 0, state.ingredients.splice(oldIndex, 1)[0]);
+    },
+    burgerClear: (state, action) => {
+      return initialState;
     }
   }
 })
 
 export default burgerSlice.reducer;
 
-export const { burgerAdd, burgerRemove, burgerMove } = burgerSlice.actions;
+export const { burgerAdd, burgerRemove, burgerMove, burgerClear } = burgerSlice.actions;

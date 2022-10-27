@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import fetchIngredients from '../../utils/fetch-ingredients';
+import fetchIngredients from '../../utils/api/fetch-ingredients';
 
 const initialState = {
   ingredients: [],
@@ -12,7 +12,6 @@ export const getIngredients = createAsyncThunk('ingredients/getIngredients', fet
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {},
   extraReducers: {
     [getIngredients.pending]: (state) => {
       state.isLoading = true;
@@ -21,9 +20,10 @@ export const ingredientsSlice = createSlice({
       state.isLoading = false;
       state.ingredients = action.payload.data;
     },
-    [getIngredients.rejected]: (state) => {
+    [getIngredients.rejected]: (state, action) => {
       state.isLoading = false;
       state.hasError = true;
+      console.error('Ошибка загрузки конструктора: ', action.error.message)
     }
   }
 })

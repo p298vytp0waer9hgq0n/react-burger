@@ -2,10 +2,7 @@ import { useState, useRef, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { setCurrentIngredient } from "../../services/ingredient-modal/ingredient-modal-slice";
 import Ingredient from "../ingredient/ingredient";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import { ingrTypes } from "../../utils/constants";
 
 import styles from './burger-ingredients.module.css';
@@ -16,8 +13,8 @@ export default function BurgerIngredients () {
   const bunsRef = useRef();
   const sauceRef = useRef();
   const stuffRef = useRef();
-  const [ingVisible, setIngVisible] = useState(false);
   const burger = useSelector((store) => store.burger);
+
 
   function handleClick (tab) {
     setCurrent(tab);
@@ -26,10 +23,13 @@ export default function BurgerIngredients () {
     if (tab === ingrTypes.main) stuffRef.current.scrollIntoView({behavior: 'smooth'});
   }
 
-  function closeModal () {
-    setTimeout(() => dispatch(setCurrentIngredient({})), 350);
-    setIngVisible(false);
-  }
+  const ingredientCounters = useMemo(() => {
+    const counters = {};
+    burger.ingredients.forEach((item) => {
+      counters[item._id] = counters[item._id] + 1 || 1;
+    });
+    return counters;
+  }, [burger.ingredients]);
 
   const [current, setCurrent] = useState(ingrTypes.bun);
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
@@ -38,20 +38,15 @@ export default function BurgerIngredients () {
     return ingredients.map((item) => {
       return (
         <Ingredient
-          openIngredientDetails={() => {
-            dispatch(setCurrentIngredient(item));
-            setIngVisible(true);
-          }}
           key={item._id}
-          {...item}
           quantity={
-            item._id === burger.bun._id ? 2 : burger.ingredients.reduce((count, cur) => {
-            return (cur._id === item._id) ? count + 1 : count;
-          }, 0)}
+            item._id === burger.bun._id ? 2 : ingredientCounters[item._id]
+          }
+          {...item}
         />
       );
     });
-  }, [ingredients, burger, dispatch]);
+  }, [ingredients, burger, dispatch, ingredientCounters]);
 
   const bunsElements = elements.filter((elem) => elem.props.type === ingrTypes.bun);
   const mainElements = elements.filter((elem) => elem.props.type === ingrTypes.main);
@@ -78,13 +73,6 @@ export default function BurgerIngredients () {
 
   return (
     <section className={styles.burger}>
-      <Modal
-        title="Детали ингредиента"
-        visible={ingVisible}
-        close={closeModal}
-      >
-        <IngredientDetails></IngredientDetails>
-      </Modal>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <div className={styles.burger__tabs}>
         <Tab value={ingrTypes.bun} active={current === ingrTypes.bun} onClick={handleClick}>Булки</Tab>
