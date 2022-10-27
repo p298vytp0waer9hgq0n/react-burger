@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { getCookie } from "../utils/get-cookie";
 import useRenewToken from "./use-renew-token";
 
 export default function useCheckToken() {
@@ -10,7 +11,7 @@ export default function useCheckToken() {
       return user.accToken;
     }
     let newToken = user.accToken;
-    const token = document.cookie.match('refToken')?.input.split('=')[1] || null;
+    const token = getCookie('refToken') || null;
     if (token) {
       newToken = renewToken(token);
     } else {

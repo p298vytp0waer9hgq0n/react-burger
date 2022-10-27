@@ -70,9 +70,10 @@ export default function App() {
           <ForgotPasswordPage />
         </ProtectedRoute>
         { tokenSent &&
-        <ProtectedRoute path="/reset-password" auth={false} redirect="/">
-          <ResetPasswordPage />
-        </ProtectedRoute> }
+          <ProtectedRoute path="/reset-password" auth={false} redirect="/">
+            <ResetPasswordPage />
+          </ProtectedRoute>
+        }
         <ProtectedRoute exact path="/profile" auth={true} redirect="/login" comeback>
           <ProfilePage />
         </ProtectedRoute>

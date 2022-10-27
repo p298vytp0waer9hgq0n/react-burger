@@ -3,6 +3,8 @@ import { setEmail, setHasError, setIsLoading, setLogoff, setUserName } from "../
 import getUserDetails from "../utils/api/get-user-details";
 import logout from "../utils/api/logout";
 import updateUserInfo from "../utils/api/update-user-info";
+import { getCookie } from "../utils/get-cookie";
+import { setCookie } from "../utils/set-cookie";
 import useCheckToken from "./use-check-token";
 
 export function useAuth () {
@@ -47,10 +49,10 @@ export function useAuth () {
 
   function logoutUser () {
     dispatch(setIsLoading(true));
-    const token = document.cookie.match('refToken').input.split('=')[1];
+    const token = getCookie('refToken');
     logout(token).then(() => {
       dispatch(setLogoff());
-      document.cookie = 'refToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/react-burger';
+      setCookie('refToken', '', {expires: 'Thu, 01 Jan 1970 00:00:00 UTC'});
       dispatch(setIsLoading(false));
     }).catch((err) => console.error('Ошибка выхода из системы: ', err));
   }

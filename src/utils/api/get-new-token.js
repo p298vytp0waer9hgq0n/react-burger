@@ -1,5 +1,6 @@
 import checkResponse from "../check-response";
 import { baseUrl, refreshUrl } from "../constants";
+import { setCookie } from "../set-cookie";
 
 export default function getNewToken (token) {
   return fetch(`${baseUrl}${refreshUrl}`, {
@@ -9,7 +10,7 @@ export default function getNewToken (token) {
       'token': token
     })
   }).then(checkResponse).then((resp) => {
-    if (resp.refreshToken) document.cookie = `refToken=${resp.refreshToken}; path=/react-burger`;
+    if (resp.refreshToken) setCookie('refToken', resp.refreshToken, { path: '/react-burger' });
     return resp;
   });
 }
