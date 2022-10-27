@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type {} from 'redux-thunk/extend-redux';
 
@@ -28,10 +28,16 @@ export default function App() {
   const dispatch = useDispatch();
   const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
   const location:any = useLocation();
+  const history:any = useHistory();
   const background = location.state?.background;
   const tokenSent = location.state?.tokenSent;
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
+
+  function closeModal (evt:any) {
+    evt.stopPropagation();
+    history.goBack();
+  }
 
   useEffect(() => {
     if (fetchRan.current === false) {
@@ -89,14 +95,14 @@ export default function App() {
       </Switch>
       {background &&
         <Route path="/ingredients/:id">
-          <Modal title="Детали ингредиента">
+          <Modal title="Детали ингредиента" close={closeModal}>
             <IngredientDetails />
           </Modal>
         </Route>
       }
       {background &&
         <ProtectedRoute auth={true} redirect="/login" path="/order">
-          <Modal title="">
+          <Modal title="" close={closeModal}>
             <OrderDetail />
           </Modal>
         </ProtectedRoute>

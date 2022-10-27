@@ -11,18 +11,13 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function Modal ({children, title}) {
+export default function Modal ({ children, title, close }) {
   const history = useHistory();
 
   function handleClick (evt) {
     if (evt.target.classList.contains(overlayStyles.modal)) {
       close(evt);
     }
-  }
-
-  function close (evt) {
-    evt.stopPropagation();
-    history.goBack();
   }
 
   useEffect(() => {
@@ -53,5 +48,6 @@ export default function Modal ({children, title}) {
 
 Modal.propTypes = {
   children: PropTypes.any.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  close: PropTypes.func
 }
