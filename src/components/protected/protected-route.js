@@ -16,7 +16,7 @@ export default function ProtectedRoute ({ children, path, auth, redirect, ...res
     getUser();
   }, []);
 
-  if (user.isLoading) {
+  if (user.isLoading && !location.state?.background) {
     return (
       <LoadingPage />
     )

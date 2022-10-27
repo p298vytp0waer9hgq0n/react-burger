@@ -2,6 +2,7 @@ import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-component
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { burgerClear } from "../../services/burger/burger-slice";
 import { orderBurger } from "../../services/order/order-slice";
 
 import styles from "./order-details.module.css";
@@ -14,7 +15,7 @@ export default function OrderDetail () {
   const { accToken } = useSelector((store) => store.user);
 
   useEffect(() => {
-    if (!order.isLoading) dispatch(orderBurger({ ingredients, accToken }));
+    dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear()));
   }, [])
 
   if (order.isLoading) {

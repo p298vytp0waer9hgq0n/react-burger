@@ -4,7 +4,7 @@ import placeOrder from "../../utils/api/place-order";
 export const orderBurger = createAsyncThunk('burger/order', placeOrder);
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   hasError: false,
   placedOrder: {}
 }
@@ -14,9 +14,7 @@ export const orderSlice = createSlice({
   initialState,
   extraReducers: {
     [orderBurger.pending]: (state, action) => {
-      state.isLoading = true;
-      state.hasError = false;
-      state.placeOrder = {};
+      return initialState;
     },
     [orderBurger.fulfilled]: (state, action) => {
       state.placedOrder = action.payload;
