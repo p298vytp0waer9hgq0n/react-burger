@@ -1,7 +1,7 @@
 import checkResponse from "../check-response";
 import { baseUrl, ingredientsUrl } from "../constants";
+import request from "../request";
 
 export default function fetchIngredients (): Promise<any> {
-  return fetch(`${baseUrl}${ingredientsUrl}`)
-    .then(checkResponse);
+  return request(`${baseUrl}${ingredientsUrl}`);
 }

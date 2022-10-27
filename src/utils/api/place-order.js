@@ -1,8 +1,9 @@
 import checkResponse from "../check-response";
 import { baseUrl, orderUrl } from "../constants";
+import request from "../request";
 
 export default function placeOrder({ ingredients, accToken }) {
-  return fetch(`${baseUrl}${orderUrl}`, {
+  return request(`${baseUrl}${orderUrl}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
@@ -11,6 +12,5 @@ export default function placeOrder({ ingredients, accToken }) {
     body: JSON.stringify({
       "ingredients": ingredients
     })
-  })
-    .then(checkResponse);
+  });
 }

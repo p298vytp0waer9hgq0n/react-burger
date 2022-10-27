@@ -1,8 +1,9 @@
 import checkResponse from "../check-response";
 import { baseUrl, userUrl } from "../constants";
+import request from "../request";
 
 export default function updateUserInfo (token, userName, email, password) {
-  return fetch(`${baseUrl}${userUrl}`, {
+  return request(`${baseUrl}${userUrl}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -13,5 +14,5 @@ export default function updateUserInfo (token, userName, email, password) {
       'email': email,
       'password': password
     })
-  }).then(checkResponse);
+  });
 }
