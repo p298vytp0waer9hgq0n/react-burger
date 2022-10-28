@@ -1,0 +1,17 @@
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  overflow: hidden;
+}
+
+.icon {
+  margin-right: -16px;
+  width: 60px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  border: solid 2px var(--colors-interface-accent);
+  border-radius: 50%;
+  background: var(--background-alt);
+}

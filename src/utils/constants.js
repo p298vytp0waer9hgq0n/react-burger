@@ -9,7 +9,10 @@ export const userUrl = 'auth/user';
 export const resetUrl = 'password-reset';
 export const newPwUrl = 'password-reset/reset';
 export const logoutUrl = 'auth/logout';
+export const allOrdersUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const userOrdersUrl = 'wss://norma.nomoreparties.space/orders';
 export const modalRoot = document.getElementById('modal-root');
+
 
 export const dragTypes = {
   ingredient: 'ingredient',

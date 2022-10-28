@@ -23,6 +23,7 @@ import Modal from '../modal/modal';
 import styles from './app.module.css';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetail from '../order-details/order-details';
+import FeedPage from '../../pages/feed';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -89,6 +90,9 @@ export default function App() {
         <ProtectedRoute path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
         </ProtectedRoute>
+        <Route path="/feed">
+          <FeedPage />
+        </Route>
         <Route path="*">
           <MissingPage />
         </Route>

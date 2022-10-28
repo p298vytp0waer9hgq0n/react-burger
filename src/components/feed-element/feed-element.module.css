@@ -1,0 +1,19 @@
+.element {
+  padding: calc(var(--offset-base-size) * 6) 26px;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--offset-base-size) * 6);
+  background-color: var(--background);
+  border-radius: 40px;
+}
+
+.element__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.element__total {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
