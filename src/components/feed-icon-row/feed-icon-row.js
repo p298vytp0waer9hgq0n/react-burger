@@ -25,7 +25,7 @@ export default function FeedIconRow ({ingredients}) {
 
   return(
     <div className={styles.row}>
-      {icons}
+      {icons.reverse()}
     </div>
   )
 }

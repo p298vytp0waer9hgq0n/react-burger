@@ -8,7 +8,25 @@ export default function FeedElement (props) {
   const ingList = useSelector((store) => store.ingredients.ingredients);
   const total = useMemo(() => {
     return props.ingredients.reduce((cum, cur) => cum + ingList.find((elem) => elem._id === cur).price, 0);
-  })
+  });
+
+  function getStatusText (status) {
+    switch (status) {
+      case 'created':
+        return (
+          <p className="text text_type_main-default">Создан</p>
+        );
+      case 'pending':
+        return (
+          <p className="text text_type_main-default">Готовится</p>
+        );
+      case 'done':
+        return (
+          <p className={`${styles.element__success} text text_type_main-default`}>Выполнен</p>
+        )
+    }
+  }
+
   return (
     <article className={`${styles.element} mb-4 mr-2`}>
       <div className={styles.element__info}>
@@ -16,6 +34,7 @@ export default function FeedElement (props) {
         <span className="text text_type_main-default text_color_inactive">{props.createdAt}</span>
       </div>
       <p className="text text_type_main-medium">{props.name}</p>
+      {props.auth && getStatusText(props.status)}
       <div className={styles.element__info}>
         <FeedIconRow ingredients={props.ingredients} />
         <div className={styles.element__total}>

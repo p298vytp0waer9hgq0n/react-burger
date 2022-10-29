@@ -1,12 +1,11 @@
 export const socketMiddleware = (url, actions) => (store) => {
   let socket = null;
   return (next) => (action) => {
-    const {dispatch, getState} = store;
+    const {dispatch} = store;
     const {type, payload} = action;
     const { onConnect, onMessage } = actions;
     if (type === onConnect) {
-      console.log(onMessage);
-      socket = new WebSocket(url);
+      socket = new WebSocket(payload ? `${url}?token=${payload}` : url);
     }
     if (socket) {
       socket.onopen = (evt) => {

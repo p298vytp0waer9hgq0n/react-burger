@@ -12,6 +12,10 @@
   justify-content: space-between;
 }
 
+.element__success {
+  color: #00cccc;
+}
+
 .element__total {
   display: flex;
   align-items: center;
