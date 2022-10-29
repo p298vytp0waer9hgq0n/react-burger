@@ -42,5 +42,5 @@ export default function FeedIconRow ({ingredients}) {
 }
 
 FeedIconRow.propTypes = {
-  ingredients: PropTypes.arrayOf.string.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
 }

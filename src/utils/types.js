@@ -10,8 +10,8 @@ export const ingredientType = {
 
 export const orderType = {
   _id: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf.string.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   name: PropTypes.string.isRequired,
-  createAt: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired
 };
