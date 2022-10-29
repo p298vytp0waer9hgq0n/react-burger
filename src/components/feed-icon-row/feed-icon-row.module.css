@@ -6,12 +6,38 @@
   overflow: hidden;
 }
 
+.container {
+  margin-right: -16px;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient()
+}
+
 .icon {
   margin-right: -16px;
   width: 60px;
   object-fit: cover;
   aspect-ratio: 1 / 1;
-  border: solid 2px var(--colors-interface-accent);
   border-radius: 50%;
-  background: var(--background-alt);
+  background:
+    linear-gradient(var(--background-alt), var(--background-alt)) padding-box,
+    linear-gradient(to right, #801ab2, #4c4cff) border-box;
+  border: 2px solid transparent;
+  z-index: 1;
+}
+
+.lastContainer {
+  padding-left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 60px;
+  aspect-ratio: 1 / 1;
+}
+
+.icon_last {
+  position: absolute;
+  left: -2px;
+  opacity: .4;
 }

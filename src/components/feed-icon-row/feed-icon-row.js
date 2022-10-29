@@ -3,29 +3,44 @@ import { useSelector } from "react-redux";
 
 import styles from "./feed-icon-row.module.css"
 
+import PropTypes from 'prop-types';
+
 export default function FeedIconRow ({ingredients}) {
   const ingrList = useSelector((store) => store.ingredients.ingredients);
-  const lenght = ingredients.lenght;
+  const add = ingredients.length - 6;
   const icons = useMemo(() => {
-    const ingrSliced = ingredients.slice(0, 5);
-    return ingrSliced.map((id, index) => {
-      return (
-        <img key={index} className={styles.icon} src={ingrList.find((ele) => ele._id === id).image_mobile} />
-      )
-    });
-  }, [ingredients]);
-  /* const icons = useMemo(() => {
     const result = [];
-    let i = 0;
-    while (i < 6 || i < ingredients.length) {
+    let bun;
+    let first = true;
+    for (let i = 0; i < Math.min(ingredients.length, 6); i++) {
       const current = ingrList.find((ele) => ele._id === ingredients[i]);
-
+      if (current.type === 'bun') {
+        bun = current;
+        continue;
+      }
+      if (first && add > 0) {
+        result.push(
+          <div key={i} className={styles.lastContainer}>
+            <img className={`${styles.icon} ${styles.icon_last}`} src={current.image_mobile} />
+            <p className="text text_type_main-default">+{add}</p>
+          </div>
+        )
+        first = false;
+      } else {
+      result.push(<img key={i} className={styles.icon} src={current.image_mobile} />)
+      }
     }
-  }) */
+    result.push(<img key={7} className={styles.icon} src={bun.image_mobile} />)
+    return result;
+  }, [ingredients])
 
   return(
     <div className={styles.row}>
-      {icons.reverse()}
+      {icons}
     </div>
   )
+}
+
+FeedIconRow.propTypes = {
+  ingredients: PropTypes.arrayOf.string.isRequired,
 }

@@ -11,7 +11,7 @@ export const allOrdersSlice = createSlice({
   initialState,
   reducers: {
     allOrdersConnect: (state, action) => {
-      console.log('all orders connect');
+      // console.log('all orders connect');
     },
     allOrdersMessage: (state, action) => {
       return action.payload;

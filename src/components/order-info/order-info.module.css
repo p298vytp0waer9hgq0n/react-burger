@@ -8,6 +8,7 @@
 }
 
 .name {
+  /* max-height: 60px; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -36,7 +37,10 @@
   width: 60px;
   object-fit: cover;
   aspect-ratio: 1 / 1;
-  border: solid 2px var(--colors-interface-accent);
+  background:
+    linear-gradient(var(--background-alt), var(--background-alt)) padding-box,
+    linear-gradient(to right, #801ab2, #4c4cff) border-box;
+  border: 2px solid transparent;
   border-radius: 50%;
 }
 

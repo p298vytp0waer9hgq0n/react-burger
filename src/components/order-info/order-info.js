@@ -2,8 +2,12 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { statusText } from "../../utils/constants";
+import convertDate from "../../utils/convert-date";
 
 import styles from "./order-info.module.css";
+
+import PropTypes from 'prop-types';
+import { orderType } from "../../utils/types";
 
 export default function OrderInfo ({ number, name, status, ingredients, createdAt }) {
   const ingList = useSelector((store) => store.ingredients.ingredients);
@@ -42,7 +46,7 @@ export default function OrderInfo ({ number, name, status, ingredients, createdA
       <h2 className="mt-15">Состав:</h2>
       <div className={`${styles.list} custom-scroll`}>{elements}</div>
       <div className={`${styles.footer} mt-5`}>
-        <p className="text_color_inactive">{createdAt}</p>
+        <p className="text_color_inactive">{convertDate(createdAt)}</p>
         <div className={`${styles.price} text_type_digits-default`}>
           <p>{total}</p>
           <CurrencyIcon />
@@ -50,4 +54,8 @@ export default function OrderInfo ({ number, name, status, ingredients, createdA
       </div>
     </section>
   )
+}
+
+OrderInfo.propTypes = {
+  ...orderType
 }

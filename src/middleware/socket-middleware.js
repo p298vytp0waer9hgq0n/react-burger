@@ -8,9 +8,6 @@ export const socketMiddleware = (url, actions) => (store) => {
       socket = new WebSocket(payload ? `${url}?token=${payload}` : url);
     }
     if (socket) {
-      socket.onopen = (evt) => {
-        console.log('soket opened');
-      }
       socket.onmessage = (evt) => {
         if (evt.data) {
           dispatch(onMessage(JSON.parse(evt.data)));
