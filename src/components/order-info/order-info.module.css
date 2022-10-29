@@ -1,0 +1,53 @@
+.container {
+  margin-top: 92px;
+  width: 640px;
+}
+
+.number {
+  text-align: center;
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.success {
+  margin: 0;
+  color: #00cccc;
+}
+
+.list {
+  max-height: 302px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 15px;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon {
+  width: 60px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  border: solid 2px var(--colors-interface-accent);
+  border-radius: 50%;
+}
+
+.price {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+}

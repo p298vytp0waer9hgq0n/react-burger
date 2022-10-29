@@ -1,6 +1,7 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { statusText } from '../../utils/constants';
 import FeedIconRow from '../feed-icon-row/feed-icon-row';
 import styles from './feed-element.module.css';
 
@@ -10,23 +11,6 @@ export default function FeedElement (props) {
     return props.ingredients.reduce((cum, cur) => cum + ingList.find((elem) => elem._id === cur).price, 0);
   });
 
-  function getStatusText (status) {
-    switch (status) {
-      case 'created':
-        return (
-          <p className="text text_type_main-default">Создан</p>
-        );
-      case 'pending':
-        return (
-          <p className="text text_type_main-default">Готовится</p>
-        );
-      case 'done':
-        return (
-          <p className={`${styles.element__success} text text_type_main-default`}>Выполнен</p>
-        )
-    }
-  }
-
   return (
     <article className={`${styles.element} mb-4 mr-2`}>
       <div className={styles.element__info}>
@@ -34,7 +18,7 @@ export default function FeedElement (props) {
         <span className="text text_type_main-default text_color_inactive">{props.createdAt}</span>
       </div>
       <p className="text text_type_main-medium">{props.name}</p>
-      {props.auth && getStatusText(props.status)}
+      {props.auth && <p className={`${props.status === 'done' ? styles.element__success : ''} text text_type_main-default`}>{statusText[props.status]}</p>}
       <div className={styles.element__info}>
         <FeedIconRow ingredients={props.ingredients} />
         <div className={styles.element__total}>

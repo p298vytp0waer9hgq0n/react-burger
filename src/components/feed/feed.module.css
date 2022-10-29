@@ -7,3 +7,8 @@
 .feed__container {
   overflow-y: scroll;
 }
+
+.feed__link {
+  text-decoration: none;
+  color: inherit;
+}

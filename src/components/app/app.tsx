@@ -24,6 +24,7 @@ import styles from './app.module.css';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetail from '../order-details/order-details';
 import FeedPage from '../../pages/feed';
+import OrderInfoPage from '../../pages/order-info';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -87,11 +88,17 @@ export default function App() {
         <ProtectedRoute path="/profile/logout" auth={true} redirect="/login">
           <LogoutPage />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders" auth={true} redirect="/login" comeback>
+        <ProtectedRoute exact path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
         </ProtectedRoute>
-        <Route path="/feed">
+        <ProtectedRoute path="/profile/orders/:id" auth={true} redirect="/login" comeback>
+          <OrderInfoPage auth={true} />
+        </ProtectedRoute>
+        <Route exact path="/feed">
           <FeedPage />
+        </Route>
+        <Route path="/feed/:id">
+          <OrderInfoPage auth={false} />
         </Route>
         <Route path="*">
           <MissingPage />

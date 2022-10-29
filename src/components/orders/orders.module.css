@@ -1,3 +1,15 @@
 .orders {
   display: flex;
+  flex-direction: column;
+  flex: 1 1 600px;
 }
+
+.orders__container {
+  overflow-y: scroll;
+}
+
+.orders__link {
+  text-decoration: none;
+  color: inherit;
+}
+

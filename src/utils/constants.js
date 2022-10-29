@@ -24,3 +24,9 @@ export const ingrTypes = {
   sauce: 'sauce',
   main: 'main'
 }
+
+export const statusText = {
+  done: 'Выполнен',
+  pending: 'Готовится',
+  created: 'Создан'
+}
