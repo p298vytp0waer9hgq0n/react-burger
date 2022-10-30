@@ -1,6 +1,10 @@
-import { ordersMessage } from "../orders/orders-slice";
+import { ordersClose, ordersError, ordersMessage } from "../orders/orders-slice";
 
 export const ordersActions = {
-  onConnect: 'orders/ordersConnect',
-  onMessage: ordersMessage
+  doConnect: 'orders/connectOrders',
+  onMessage: ordersMessage,
+  onError: ordersError,
+  doSend: 'orders/sendOrders',
+  onClose: ordersClose,
+  doClose: 'orders/closeOrders'
 }

@@ -1,19 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Orders from "../components/orders/orders";
 import ProfileNav from "../components/profile-nav/profile-nav";
 import { useAuth } from "../hooks/use-auth";
-import { ordersConnect } from "../services/orders/orders-slice";
+import { closeOrders, connectOrders } from "../services/orders/orders-slice";
 
 import styles from "./profile.module.css";
 
 export default function OrdersPage () {
   const {user} = useAuth();
   const dispatch = useDispatch();
+  const socketConnect = useRef(false);
 
   useEffect(() => {
-    dispatch(ordersConnect(user.accToken.split(' ')[1]));
-  }, []);
+    if (!socketConnect.current) dispatch(connectOrders(user.accToken.split(' ')[1]));
+    return () => {
+      // StrictMode
+      if (socketConnect.current) dispatch(closeOrders());
+      socketConnect.current = true;
+      // Deploy
+      // dispatch(closeOrders());
+    }
+  }, [dispatch, user.accToken]);
 
   return (
     <main className={styles.main}>
