@@ -6,11 +6,17 @@ import convertDate from "../../utils/convert-date";
 
 import styles from "./order-info.module.css";
 
-import PropTypes from 'prop-types';
-import { orderType } from "../../utils/types";
+import { useParams } from "react-router-dom";
 
-export default function OrderInfo ({ number, name, status, ingredients, createdAt }) {
+export default function OrderInfo () {
+  const {id} = useParams();
+  const userOrders = useSelector((store) => store.orders.orders);
+  const orders = useSelector((store) => store.allOrders.orders);
   const ingList = useSelector((store) => store.ingredients.ingredients);
+
+  const order = orders.find((ele) => ele._id === id) || userOrders.find((ele) => ele._id === id);
+  const { number, name, status, ingredients, createdAt } = order;
+
   const { elements, total } = useMemo(() => {
     const ingCounter = ingredients.reduce((counter, id) => {
       const curCount = counter[id] ?? 0;
@@ -54,8 +60,4 @@ export default function OrderInfo ({ number, name, status, ingredients, createdA
       </div>
     </section>
   )
-}
-
-OrderInfo.propTypes = {
-  ...orderType
 }

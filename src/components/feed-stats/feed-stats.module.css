@@ -23,7 +23,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   gap: 8px 25px;
-  max-height: 170px;
+  max-height: 315px;
   overflow: hidden;
 }
 
