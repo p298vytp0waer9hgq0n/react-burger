@@ -1,10 +1,11 @@
 .main {
   width: 1240px;
   margin: auto;
+  display: flex;
+  overflow: hidden;
 }
 
 .profile {
-  margin-top: 120px;
   display: flex;
 }
 

@@ -1,0 +1,57 @@
+.container {
+  margin-top: 92px;
+  width: 640px;
+}
+
+.number {
+  text-align: center;
+}
+
+.name {
+  /* max-height: 60px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.success {
+  margin: 0;
+  color: #00cccc;
+}
+
+.list {
+  max-height: 302px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 15px;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon {
+  width: 60px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  background:
+    linear-gradient(var(--background-alt), var(--background-alt)) padding-box,
+    linear-gradient(to right, #801ab2, #4c4cff) border-box;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.price {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+}

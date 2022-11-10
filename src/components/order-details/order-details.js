@@ -1,5 +1,5 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { burgerClear } from "../../services/burger/burger-slice";
@@ -14,8 +14,11 @@ export default function OrderDetail () {
   const dispatch = useDispatch();
   const { accToken } = useSelector((store) => store.user);
 
+  const orderPlaced = useRef(false);
+
   useEffect(() => {
-    dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear()));
+    if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear()));
+    return () => orderPlaced.current = true;
   }, [])
 
   if (order.isLoading) {

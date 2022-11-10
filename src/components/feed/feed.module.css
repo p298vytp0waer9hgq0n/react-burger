@@ -1,0 +1,14 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 600px;
+}
+
+.feed__container {
+  overflow-y: scroll;
+}
+
+.feed__link {
+  text-decoration: none;
+  color: inherit;
+}
