@@ -3,6 +3,9 @@
 ### Обзор
 
 Страница "react-burger" для седьмого спринта. React/CRA.
+Она же для восьмого спринта. CRA/Redux.
+Она же для девятого спринта. CRA/Redux/React Router.
+Она же для десятого спринта.... CRA/Redux/React Router/TS.
 
 **Figma**
 
