@@ -4,16 +4,17 @@ import { useSelector } from "react-redux";
 import styles from "./feed-icon-row.module.css"
 
 import PropTypes from 'prop-types';
+import { TFeedIconProps, TIngredient } from "../../utils/types";
 
-export default function FeedIconRow ({ingredients}) {
-  const ingrList = useSelector((store) => store.ingredients.ingredients);
+export default function FeedIconRow ({ingredients}: TFeedIconProps) {
+  const ingrList = useSelector((store: any) => store.ingredients.ingredients);
   const add = ingredients.length - 6;
   const icons = useMemo(() => {
     const result = [];
     let bun;
     let first = true;
     for (let i = 0; i < Math.min(ingredients.length, 6); i++) {
-      const current = ingrList.find((ele) => ele._id === ingredients[i]);
+      const current = ingrList.find((ele: TIngredient) => ele._id === ingredients[i]);
       if (current.type === 'bun') {
         bun = current;
         continue;
@@ -30,7 +31,7 @@ export default function FeedIconRow ({ingredients}) {
       result.push(<img key={i} className={styles.icon} src={current.image_mobile} />)
       }
     }
-    result.push(<img key={7} className={styles.icon} src={bun.image_mobile} />)
+    result.push(<img key={7} className={styles.icon} src={bun?.image_mobile} />)
     return result;
   }, [ingredients])
 

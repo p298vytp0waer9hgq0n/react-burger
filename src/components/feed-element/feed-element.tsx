@@ -3,17 +3,15 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { statusText } from '../../utils/constants';
 import convertDate from '../../utils/convert-date';
+import { TFeedElementProps, TIngredient } from '../../utils/types';
 import FeedIconRow from '../feed-icon-row/feed-icon-row';
 import styles from './feed-element.module.css';
 
-import PropTypes from 'prop-types';
-import { orderType } from '../../utils/types';
-
-export default function FeedElement (props) {
-  const ingList = useSelector((store) => store.ingredients.ingredients);
+export default function FeedElement (props: TFeedElementProps) {
+  const ingList = useSelector((store: any) => store.ingredients.ingredients);
   const total = useMemo(() => {
-    return props.ingredients.reduce((cum, cur) => cum + ingList.find((elem) => elem._id === cur).price, 0);
-  });
+    return props.ingredients.reduce((cum, cur) => cum + ingList.find((elem: TIngredient) => elem._id === cur).price, 0);
+  }, [props.ingredients]);
 
   return (
     <article className={`${styles.element} mb-4 mr-2`}>
@@ -27,13 +25,9 @@ export default function FeedElement (props) {
         <FeedIconRow ingredients={props.ingredients} />
         <div className={styles.element__total}>
           <span className="text text_type_digits-default">{total}</span>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary" />
         </div>
       </div>
     </article>
   )
-}
-
-FeedElement.propTypes = {
-  ...orderType
 }

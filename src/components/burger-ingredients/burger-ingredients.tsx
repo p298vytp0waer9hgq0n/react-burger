@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useEffect } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,26 +6,27 @@ import Ingredient from "../ingredient/ingredient";
 import { ingrTypes } from "../../utils/constants";
 
 import styles from './burger-ingredients.module.css';
+import { TCounter, TIngredient } from "../../utils/types";
 
 
 export default function BurgerIngredients () {
   const dispatch = useDispatch();
-  const bunsRef = useRef();
-  const sauceRef = useRef();
-  const stuffRef = useRef();
-  const burger = useSelector((store) => store.burger);
+  const bunsRef = useRef<HTMLDivElement>(null);
+  const sauceRef = useRef<HTMLDivElement>(null);
+  const stuffRef = useRef<HTMLDivElement>(null);
+  const burger = useSelector((store: any) => store.burger);
 
 
-  function handleClick (tab) {
+  function handleClick (tab: string) {
     setCurrent(tab);
-    if (tab === ingrTypes.sauce) sauceRef.current.scrollIntoView({behavior: 'smooth'});
-    if (tab === ingrTypes.bun) bunsRef.current.scrollIntoView({behavior: 'smooth'});
-    if (tab === ingrTypes.main) stuffRef.current.scrollIntoView({behavior: 'smooth'});
+    if (tab === ingrTypes.sauce) sauceRef.current!.scrollIntoView({behavior: 'smooth'});
+    if (tab === ingrTypes.bun) bunsRef.current!.scrollIntoView({behavior: 'smooth'});
+    if (tab === ingrTypes.main) stuffRef.current!.scrollIntoView({behavior: 'smooth'});
   }
 
   const ingredientCounters = useMemo(() => {
-    const counters = {};
-    burger.ingredients.forEach((item) => {
+    const counters: TCounter = {};
+    burger.ingredients.forEach((item: TIngredient) => {
       counters[item._id] = counters[item._id] + 1 || 1;
     });
     return counters;
@@ -33,9 +34,9 @@ export default function BurgerIngredients () {
 
   const [current, setCurrent] = useState(ingrTypes.bun);
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store: any) => store.ingredients);
   const elements = useMemo(() => {
-    return ingredients.map((item) => {
+    return ingredients.map((item: TIngredient) => {
       return (
         <Ingredient
           key={item._id}
@@ -48,25 +49,25 @@ export default function BurgerIngredients () {
     });
   }, [ingredients, burger, dispatch, ingredientCounters]);
 
-  const bunsElements = elements.filter((elem) => elem.props.type === ingrTypes.bun);
-  const mainElements = elements.filter((elem) => elem.props.type === ingrTypes.main);
-  const sauceElements = elements.filter((elem) => elem.props.type === ingrTypes.sauce);
+  const bunsElements = elements.filter((elem: JSX.Element) => elem.props.type === ingrTypes.bun);
+  const mainElements = elements.filter((elem: JSX.Element) => elem.props.type === ingrTypes.main);
+  const sauceElements = elements.filter((elem: JSX.Element) => elem.props.type === ingrTypes.sauce);
 
-  const sauceTrans = useRef(null);
-  const stuffTrans = useRef(null);
+  const sauceTrans = useRef<number>(0);
+  const stuffTrans = useRef<number>(0);
   useEffect(() => {
-    sauceTrans.current = (sauceRef.current.offsetTop - bunsRef.current.offsetTop) / 2;
-    stuffTrans.current = (stuffRef.current.offsetTop - bunsRef.current.offsetTop + sauceRef.current.offsetTop) / 2;
+    sauceTrans.current = (sauceRef.current!.offsetTop - bunsRef.current!.offsetTop) / 2;
+    stuffTrans.current = (stuffRef.current!.offsetTop - bunsRef.current!.offsetTop + sauceRef.current!.offsetTop) / 2;
   }, [])
 
-  function onScroll (evt) {
-    if (evt.target.scrollTop < sauceTrans.current && current !== ingrTypes.bun) {
+  function onScroll (evt: React.UIEvent<HTMLElement>) {
+    if (evt.currentTarget.scrollTop < sauceTrans.current && current !== ingrTypes.bun) {
       setCurrent(ingrTypes.bun);
     }
-    if (evt.target.scrollTop >= sauceTrans.current && evt.target.scrollTop < stuffTrans.current && current !== ingrTypes.sauce) {
+    if (evt.currentTarget.scrollTop >= sauceTrans.current && evt.currentTarget.scrollTop < stuffTrans.current && current !== ingrTypes.sauce) {
       setCurrent(ingrTypes.sauce);
     }
-    if (evt.target.scrollTop >= stuffTrans.current && current !== ingrTypes.main) {
+    if (evt.currentTarget.scrollTop >= stuffTrans.current && current !== ingrTypes.main) {
       setCurrent(ingrTypes.main);
     }
   }

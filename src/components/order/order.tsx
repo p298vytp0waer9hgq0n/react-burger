@@ -4,13 +4,14 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import styles from './order.module.css';
 
 import { Link, useLocation } from 'react-router-dom';
+import { TIngredient } from '../../utils/types';
 
 export default function Order () {
   const location = useLocation();
-  const burger = useSelector((store) => store.burger);
+  const burger = useSelector((store: any) => store.burger);
 
   const total = useMemo(() => {
-    return (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum, cur) => {
+    return (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum: number, cur: TIngredient) => {
       return cum + cur.price;
     }, 0);
   }, [burger.bun, burger.ingredients]);
@@ -20,7 +21,7 @@ export default function Order () {
       <div className={`${styles.constructor__total} mr-10`}>
         <p className="text text_type_digits-medium">{total}&nbsp;</p>
         <div className={styles.constructor__bigicon}>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary" />
         </div>
       </div>
         <Link to={{pathname: "/order", state: { background: location }}}><Button type="primary" size="large" htmlType="button">Оформить заказ</Button></Link>

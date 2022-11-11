@@ -1,8 +1,8 @@
 import styles from './modal-overlay.module.css';
 
-import PropTypes from 'prop-types';
+import { TModalOverlayProps } from '../../utils/types';
 
-export default function ModalOverlay (props) {
+export default function ModalOverlay (props: TModalOverlayProps) {
   const visStyle = `${styles.modal}`;
 
   return (
@@ -11,7 +11,3 @@ export default function ModalOverlay (props) {
     </div>
   );
 }
-
-ModalOverlay.propTypes = {
-  clickHandler: PropTypes.func.isRequired
-}.isRequired

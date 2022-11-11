@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type {} from 'redux-thunk/extend-redux';
@@ -25,18 +25,19 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetail from '../order-details/order-details';
 import FeedPage from '../../pages/feed';
 import OrderInfoPage from '../../pages/order-info';
+import { TLocationState } from '../../utils/types';
 
 export default function App() {
   const dispatch = useDispatch();
   const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
-  const location:any = useLocation();
-  const history:any = useHistory();
+  const location = useLocation<TLocationState>();
+  const history = useHistory();
   const background = location.state?.background;
   const tokenSent = location.state?.tokenSent;
 
   const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
 
-  function closeModal (evt:any) {
+  function closeModal (evt: React.MouseEvent | React.KeyboardEvent) {
     evt.stopPropagation();
     history.goBack();
   }
@@ -61,7 +62,7 @@ export default function App() {
   return (
     <div className={styles.page}>
       <AppHeader />
-      <Switch location={ background || location }>
+      <Switch location={background ? background : location}>
         <Route exact path="/">
           <HomePage />
         </Route>

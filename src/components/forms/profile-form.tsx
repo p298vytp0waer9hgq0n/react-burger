@@ -1,17 +1,17 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
 
 import styles from "./forms.module.css";
 
 export default function ProfileForm() {
   const { user, postUser } = useAuth();
-  const [activeInput, setActiveInput] = useState(null);
+  const [activeInput, setActiveInput] = useState<string | null>(null);
   const [newName, setNewName] = useState(user.userName);
   const [newEmail, setNewEmail] = useState(user.email);
   const [newPassword, setNewPassword] = useState('');
 
-  function submitProfile (evt) {
+  function submitProfile (evt: React.FormEvent) {
     evt.preventDefault();
     postUser(newName, newEmail, newPassword);
     setActiveInput(null);

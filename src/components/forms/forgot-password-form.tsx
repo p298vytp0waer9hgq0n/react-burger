@@ -1,5 +1,5 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { requestReset } from "../../services/user/user-slice";
@@ -11,7 +11,7 @@ export default function ForgotPasswordForm () {
   const [email, setEmail] = useState('');
   const [success, setSuccess] = useState(false);
 
-  async function submitHandler (evt) {
+  async function submitHandler (evt: React.FormEvent) {
     evt.preventDefault();
     const reply = await dispatch(requestReset(email)).unwrap();
     setSuccess(reply.success);

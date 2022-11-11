@@ -12,15 +12,16 @@ import BurgerConstructorElement from "../burger-constructor-element/burger-const
 import { dragTypes } from "../../utils/constants";
 
 import styles from './burger-constructor.module.css';
+import { TConstructorIngredient, TIngredient } from "../../utils/types";
 
 export default function BurgerConstructor () {
-  function dropHandler (item) {
+  function dropHandler (item: TIngredient) {
     const uid = uuid();
     dispatch(burgerAdd({ uid, ...item }));
   }
 
   const dispatch = useDispatch();
-  const burger = useSelector((store) => store.burger);
+  const burger = useSelector((store: any) => store.burger);
 
   const burgerBun = burger.bun;
   const burgerTop = burgerBun ?
@@ -36,11 +37,11 @@ export default function BurgerConstructor () {
       type='bottom'
       isLocked={true}
       text={`${burgerBun.name} (низ)`}
-      price={burgerBun.price} // по заданию вроде выходит, что мы берём за булку дважды, как жлобы
+      price={burgerBun.price}
       thumbnail={burgerBun.image}
     /> : null;
   const burgerElems = useMemo(() => {
-    return burger.ingredients.map((item) => {
+    return burger.ingredients.map((item: TConstructorIngredient) => {
         return (
           <BurgerConstructorElement key={item.uid} item={item} />
         )
@@ -49,7 +50,7 @@ export default function BurgerConstructor () {
 
   const [, dropTarget] = useDrop({
     accept: dragTypes.ingredient,
-    drop (item) {
+    drop (item: TIngredient) {
       dropHandler(item);
     }
   });

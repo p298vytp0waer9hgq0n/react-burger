@@ -2,14 +2,12 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { Link, useLocation } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
 
-import { ingredientType } from '../../utils/types';
+import { TCountedIngredient } from '../../utils/types';
 import { dragTypes } from '../../utils/constants';
 
 import styles from './ingredient.module.css';
 
-import PropTypes from 'prop-types';
-
-export default function Ingredient (props) {
+export default function Ingredient (props: TCountedIngredient) {
   const location = useLocation();
   const [, dragRef] = useDrag({
     type: dragTypes.ingredient,
@@ -31,8 +29,4 @@ export default function Ingredient (props) {
       <p className={`${styles.burger__name} text text_type_main-default`}>{props.name}</p>
     </Link>
   )
-}
-
-Ingredient.propTypes = {
-  ...ingredientType
 }

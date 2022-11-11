@@ -8,17 +8,16 @@ import { orderBurger } from "../../services/order/order-slice";
 import styles from "./order-details.module.css";
 
 export default function OrderDetail () {
-  const order = useSelector((store) => store.order);
-  const burger = useSelector((store) => store.burger);
+  const order = useSelector((store: any) => store.order);
+  const burger = useSelector((store: any) => store.burger);
   const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
   const dispatch = useDispatch();
-  const { accToken } = useSelector((store) => store.user);
+  const { accToken } = useSelector((store: any) => store.user);
 
   const orderPlaced = useRef(false);
 
   useEffect(() => {
-    if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear()));
-    return () => orderPlaced.current = true;
+    if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear(true)));
   }, [])
 
   if (order.isLoading) {

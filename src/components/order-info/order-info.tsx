@@ -7,25 +7,26 @@ import convertDate from "../../utils/convert-date";
 import styles from "./order-info.module.css";
 
 import { useParams } from "react-router-dom";
+import { TFeedOrder, TIngCounter, TIngredient } from "../../utils/types";
 
 export default function OrderInfo () {
-  const {id} = useParams();
-  const userOrders = useSelector((store) => store.orders.orders);
-  const orders = useSelector((store) => store.allOrders.orders);
-  const ingList = useSelector((store) => store.ingredients.ingredients);
+  const {id} = useParams<{ id: string }>();
+  const userOrders = useSelector((store: any) => store.orders.orders);
+  const orders = useSelector((store: any) => store.allOrders.orders);
+  const ingList = useSelector((store: any) => store.ingredients.ingredients);
 
-  const order = orders.find((ele) => ele._id === id) || userOrders.find((ele) => ele._id === id);
+  const order: TFeedOrder = orders.find((ele: TFeedOrder) => ele._id === id) || userOrders.find((ele: TFeedOrder) => ele._id === id);
   const { number, name, status, ingredients, createdAt } = order;
 
   const { elements, total } = useMemo(() => {
-    const ingCounter = ingredients.reduce((counter, id) => {
+    const ingCounter = ingredients.reduce((counter: TIngCounter, id: string) => {
       const curCount = counter[id] ?? 0;
       return { ...counter, [id]: curCount + 1 };
     }, {});
     const elements = [];
     let total = 0;
     for (const i in ingCounter) {
-      const ing = ingList.find((ele) => ele._id === i);
+      const ing = ingList.find((ele: TIngredient) => ele._id === i);
       total += ingCounter[i] * ing.price;
       const element = (
         <div key={i} className={`${styles.ingredient} mr-5`}>
@@ -35,7 +36,7 @@ export default function OrderInfo () {
             <span>{ingCounter[i]}</span>
             <span>x</span>
             <span>{ingCounter[i] * ing.price}</span>
-            <CurrencyIcon />
+            <CurrencyIcon type="primary" />
           </div>
         </div>
       );
@@ -55,7 +56,7 @@ export default function OrderInfo () {
         <p className="text_color_inactive">{convertDate(createdAt)}</p>
         <div className={`${styles.price} text_type_digits-default`}>
           <p>{total}</p>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary" />
         </div>
       </div>
     </section>

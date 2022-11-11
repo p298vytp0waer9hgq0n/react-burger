@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { TFeedOrder } from '../../utils/types';
 import styles from './feed-stats.module.css';
 
 export default function FeedStats () {
-  const { total, totalToday, orders } = useSelector((store) => store.allOrders);
-  const [pending, setPending] = useState([]);
-  const [done, setDone] = useState([]);
+  const { total, totalToday, orders } = useSelector((store: any) => store.allOrders);
+  const [pending, setPending] = useState<JSX.Element[]>([]);
+  const [done, setDone] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    const pending = [];
-    const done = [];
-    orders.forEach((elem) => {
+    const pending: JSX.Element[] = [];
+    const done: JSX.Element[] = [];
+    orders.forEach((elem: TFeedOrder) => {
       if (elem.status === 'pending') pending.push(<p key={elem.number} className="text text_type_digits-default">{elem.number}</p>);
       if (elem.status === 'done') done.push(<p key={elem.number} className="text text_type_digits-default">{elem.number}</p>);
     })

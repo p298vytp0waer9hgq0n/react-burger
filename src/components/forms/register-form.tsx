@@ -1,5 +1,5 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../services/user/user-slice";
 
@@ -11,7 +11,7 @@ export default function RegisterForm () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit (evt) {
+  function handleSubmit (evt: React.FormEvent) {
     evt.preventDefault();
     dispatch(registerUser({ username, email, password }));
   }

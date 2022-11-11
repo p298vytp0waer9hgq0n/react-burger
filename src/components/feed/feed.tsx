@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { TFeedOrder } from "../../utils/types";
 import FeedElement from "../feed-element/feed-element";
 
 import styles from './feed.module.css';
 
 export default function Feed () {
-  const { orders } = useSelector((store) => store.allOrders);
-  const children = orders.map((order) => {
+  const { orders } = useSelector((store: any) => store.allOrders);
+  const children = orders.map((order: TFeedOrder) => {
     return (
       <Link className={styles.feed__link} key={order._id} to={`/feed/${order._id}`}>
         <FeedElement  {...order} />

@@ -4,11 +4,11 @@ import { useAuth } from "../../hooks/use-auth";
 import LoadingPage from "../../pages/loading";
 import { getCookie } from "../../utils/get-cookie";
 
-import PropTypes from 'prop-types';
+import { IProtectedProps, TLocationState } from "../../utils/types";
 
-export default function ProtectedRoute ({ children, path, auth, redirect, ...rest }) {
+export default function ProtectedRoute ({ children, path, auth, redirect, ...rest }: IProtectedProps) {
   const { getUser, user } = useAuth();
-  const location = useLocation();
+  const location = useLocation<TLocationState>();
 
   const hasAuth = Boolean(getCookie('refToken'));
 
@@ -28,7 +28,7 @@ export default function ProtectedRoute ({ children, path, auth, redirect, ...res
     )
   }
 
-  const to = { pathname: location.state?.redirect || redirect };
+  const to = {...location, pathname: location.state?.redirect || redirect };
   if (rest.comeback) to.state = { comeback: location.pathname };
 
   return (
@@ -36,11 +36,4 @@ export default function ProtectedRoute ({ children, path, auth, redirect, ...res
       { hasAuth === auth ? children : <Redirect to={to} /> }
     </Route>
   );
-}
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.any,
-  path: PropTypes.string.isRequired,
-  auth: PropTypes.bool.isRequired,
-  redirect: PropTypes.string.isRequired
 }
