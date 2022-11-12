@@ -11,10 +11,10 @@ export default function FeedPage () {
   const socketConnect = useRef(false);
 
   useEffect(() => {
-    if (!socketConnect.current) dispatch(connectAllOrders());
+    if (!socketConnect.current) dispatch(connectAllOrders(null));
     return () => {
       // StrictMode
-      if (socketConnect.current) dispatch(closeAllOrders());
+      if (socketConnect.current) dispatch(closeAllOrders(null));
       socketConnect.current = true;
       // Deploy
       // dispatch(closeAllOrders());

@@ -9,7 +9,7 @@ import useCheckToken from "./use-check-token";
 
 export function useAuth () {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store: any) => store.user);
 
   const { checkToken } = useCheckToken();
 
@@ -33,7 +33,7 @@ export function useAuth () {
     });
   }
 
-  async function postUser(newName, newEmail, newPassword) {
+  async function postUser(newName: string, newEmail: string, newPassword: string) {
     dispatch(setIsLoading(true));
     const token = await checkToken();
     updateUserInfo(token, newName, newEmail, newPassword).then((resp) => {

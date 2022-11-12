@@ -8,7 +8,9 @@ export default function LogoutPage () {
 
   useEffect(() => {
     if (!sentLogout.current) logoutUser();
-    return () => sentLogout.current = true;
+    return () => {
+      sentLogout.current = true
+    };
   }, []);
 
   return (

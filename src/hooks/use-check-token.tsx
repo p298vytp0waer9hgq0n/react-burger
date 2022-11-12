@@ -3,7 +3,7 @@ import { getCookie } from "../utils/get-cookie";
 import useRenewToken from "./use-renew-token";
 
 export default function useCheckToken() {
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store: any) => store.user);
   const { renewToken } = useRenewToken();
 
   function checkToken() {

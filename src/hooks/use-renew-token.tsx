@@ -4,7 +4,7 @@ import { refreshToken } from "../services/user/user-slice";
 export default function useRenewToken () {
   const dispatch = useDispatch();
 
-  async function renewToken (token) {
+  async function renewToken (token: string) {
     const data = await dispatch(refreshToken(token)).unwrap();
     return data.accessToken;
   }
