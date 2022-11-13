@@ -5,6 +5,7 @@ import logout from "../utils/api/logout";
 import updateUserInfo from "../utils/api/update-user-info";
 import { getCookie } from "../utils/get-cookie";
 import { setCookie } from "../utils/set-cookie";
+import { TUser } from "../utils/types";
 import useCheckToken from "./use-check-token";
 
 export function useAuth () {
@@ -33,10 +34,10 @@ export function useAuth () {
     });
   }
 
-  async function postUser(newName: string, newEmail: string, newPassword: string) {
+  async function postUser({ username, email, password }: TUser) {
     dispatch(setIsLoading(true));
     const token = await checkToken();
-    updateUserInfo(token, newName, newEmail, newPassword).then((resp) => {
+    updateUserInfo({ token, username, email, password }).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));
       dispatch(setIsLoading(false));

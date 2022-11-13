@@ -13,7 +13,7 @@ export default function ProfileForm() {
 
   function submitProfile (evt: React.FormEvent) {
     evt.preventDefault();
-    postUser(newName, newEmail, newPassword);
+    postUser({ username: newName, email: newEmail, password: newPassword });
     setActiveInput(null);
   }
 

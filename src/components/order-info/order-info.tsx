@@ -7,7 +7,7 @@ import convertDate from "../../utils/convert-date";
 import styles from "./order-info.module.css";
 
 import { useParams } from "react-router-dom";
-import { TFeedOrder, TIngCounter, TIngredient } from "../../utils/types";
+import { TCounter, TFeedOrder, TIngredient } from "../../utils/types";
 
 export default function OrderInfo () {
   const {id} = useParams<{ id: string }>();
@@ -19,7 +19,7 @@ export default function OrderInfo () {
   const { number, name, status, ingredients, createdAt } = order;
 
   const { elements, total } = useMemo(() => {
-    const ingCounter = ingredients.reduce((counter: TIngCounter, id: string) => {
+    const ingCounter = ingredients.reduce((counter: TCounter, id: string) => {
       const curCount = counter[id] ?? 0;
       return { ...counter, [id]: curCount + 1 };
     }, {});

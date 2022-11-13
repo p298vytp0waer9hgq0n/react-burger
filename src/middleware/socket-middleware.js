@@ -5,6 +5,7 @@ export const socketMiddleware = (url, actions) => (store) => {
     const {type, payload} = action;
     const { doConnect, onMessage, onError, doSend, onClose, doClose } = actions;
     if (type === doConnect) {
+      console.log(url, payload);
       socket = new WebSocket(payload ? `${url}?token=${payload}` : url);
     }
     if (socket) {

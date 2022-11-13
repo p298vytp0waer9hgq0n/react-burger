@@ -21,8 +21,6 @@ export type TIngredient = {
   price: number;
 };
 
-export type TIngCounter = Record<string, number>;
-
 export type TCountedIngredient = TIngredient & { quantity: number };
 
 export type TIngredientsIds = {
@@ -53,13 +51,13 @@ export type TModalOverlayProps = {
   clickHandler: (evt: React.MouseEvent) => void;
 }
 
-export type TRegister = {
+export type TUser = {
   username: string;
   email: string;
   password: string;
 }
 
-export type TLogin = Omit<TRegister, 'username'>
+export type TLogin = Omit<TUser, 'username'>
 
 export type TReset = {
   password: string;
@@ -73,5 +71,3 @@ export type TFeedOrder = TOrder & { status: ('done' | 'pending' | 'created') }
 export type TConstructorIngredient = TIngredient & { uid: string };
 
 export type TCounter = Record<string, number>;
-
-export type TTab = ('bun' | 'main' | 'sauce');

@@ -2,9 +2,9 @@ import checkResponse from "../check-response";
 import { baseUrl, registerUrl } from "../constants";
 import request from "../request";
 import { setCookie } from "../set-cookie";
-import { TRegister } from "../types";
+import { TUser } from "../types";
 
-export default function register ({ username, email, password }: TRegister) {
+export default function register ({ username, email, password }: TUser) {
   return request(`${baseUrl}${registerUrl}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
