@@ -1,4 +1,4 @@
-export default function checkResponse (resp) {
+export default function checkResponse (resp: Response) {
   if (resp.ok) {
     return resp.json();
   } else {

@@ -1,4 +1,4 @@
-export default function convertDate (date) {
+export default function convertDate (date: string) {
   let day;
   const order = new Date(date).toLocaleString('ru-RU', {dateStyle: 'short'}).split('.');
   const current = new Date().toLocaleString('ru-RU', {dateStyle: 'short'}).split('.');

@@ -50,7 +50,7 @@ export function useAuth () {
   function logoutUser () {
     dispatch(setIsLoading(true));
     const token = getCookie('refToken');
-    logout(token).then(() => {
+    token && logout(token).then(() => {
       dispatch(setLogoff());
       setCookie('refToken', '', {expires: 'Thu, 01 Jan 1970 00:00:00 UTC'});
       dispatch(setIsLoading(false));

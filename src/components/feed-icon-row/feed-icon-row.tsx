@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import styles from "./feed-icon-row.module.css"
 
 import PropTypes from 'prop-types';
-import { TFeedIconProps, TIngredient } from "../../utils/types";
+import { TIngredient, TIngredientsIds } from "../../utils/types";
 
-export default function FeedIconRow ({ingredients}: TFeedIconProps) {
+export default function FeedIconRow ({ingredients}: TIngredientsIds) {
   const ingrList = useSelector((store: any) => store.ingredients.ingredients);
   const add = ingredients.length - 6;
   const icons = useMemo(() => {
