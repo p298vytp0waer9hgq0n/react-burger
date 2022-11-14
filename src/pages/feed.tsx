@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../components/app/hooks";
 import FeedStats from "../components/feed-stats/feed-stats";
 import Feed from "../components/feed/feed";
 import { closeAllOrders, connectAllOrders } from "../services/all-orders/all-orders-slice";
@@ -7,7 +7,7 @@ import { closeAllOrders, connectAllOrders } from "../services/all-orders/all-ord
 import styles from './home.module.css';
 
 export default function FeedPage () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const socketConnect = useRef(false);
 
   useEffect(() => {

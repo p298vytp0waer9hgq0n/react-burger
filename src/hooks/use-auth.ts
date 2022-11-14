@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../components/app/hooks";
 import { setEmail, setHasError, setIsLoading, setLogoff, setUserName } from "../services/user/user-slice";
 import getUserDetails from "../utils/api/get-user-details";
 import logout from "../utils/api/logout";
@@ -9,8 +9,8 @@ import { TUser } from "../utils/types";
 import useCheckToken from "./use-check-token";
 
 export function useAuth () {
-  const dispatch = useDispatch();
-  const user = useSelector((store: any) => store.user);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((store: any) => store.user);
 
   const { checkToken } = useCheckToken();
 

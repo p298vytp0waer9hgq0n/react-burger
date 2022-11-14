@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { TOrder } from "../../utils/types";
 
-const initialState = {
+type TAllOrdersState = {
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
+  hasError: boolean;
+}
+
+const initialState: TAllOrdersState = {
   orders: [],
   total: 0,
   totalToday: 0,

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from './forms.module.css';
-import { useDispatch } from "react-redux";
 import { loginUser } from "../../services/user/user-slice";
 import { useLocation } from "react-router-dom";
 import { TLocationState } from "../../utils/types";
+import { useAppDispatch } from "../app/hooks";
 
 export default function LoginForm () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation<TLocationState>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

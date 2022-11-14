@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './order.module.css';
 
 import { Link, useLocation } from 'react-router-dom';
 import { TIngredient } from '../../utils/types';
+import { useAppSelector } from '../app/hooks';
 
 export default function Order () {
   const location = useLocation();
-  const burger = useSelector((store: any) => store.burger);
+  const burger = useAppSelector((store: any) => store.burger);
 
   const total = useMemo(() => {
     return (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum: number, cur: TIngredient) => {

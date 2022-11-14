@@ -5,6 +5,7 @@ import login from "../../utils/api/login";
 import register from "../../utils/api/register";
 import parseTokenExp from "../../utils/parse-token-exp";
 import getNewToken from "../../utils/api/get-new-token";
+import { TUser } from "../../utils/types";
 
 export const requestReset = createAsyncThunk('user/requestReset', requestPwReset);
 export const reset = createAsyncThunk('user/reset', resetPassword);
@@ -12,7 +13,16 @@ export const loginUser = createAsyncThunk('user/login', login);
 export const registerUser = createAsyncThunk('user/register', register);
 export const refreshToken = createAsyncThunk('user/refresh', getNewToken);
 
-const initialState = {
+type TUserState = {
+  userName: string;
+  email: string;
+  accToken: string;
+  expire: number;
+  isLoading: boolean;
+  hasError: boolean;
+}
+
+const initialState: TUserState = {
   userName: '',
   email: '',
   accToken: '',
@@ -45,45 +55,44 @@ export const userSlice = createSlice({
       return initialState;
     }
   },
-  extraReducers: {
-    [requestReset.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(requestReset.fulfilled, (state, action) => {
       console.log(action.payload);
-      state.resetEmail = '';
-    },
-    [requestReset.rejected]: (state, action) => {
+    })
+    builder.addCase(requestReset.rejected, (state, action) => {
       console.error('Ошибка восстановления пароля: ', action.error.message);
-    },
-    [reset.fulfilled]: (state, action) => {
+    })
+    builder.addCase(reset.fulfilled, (state, action) => {
       console.log(action.payload);
-    },
-    [reset.rejected]: (state, action) => {
+    })
+    builder.addCase(reset.rejected, (state, action) => {
       console.error('Ошибка восстановления пароля: ', action.error.message);
-    },
-    [loginUser.fulfilled]: (state, action) => {
+    })
+    builder.addCase(loginUser.fulfilled, (state, action) => {
       state.userName = action.payload.user.name;
       state.email = action.payload.user.email;
       state.accToken = action.payload.accessToken;
       state.expire = parseTokenExp(action.payload.accessToken);
-    },
-    [loginUser.rejected]: (state, action) => {
+    })
+    builder.addCase(loginUser.rejected, (state, action) => {
       console.error('Ошибка входа: ', action.error.message);
-    },
-    [refreshToken.fulfilled]: (state, action) => {
+    })
+    builder.addCase(refreshToken.fulfilled, (state, action) => {
       state.accToken = action.payload.accessToken;
       state.expire = parseTokenExp(action.payload.accessToken);
-    },
-    [refreshToken.rejected]: (state, action) => {
+    })
+    builder.addCase(refreshToken.rejected, (state, action) => {
       console.error('refresh error', action.error.message);
-    },
-    [registerUser.fulfilled]: (state, action) => {
+    })
+    builder.addCase(registerUser.fulfilled, (state, action) => {
       state.userName = action.payload.user.name;
       state.email = action.payload.user.email;
       state.accToken = action.payload.accessToken;
       state.expire = parseTokenExp(action.payload.accessToken);
-    },
-    [registerUser.rejected]: (state, action) => {
+    })
+    builder.addCase(registerUser.rejected, (state, action) => {
       console.error('Ошибка регистрации: ', action.error.message);
-    }
+    })
   }
 })
 

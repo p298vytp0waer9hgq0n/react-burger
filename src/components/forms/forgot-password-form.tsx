@@ -1,13 +1,13 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { requestReset } from "../../services/user/user-slice";
+import { useAppDispatch } from "../app/hooks";
 
 import styles from './forms.module.css';
 
 export default function ForgotPasswordForm () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [success, setSuccess] = useState(false);
 

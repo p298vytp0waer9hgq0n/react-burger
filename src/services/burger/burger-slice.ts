@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ingrTypes } from "../../utils/constants";
+import { TConstructorIngredient, TIngredient } from "../../utils/types";
 
-const initialState = {
+type TBurgerState = {
+  bun: TConstructorIngredient | {};
+  ingredients: Array<TConstructorIngredient>;
+}
+
+const initialState: TBurgerState = {
   bun: {},
   ingredients: [],
 };

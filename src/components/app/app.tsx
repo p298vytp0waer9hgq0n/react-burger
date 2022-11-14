@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import type {} from 'redux-thunk/extend-redux';
 
 import AppHeader from '../app-header/app-header';
@@ -26,10 +25,11 @@ import OrderDetail from '../order-details/order-details';
 import FeedPage from '../../pages/feed';
 import OrderInfoPage from '../../pages/order-info';
 import { TLocationState } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from './hooks';
 
 export default function App() {
-  const dispatch = useDispatch();
-  const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
+  const dispatch = useAppDispatch();
+  const { isLoading, hasError } = useAppSelector((store: any) => store.ingredients);
   const location = useLocation<TLocationState>();
   const history = useHistory();
   const background = location.state?.background;

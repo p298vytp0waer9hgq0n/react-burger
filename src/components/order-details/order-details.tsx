@@ -1,18 +1,18 @@
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useRef } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
 import { burgerClear } from "../../services/burger/burger-slice";
 import { orderBurger } from "../../services/order/order-slice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 import styles from "./order-details.module.css";
 
 export default function OrderDetail () {
-  const order = useSelector((store: any) => store.order);
-  const burger = useSelector((store: any) => store.burger);
+  const order = useAppSelector((store: any) => store.order);
+  const burger = useAppSelector((store: any) => store.burger);
   const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
-  const dispatch = useDispatch();
-  const { accToken } = useSelector((store: any) => store.user);
+  const dispatch = useAppDispatch();
+  const { accToken } = useAppSelector((store: any) => store.user);
 
   const orderPlaced = useRef(false);
 

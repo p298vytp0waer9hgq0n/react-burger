@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { burgerMove, burgerRemove } from "../../services/burger/burger-slice";
 import { dragTypes } from "../../utils/constants";
 import styles from './burger-constructor-element.module.css';
+import { useAppDispatch } from "../app/hooks";
 
 export default function BurgerConstructorElement ({ item }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = useRef();
 
   function removeIngredient () {

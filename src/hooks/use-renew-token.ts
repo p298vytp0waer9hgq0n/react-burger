@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../components/app/hooks";
 import { refreshToken } from "../services/user/user-slice";
 
 export default function useRenewToken () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   async function renewToken (token: string) {
     const data = await dispatch(refreshToken(token)).unwrap();

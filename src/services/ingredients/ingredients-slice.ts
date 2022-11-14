@@ -1,7 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import fetchIngredients from '../../utils/api/fetch-ingredients';
+import { TIngredient } from "../../utils/types";
 
-const initialState = {
+type TUserState = {
+  ingredients: Array<TIngredient>;
+  isLoading: boolean;
+  hasError: boolean;
+}
+
+const initialState: TUserState = {
   ingredients: [],
   isLoading: false,
   hasError: false,
@@ -12,22 +19,21 @@ export const getIngredients = createAsyncThunk('ingredients/getIngredients', fet
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  extraReducers: {
-    [getIngredients.pending]: (state) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getIngredients.pending, (state) => {
       state.isLoading = true;
-    },
-    [getIngredients.fulfilled]: (state, action) => {
+    })
+    builder.addCase(getIngredients.fulfilled, (state, action) => {
       state.isLoading = false;
       state.ingredients = action.payload.data;
-    },
-    [getIngredients.rejected]: (state, action) => {
+    })
+    builder.addCase(getIngredients.rejected, (state, action) => {
       state.isLoading = false;
       state.hasError = true;
       console.error('Ошибка загрузки конструктора: ', action.error.message)
-    }
+    })
   }
 })
 
 export default ingredientsSlice.reducer;
-
-export const { setCurrentIngredient } = ingredientsSlice.actions;

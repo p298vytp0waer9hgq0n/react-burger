@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import uuid from 'react-uuid';
 
@@ -13,6 +12,7 @@ import { dragTypes } from "../../utils/constants";
 
 import styles from './burger-constructor.module.css';
 import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 export default function BurgerConstructor () {
   function dropHandler (item: TIngredient) {
@@ -20,8 +20,8 @@ export default function BurgerConstructor () {
     dispatch(burgerAdd({ uid, ...item }));
   }
 
-  const dispatch = useDispatch();
-  const burger = useSelector((store: any) => store.burger);
+  const dispatch = useAppDispatch();
+  const burger = useAppSelector((store: any) => store.burger);
 
   const burgerBun = burger.bun;
   const burgerTop = burgerBun ?

@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../components/app/hooks";
 import { getCookie } from "../utils/get-cookie";
 import useRenewToken from "./use-renew-token";
 
 export default function useCheckToken() {
-  const user = useSelector((store: any) => store.user);
+  const user = useAppSelector((store: any) => store.user);
   const { renewToken } = useRenewToken();
 
   function checkToken() {

@@ -1,13 +1,13 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { reset } from "../../services/user/user-slice";
+import { useAppDispatch } from "../app/hooks";
 
 import styles from './forms.module.css';
 
 export default function ResetPasswordForm () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [password, setPassword] = useState('');
   const [safeNumber, setSafeNumber] = useState('');
   const [success, setSuccess] = useState(false);

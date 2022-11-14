@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "../ingredient/ingredient";
@@ -7,14 +6,15 @@ import { ingrTypes } from "../../utils/constants";
 
 import styles from './burger-ingredients.module.css';
 import { TCounter, TIngredient } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 
 export default function BurgerIngredients () {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const bunsRef = useRef<HTMLDivElement>(null);
   const sauceRef = useRef<HTMLDivElement>(null);
   const stuffRef = useRef<HTMLDivElement>(null);
-  const burger = useSelector((store: any) => store.burger);
+  const burger = useAppSelector((store: any) => store.burger);
 
 
   function handleClick (tab: string) {
@@ -34,7 +34,7 @@ export default function BurgerIngredients () {
 
   const [current, setCurrent] = useState(ingrTypes.bun);
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { ingredients } = useAppSelector((store: any) => store.ingredients);
   const elements = useMemo(() => {
     return ingredients.map((item: TIngredient) => {
       return (

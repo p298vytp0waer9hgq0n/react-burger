@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../components/app/hooks";
 import Orders from "../components/orders/orders";
 import ProfileNav from "../components/profile-nav/profile-nav";
 import { useAuth } from "../hooks/use-auth";
@@ -9,7 +9,7 @@ import styles from "./profile.module.css";
 
 export default function OrdersPage () {
   const {user} = useAuth();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const socketConnect = useRef(false);
 
   useEffect(() => {

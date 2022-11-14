@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { TFeedOrder } from '../../utils/types';
+import { useAppSelector } from '../app/hooks';
 import styles from './feed-stats.module.css';
 
 export default function FeedStats () {
-  const { total, totalToday, orders } = useSelector((store: any) => store.allOrders);
+  const { total, totalToday, orders } = useAppSelector((store: any) => store.allOrders);
   const [pending, setPending] = useState<JSX.Element[]>([]);
   const [done, setDone] = useState<JSX.Element[]>([]);
 

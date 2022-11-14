@@ -1,14 +1,14 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { statusText } from '../../utils/constants';
 import convertDate from '../../utils/convert-date';
 import { TFeedElementProps, TIngredient } from '../../utils/types';
+import { useAppSelector } from '../app/hooks';
 import FeedIconRow from '../feed-icon-row/feed-icon-row';
 import styles from './feed-element.module.css';
 
 export default function FeedElement (props: TFeedElementProps) {
-  const ingList = useSelector((store: any) => store.ingredients.ingredients);
+  const ingList = useAppSelector((store: any) => store.ingredients.ingredients);
   const total = useMemo(() => {
     return props.ingredients.reduce((cum, cur) => cum + ingList.find((elem: TIngredient) => elem._id === cur).price, 0);
   }, [props.ingredients]);

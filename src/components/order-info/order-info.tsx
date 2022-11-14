@@ -1,6 +1,5 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { statusText } from "../../utils/constants";
 import convertDate from "../../utils/convert-date";
 
@@ -8,12 +7,13 @@ import styles from "./order-info.module.css";
 
 import { useParams } from "react-router-dom";
 import { TCounter, TFeedOrder, TIngredient } from "../../utils/types";
+import { useAppSelector } from "../app/hooks";
 
 export default function OrderInfo () {
   const {id} = useParams<{ id: string }>();
-  const userOrders = useSelector((store: any) => store.orders.orders);
-  const orders = useSelector((store: any) => store.allOrders.orders);
-  const ingList = useSelector((store: any) => store.ingredients.ingredients);
+  const userOrders = useAppSelector((store: any) => store.orders.orders);
+  const orders = useAppSelector((store: any) => store.allOrders.orders);
+  const ingList = useAppSelector((store: any) => store.ingredients.ingredients);
 
   const order: TFeedOrder = orders.find((ele: TFeedOrder) => ele._id === id) || userOrders.find((ele: TFeedOrder) => ele._id === id);
   const { number, name, status, ingredients, createdAt } = order;
