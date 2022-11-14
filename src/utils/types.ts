@@ -19,6 +19,11 @@ export type TIngredient = {
   image: string;
   type: string;
   price: number;
+  image_large: string;
+  calories: number;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
 };
 
 export type TCountedIngredient = TIngredient & { quantity: number };

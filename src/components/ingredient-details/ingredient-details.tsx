@@ -5,7 +5,7 @@ import { useAppSelector } from "../app/hooks";
 import styles from "./ingredient-details.module.css";
 
 export default function IngredientDetails () {
-  const ingredients = useAppSelector((store: any) => store.ingredients.ingredients);
+  const ingredients = useAppSelector((store) => store.ingredients.ingredients);
   const { id } = useParams<{ id: string }>();
   const ingredient = ingredients.find((elem: TIngredient) => elem._id === id);
 
