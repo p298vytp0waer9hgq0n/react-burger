@@ -29,7 +29,7 @@ import { useAppDispatch, useAppSelector } from './hooks';
 
 export default function App() {
   const dispatch = useAppDispatch();
-  const { isLoading, hasError } = useAppSelector((store: any) => store.ingredients);
+  const { isLoading, hasError } = useAppSelector((store) => store.ingredients);
   const location = useLocation<TLocationState>();
   const history = useHistory();
   const background = location.state?.background;

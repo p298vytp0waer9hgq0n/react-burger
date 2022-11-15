@@ -3,12 +3,11 @@ import { ingrTypes } from "../../utils/constants";
 import { TConstructorIngredient, TIngredient } from "../../utils/types";
 
 type TBurgerState = {
-  bun: TConstructorIngredient | {};
+  bun?: TConstructorIngredient;
   ingredients: Array<TConstructorIngredient>;
 }
 
 const initialState: TBurgerState = {
-  bun: {},
   ingredients: [],
 };
 

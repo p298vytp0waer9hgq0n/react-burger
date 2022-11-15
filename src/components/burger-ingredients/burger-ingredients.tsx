@@ -41,7 +41,7 @@ export default function BurgerIngredients () {
         <Ingredient
           key={item._id}
           quantity={
-            item._id === burger.bun._id ? 2 : ingredientCounters[item._id]
+            item._id === burger.bun?._id ? 2 : ingredientCounters[item._id]
           }
           {...item}
         />

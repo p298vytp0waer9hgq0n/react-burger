@@ -11,7 +11,7 @@ export default function Order () {
   const burger = useAppSelector((store: any) => store.burger);
 
   const total = useMemo(() => {
-    return (burger.bun.price || 0) * 2 + burger.ingredients.reduce((cum: number, cur: TIngredient) => {
+    return (burger.bun?.price || 0) * 2 + burger.ingredients.reduce((cum: number, cur: TIngredient) => {
       return cum + cur.price;
     }, 0);
   }, [burger.bun, burger.ingredients]);

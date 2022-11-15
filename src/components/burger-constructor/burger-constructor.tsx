@@ -21,9 +21,9 @@ export default function BurgerConstructor () {
   }
 
   const dispatch = useAppDispatch();
-  const burger = useAppSelector((store: any) => store.burger);
+  const burger = useAppSelector((store) => store.burger);
 
-  const burgerBun = burger.bun;
+  const burgerBun = burger?.bun;
   const burgerTop = burgerBun ?
     <ConstructorElement
       type='top'
@@ -55,7 +55,7 @@ export default function BurgerConstructor () {
     }
   });
 
-  if (!burger.bun._id && burger.ingredients.length < 1) {
+  if (!burger.bun && burger.ingredients.length < 1) {
     return (
       <section className={`${styles.constructor} ${styles.constructor_empty} mt-25 pl-4`} ref={dropTarget}>
         <p className="text text_type_main-large">Перетащите ингредиенты</p>
@@ -65,11 +65,11 @@ export default function BurgerConstructor () {
 
   return (
     <section className={`${styles.constructor} mt-25 pl-4`} ref={dropTarget}>
-      {burger.bun._id && <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>}
+      {burger.bun?._id && <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerTop}</div>}
       <ul className={`${styles.constructor__list} pr-1 custom-scroll`}>
         {burgerElems}
       </ul>
-      {burger.bun._id && <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>}
+      {burger.bun?._id && <div className={`${styles.constructor__term} pl-8 pr-4`}>{burgerBottom}</div>}
       <Order />
     </section>
   );
