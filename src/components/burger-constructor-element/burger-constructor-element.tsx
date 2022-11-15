@@ -6,10 +6,11 @@ import { burgerMove, burgerRemove } from "../../services/burger/burger-slice";
 import { dragTypes } from "../../utils/constants";
 import styles from './burger-constructor-element.module.css';
 import { useAppDispatch } from "../app/hooks";
+import { TConstructorIngredient } from "../../utils/types";
 
-export default function BurgerConstructorElement ({ item }) {
+export default function BurgerConstructorElement ({ item }: { item: TConstructorIngredient}) {
   const dispatch = useAppDispatch();
-  const ref = useRef();
+  const ref = useRef<HTMLLIElement>(null);
 
   function removeIngredient () {
     dispatch(burgerRemove(item.uid));
@@ -24,7 +25,7 @@ export default function BurgerConstructorElement ({ item }) {
   }));
   const [, dropRef] = useDrop({
     accept: dragTypes.sorting,
-    hover({ uid: draggedUid }) {
+    hover({ uid: draggedUid }: { uid: string }) {
       if (item.uid !== draggedUid) {
         dispatch(burgerMove({ uid: item.uid, draggedUid: draggedUid }));
       }
@@ -40,7 +41,7 @@ export default function BurgerConstructorElement ({ item }) {
   return (
     <li className={elementStyle} ref={ref}>
       <div className={styles.constructor__dragHandle} ref={dragRef}>
-        <DragIcon />
+        <DragIcon type="primary"/>
       </div>
       <ConstructorElement
         isLocked={false}
