@@ -8,9 +8,12 @@ import FeedIconRow from '../feed-icon-row/feed-icon-row';
 import styles from './feed-element.module.css';
 
 export default function FeedElement (props: TFeedElementProps) {
-  const ingList = useAppSelector((store: any) => store.ingredients.ingredients);
+  const ingList = useAppSelector((store) => store.ingredients.ingredients);
   const total = useMemo(() => {
-    return props.ingredients.reduce((cum, cur) => cum + ingList.find((elem: TIngredient) => elem._id === cur).price, 0);
+    return props.ingredients.reduce((cum, cur) => {
+      const ingrPrice = ingList.find((elem: TIngredient) => elem._id === cur)?.price
+      return ingrPrice ? cum + ingrPrice : cum;
+    }, 0);
   }, [props.ingredients]);
 
   return (

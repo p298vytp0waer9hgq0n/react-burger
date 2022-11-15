@@ -4,7 +4,7 @@ import { useAppSelector } from '../app/hooks';
 import styles from './feed-stats.module.css';
 
 export default function FeedStats () {
-  const { total, totalToday, orders } = useAppSelector((store: any) => store.allOrders);
+  const { total, totalToday, orders } = useAppSelector((store) => store.allOrders);
   const [pending, setPending] = useState<JSX.Element[]>([]);
   const [done, setDone] = useState<JSX.Element[]>([]);
 

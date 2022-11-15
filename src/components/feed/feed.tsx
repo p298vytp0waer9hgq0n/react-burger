@@ -6,8 +6,8 @@ import FeedElement from "../feed-element/feed-element";
 import styles from './feed.module.css';
 
 export default function Feed () {
-  const { orders } = useAppSelector((store: any) => store.allOrders);
-  const children = orders.map((order: TFeedOrder) => {
+  const { orders } = useAppSelector((store) => store.allOrders);
+  const children = orders.map((order) => {
     return (
       <Link className={styles.feed__link} key={order._id} to={`/feed/${order._id}`}>
         <FeedElement  {...order} />

@@ -11,11 +11,11 @@ import { useAppSelector } from "../app/hooks";
 
 export default function OrderInfo () {
   const {id} = useParams<{ id: string }>();
-  const userOrders = useAppSelector((store: any) => store.orders.orders);
-  const orders = useAppSelector((store: any) => store.allOrders.orders);
-  const ingList = useAppSelector((store: any) => store.ingredients.ingredients);
+  const userOrders = useAppSelector((store) => store.orders.orders);
+  const orders = useAppSelector((store) => store.allOrders.orders);
+  const ingList = useAppSelector((store) => store.ingredients.ingredients);
 
-  const order: TFeedOrder = orders.find((ele: TFeedOrder) => ele._id === id) || userOrders.find((ele: TFeedOrder) => ele._id === id);
+  const order: TFeedOrder = orders.find((ele: TFeedOrder) => ele._id === id) || userOrders.find((ele: TFeedOrder) => ele._id === id)!;
   const { number, name, status, ingredients, createdAt } = order;
 
   const { elements, total } = useMemo(() => {
@@ -26,7 +26,7 @@ export default function OrderInfo () {
     const elements = [];
     let total = 0;
     for (const i in ingCounter) {
-      const ing = ingList.find((ele: TIngredient) => ele._id === i);
+      const ing = ingList.find((ele: TIngredient) => ele._id === i)!;
       total += ingCounter[i] * ing.price;
       const element = (
         <div key={i} className={`${styles.ingredient} mr-5`}>

@@ -7,7 +7,7 @@ import { TIngredient, TIngredientsIds } from "../../utils/types";
 import { useAppSelector } from "../app/hooks";
 
 export default function FeedIconRow ({ingredients}: TIngredientsIds) {
-  const ingrList = useAppSelector((store: any) => store.ingredients.ingredients);
+  const ingrList = useAppSelector((store) => store.ingredients.ingredients);
   const add = ingredients.length - 6;
   const icons = useMemo(() => {
     const result = [];
@@ -15,6 +15,7 @@ export default function FeedIconRow ({ingredients}: TIngredientsIds) {
     let first = true;
     for (let i = 0; i < Math.min(ingredients.length, 6); i++) {
       const current = ingrList.find((ele: TIngredient) => ele._id === ingredients[i]);
+      if (!current) continue;
       if (current.type === 'bun') {
         bun = current;
         continue;

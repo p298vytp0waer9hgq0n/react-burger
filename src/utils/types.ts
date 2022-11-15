@@ -20,6 +20,7 @@ export type TIngredient = {
   type: string;
   price: number;
   image_large: string;
+  image_mobile: string;
   calories: number;
   proteins: number;
   fat: number;
@@ -40,7 +41,7 @@ export type TOrder = TIngredientsIds & {
 }
 
 export type TModalProps = {
-  children: any;
+  children: React.ReactNode;
   title?: string;
   close: Function;
 }
@@ -52,7 +53,7 @@ export interface IProtectedProps extends RouteProps {
 }
 
 export type TModalOverlayProps = {
-  children: any;
+  children: React.ReactNode;
   clickHandler: (evt: React.MouseEvent) => void;
 }
 

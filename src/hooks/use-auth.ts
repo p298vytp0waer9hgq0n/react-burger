@@ -10,7 +10,7 @@ import useCheckToken from "./use-check-token";
 
 export function useAuth () {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store: any) => store.user);
+  const user = useAppSelector((store) => store.user);
 
   const { checkToken } = useCheckToken();
 
@@ -36,7 +36,8 @@ export function useAuth () {
 
   async function postUser({ username, email, password }: TUser) {
     dispatch(setIsLoading(true));
-    const token = await checkToken();
+    const token = checkToken();
+    if (!token) throw new Error;
     updateUserInfo({ token, username, email, password }).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));

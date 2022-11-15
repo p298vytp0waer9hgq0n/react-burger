@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { TFeedOrder } from "../../utils/types"
 
-const initialState = {
+type TOrdersState = {
+  orders: Array<TFeedOrder>;
+  hasError: boolean;
+}
+
+const initialState: TOrdersState = {
   orders: [],
   hasError: false
 }

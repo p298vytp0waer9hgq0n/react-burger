@@ -8,7 +8,7 @@ import { useAppSelector } from '../app/hooks';
 
 export default function Order () {
   const location = useLocation();
-  const burger = useAppSelector((store: any) => store.burger);
+  const burger = useAppSelector((store) => store.burger);
 
   const total = useMemo(() => {
     return (burger.bun?.price || 0) * 2 + burger.ingredients.reduce((cum: number, cur: TIngredient) => {

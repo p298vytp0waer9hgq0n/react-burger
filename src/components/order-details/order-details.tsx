@@ -8,16 +8,19 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import styles from "./order-details.module.css";
 
 export default function OrderDetail () {
-  const order = useAppSelector((store: any) => store.order);
-  const burger = useAppSelector((store: any) => store.burger);
-  const ingredients = [burger.bun, ...burger.ingredients, burger.bun].map((item) => item._id);
-  const dispatch = useAppDispatch();
-  const { accToken } = useAppSelector((store: any) => store.user);
-
   const orderPlaced = useRef(false);
+  const dispatch = useAppDispatch();
+  const order = useAppSelector((store) => store.order);
+  const burger = useAppSelector((store) => store.burger);
+  const { accToken } = useAppSelector((store) => store.user);
+  const ingredients = burger.ingredients.length > 0 ? burger.ingredients.map((item) => item._id) : [];
+  if (burger.bun) {
+    ingredients.push(burger.bun._id);
+    ingredients.unshift(burger.bun._id);
+  }
 
   useEffect(() => {
-    if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear(true)));
+      if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear(true)));
   }, [])
 
   if (order.isLoading) {
@@ -40,7 +43,7 @@ export default function OrderDetail () {
 
   return (
     <>
-      <p className={`${styles.number} text text_type_digits-large mt-4`}>{order.placedOrder.order?.number}</p>
+      <p className={`${styles.number} text text_type_digits-large mt-4`}>{order.number}</p>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <div className={`${styles.thingy} mt-7 mb-8`}>
         <CheckMarkIcon type="primary" />

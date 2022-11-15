@@ -93,13 +93,13 @@ export default function App() {
           <OrdersPage />
         </ProtectedRoute>
         <ProtectedRoute path="/profile/orders/:id" auth={true} redirect="/login" comeback>
-          <OrderInfoPage auth={true} />
+          <OrderInfoPage />
         </ProtectedRoute>
         <Route exact path="/feed">
           <FeedPage />
         </Route>
         <Route path="/feed/:id">
-          <OrderInfoPage auth={false} />
+          <OrderInfoPage />
         </Route>
         <Route path="*">
           <MissingPage />

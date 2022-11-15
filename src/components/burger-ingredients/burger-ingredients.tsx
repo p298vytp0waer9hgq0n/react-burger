@@ -14,7 +14,7 @@ export default function BurgerIngredients () {
   const bunsRef = useRef<HTMLDivElement>(null);
   const sauceRef = useRef<HTMLDivElement>(null);
   const stuffRef = useRef<HTMLDivElement>(null);
-  const burger = useAppSelector((store: any) => store.burger);
+  const burger = useAppSelector((store) => store.burger);
 
 
   function handleClick (tab: string) {
@@ -34,7 +34,7 @@ export default function BurgerIngredients () {
 
   const [current, setCurrent] = useState(ingrTypes.bun);
   const titleIngrStyle = `${styles.burger__comps} text text_type_main-medium mt-2 mb-6`;
-  const { ingredients } = useAppSelector((store: any) => store.ingredients);
+  const { ingredients } = useAppSelector((store) => store.ingredients);
   const elements = useMemo(() => {
     return ingredients.map((item: TIngredient) => {
       return (

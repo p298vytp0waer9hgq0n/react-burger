@@ -6,13 +6,20 @@ export const orderBurger = createAsyncThunk('burger/order', placeOrder);
 type TOrderState = {
   isLoading: boolean;
   hasError: boolean;
-  placedOrder: any;
+  /* placedOrder: {
+    success: boolean;
+    name: string;
+    order: {
+      number: number;
+    }
+  } */
+  number: number | null;
 }
 
-const initialState = {
+const initialState: TOrderState = {
   isLoading: true,
   hasError: false,
-  placedOrder: {}
+  number: null
 }
 
 export const orderSlice = createSlice({
@@ -24,14 +31,14 @@ export const orderSlice = createSlice({
       return initialState;
     })
     builder.addCase(orderBurger.fulfilled, (state, action) => {
-      state.placedOrder = action.payload;
+      state.number = action.payload.order.number;
       state.isLoading = false;
     })
     builder.addCase(orderBurger.rejected, (state, action) => {
       console.error(`Ошибка размещения заказа: `, action.error.message);
       state.isLoading = false;
       state.hasError = true;
-      state.placedOrder = {};
+      state.number = null;
     })
   }
 });

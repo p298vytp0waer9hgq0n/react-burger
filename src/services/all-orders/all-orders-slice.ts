@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { TOrder } from "../../utils/types";
+import { TFeedOrder } from "../../utils/types";
 
 type TAllOrdersState = {
-  orders: Array<TOrder>;
+  orders: Array<TFeedOrder>;
   total: number;
   totalToday: number;
   hasError: boolean;

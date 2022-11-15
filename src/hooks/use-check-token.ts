@@ -3,7 +3,7 @@ import { getCookie } from "../utils/get-cookie";
 import useRenewToken from "./use-renew-token";
 
 export default function useCheckToken() {
-  const user = useAppSelector((store: any) => store.user);
+  const user = useAppSelector((store) => store.user);
   const { renewToken } = useRenewToken();
 
   function checkToken() {
@@ -13,7 +13,7 @@ export default function useCheckToken() {
     let newToken = user.accToken;
     const token = getCookie('refToken') || null;
     if (token) {
-      newToken = renewToken(token);
+      renewToken(token).then((resp) => newToken = resp);
     } else {
       return;
     }
