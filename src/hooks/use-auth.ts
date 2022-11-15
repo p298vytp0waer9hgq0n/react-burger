@@ -37,7 +37,7 @@ export function useAuth () {
   async function postUser({ username, email, password }: TUser) {
     dispatch(setIsLoading(true));
     const token = checkToken();
-    if (!token) throw new Error;
+    if (!token) throw new Error('Token check failed');
     updateUserInfo({ token, username, email, password }).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));

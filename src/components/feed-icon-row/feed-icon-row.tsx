@@ -2,14 +2,13 @@ import { useMemo } from "react";
 
 import styles from "./feed-icon-row.module.css"
 
-import PropTypes from 'prop-types';
 import { TIngredient, TIngredientsIds } from "../../utils/types";
 import { useAppSelector } from "../app/hooks";
 
 export default function FeedIconRow ({ingredients}: TIngredientsIds) {
   const ingrList = useAppSelector((store) => store.ingredients.ingredients);
   const add = ingredients.length - 6;
-  const icons = useMemo(() => {
+  const icons = useMemo<JSX.Element[]>(() => {
     const result = [];
     let bun;
     let first = true;
@@ -41,8 +40,4 @@ export default function FeedIconRow ({ingredients}: TIngredientsIds) {
       {icons}
     </div>
   )
-}
-
-FeedIconRow.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
 }

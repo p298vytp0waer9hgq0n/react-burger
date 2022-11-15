@@ -16,7 +16,7 @@ export default function OrdersPage () {
     if (!socketConnect.current) dispatch(connectOrders(user.accToken.split(' ')[1]));
     return () => {
       // StrictMode
-      if (socketConnect.current) dispatch(closeOrders(null));
+      if (socketConnect.current) dispatch(closeOrders());
       socketConnect.current = true;
       // Deploy
       // dispatch(closeOrders());

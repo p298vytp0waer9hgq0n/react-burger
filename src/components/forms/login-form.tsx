@@ -10,8 +10,8 @@ import { useAppDispatch } from "../app/hooks";
 export default function LoginForm () {
   const dispatch = useAppDispatch();
   const location = useLocation<TLocationState>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   function handleSubmit (evt: React.FormEvent) {
     evt.preventDefault();

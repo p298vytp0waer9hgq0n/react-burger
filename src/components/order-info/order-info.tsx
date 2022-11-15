@@ -18,7 +18,7 @@ export default function OrderInfo () {
   const order: TFeedOrder = orders.find((ele: TFeedOrder) => ele._id === id) || userOrders.find((ele: TFeedOrder) => ele._id === id)!;
   const { number, name, status, ingredients, createdAt } = order;
 
-  const { elements, total } = useMemo(() => {
+  const { elements, total } = useMemo<{ elements: JSX.Element[]; total: number }>(() => {
     const ingCounter = ingredients.reduce((counter: TCounter, id: string) => {
       const curCount = counter[id] ?? 0;
       return { ...counter, [id]: curCount + 1 };

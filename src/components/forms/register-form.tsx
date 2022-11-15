@@ -7,9 +7,9 @@ import styles from './forms.module.css';
 
 export default function RegisterForm () {
   const dispatch = useAppDispatch();
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   function handleSubmit (evt: React.FormEvent) {
     evt.preventDefault();

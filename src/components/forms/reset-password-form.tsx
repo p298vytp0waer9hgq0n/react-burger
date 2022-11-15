@@ -8,9 +8,9 @@ import styles from './forms.module.css';
 
 export default function ResetPasswordForm () {
   const dispatch = useAppDispatch();
-  const [password, setPassword] = useState('');
-  const [safeNumber, setSafeNumber] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [password, setPassword] = useState<string>('');
+  const [safeNumber, setSafeNumber] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
 
   async function submitHandler (evt: React.FormEvent) {
     evt.preventDefault();

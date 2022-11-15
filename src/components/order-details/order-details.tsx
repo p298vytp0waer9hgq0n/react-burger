@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import styles from "./order-details.module.css";
 
 export default function OrderDetail () {
-  const orderPlaced = useRef(false);
+  const orderPlaced = useRef<boolean>(false);
   const dispatch = useAppDispatch();
   const order = useAppSelector((store) => store.order);
   const burger = useAppSelector((store) => store.burger);
@@ -20,7 +20,7 @@ export default function OrderDetail () {
   }
 
   useEffect(() => {
-      if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear(true)));
+      if (!orderPlaced.current) dispatch(orderBurger({ ingredients, accToken })).then(() => dispatch(burgerClear()));
   }, [])
 
   if (order.isLoading) {

@@ -8,8 +8,8 @@ import styles from './forms.module.css';
 
 export default function ForgotPasswordForm () {
   const dispatch = useAppDispatch();
-  const [email, setEmail] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
 
   async function submitHandler (evt: React.FormEvent) {
     evt.preventDefault();

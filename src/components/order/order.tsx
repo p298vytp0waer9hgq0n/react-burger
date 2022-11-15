@@ -10,7 +10,7 @@ export default function Order () {
   const location = useLocation();
   const burger = useAppSelector((store) => store.burger);
 
-  const total = useMemo(() => {
+  const total = useMemo<number>(() => {
     return (burger.bun?.price || 0) * 2 + burger.ingredients.reduce((cum: number, cur: TIngredient) => {
       return cum + cur.price;
     }, 0);

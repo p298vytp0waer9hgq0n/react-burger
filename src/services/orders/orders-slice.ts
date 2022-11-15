@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { TFeedOrder } from "../../utils/types"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { TFeedOrder, TOrdersResponse } from "../../utils/types"
 
 type TOrdersState = {
   orders: Array<TFeedOrder>;
-  hasError: boolean;
+  hasError?: boolean;
 }
 
 const initialState: TOrdersState = {
@@ -15,20 +15,20 @@ export const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    connectOrders: (state, action) => {
+    connectOrders: (state, action: PayloadAction<string>) => {
       state.hasError = false;
     },
-    ordersMessage: (state, action) => {
+    ordersMessage: (state, action: PayloadAction<TOrdersResponse>) => {
       return action.payload;
     },
-    sendOrders: (state, action) => {
+    sendOrders: () => {
     },
-    ordersError: (state, action) => {
+    ordersError: (state) => {
       state.hasError = true;
     },
-    ordersClose: (state, action) => {
+    ordersClose: () => {
     },
-    closeOrders: (state, action) => {
+    closeOrders: () => {
     }
   }
 })

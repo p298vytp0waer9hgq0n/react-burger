@@ -9,7 +9,7 @@ import styles from './feed-element.module.css';
 
 export default function FeedElement (props: TFeedElementProps) {
   const ingList = useAppSelector((store) => store.ingredients.ingredients);
-  const total = useMemo(() => {
+  const total = useMemo<number>(() => {
     return props.ingredients.reduce((cum, cur) => {
       const ingrPrice = ingList.find((elem: TIngredient) => elem._id === cur)?.price
       return ingrPrice ? cum + ingrPrice : cum;

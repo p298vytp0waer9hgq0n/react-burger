@@ -5,7 +5,6 @@ export const socketMiddleware = (url, actions) => (store) => {
     const {type, payload} = action;
     const { doConnect, onMessage, onError, doSend, onClose, doClose } = actions;
     if (type === doConnect) {
-      console.log(url, payload);
       socket = new WebSocket(payload ? `${url}?token=${payload}` : url);
     }
     if (socket) {
@@ -21,7 +20,7 @@ export const socketMiddleware = (url, actions) => (store) => {
         }
       };
       socket.onerror = (evt) => {
-        console.log('Socket Error', evt);
+        console.error('Socket Error', evt);
         dispatch(onError());
       };
       socket.onclose = (evt) => {

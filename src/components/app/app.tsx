@@ -31,11 +31,11 @@ export default function App() {
   const dispatch = useAppDispatch();
   const { isLoading, hasError } = useAppSelector((store) => store.ingredients);
   const location = useLocation<TLocationState>();
-  const history = useHistory();
+  const history = useHistory<History>();
   const background = location.state?.background;
   const tokenSent = location.state?.tokenSent;
 
-  const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
+  const fetchRan = useRef<boolean>(false); // чтобы фетч не гонял дважды в деве
 
   function closeModal (evt: React.MouseEvent | React.KeyboardEvent) {
     evt.stopPropagation();

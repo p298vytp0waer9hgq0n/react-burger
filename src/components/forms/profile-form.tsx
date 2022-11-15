@@ -7,9 +7,9 @@ import styles from "./forms.module.css";
 export default function ProfileForm() {
   const { user, postUser } = useAuth();
   const [activeInput, setActiveInput] = useState<string | null>(null);
-  const [newName, setNewName] = useState(user.userName);
-  const [newEmail, setNewEmail] = useState(user.email);
-  const [newPassword, setNewPassword] = useState('');
+  const [newName, setNewName] = useState<string>(user.userName);
+  const [newEmail, setNewEmail] = useState<string>(user.email);
+  const [newPassword, setNewPassword] = useState<string>('');
 
   function submitProfile (evt: React.FormEvent) {
     evt.preventDefault();

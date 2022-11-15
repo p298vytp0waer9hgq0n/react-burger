@@ -24,14 +24,13 @@ export const ingredientsSlice = createSlice({
     builder.addCase(getIngredients.pending, (state) => {
       state.isLoading = true;
     })
-    builder.addCase(getIngredients.fulfilled, (state, action) => {
+    builder.addCase(getIngredients.fulfilled, (state, action: PayloadAction<{ data: Array<TIngredient> }>) => {
       state.isLoading = false;
       state.ingredients = action.payload.data;
     })
-    builder.addCase(getIngredients.rejected, (state, action) => {
+    builder.addCase(getIngredients.rejected, (state) => {
       state.isLoading = false;
       state.hasError = true;
-      console.error('Ошибка загрузки конструктора: ', action.error.message)
     })
   }
 })

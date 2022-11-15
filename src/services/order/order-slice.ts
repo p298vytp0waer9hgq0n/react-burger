@@ -1,18 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import placeOrder from "../../utils/api/place-order";
+import { TOrder } from "../../utils/types";
 
 export const orderBurger = createAsyncThunk('burger/order', placeOrder);
 
 type TOrderState = {
   isLoading: boolean;
   hasError: boolean;
-  /* placedOrder: {
-    success: boolean;
-    name: string;
-    order: {
-      number: number;
-    }
-  } */
   number: number | null;
 }
 
@@ -27,15 +21,14 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(orderBurger.pending, (state, action) => {
+    builder.addCase(orderBurger.pending, () => {
       return initialState;
     })
-    builder.addCase(orderBurger.fulfilled, (state, action) => {
+    builder.addCase(orderBurger.fulfilled, (state, action: PayloadAction<{ order: TOrder }>) => {
       state.number = action.payload.order.number;
       state.isLoading = false;
     })
-    builder.addCase(orderBurger.rejected, (state, action) => {
-      console.error(`Ошибка размещения заказа: `, action.error.message);
+    builder.addCase(orderBurger.rejected, (state) => {
       state.isLoading = false;
       state.hasError = true;
       state.number = null;

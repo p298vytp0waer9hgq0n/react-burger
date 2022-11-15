@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { TFeedOrder } from "../../utils/types";
 import { useAppSelector } from "../app/hooks";
 import FeedElement from "../feed-element/feed-element";
 

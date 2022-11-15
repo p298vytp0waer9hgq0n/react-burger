@@ -37,7 +37,7 @@ export type TOrder = TIngredientsIds & {
   _id: string;
   name: string;
   createdAt: string;
-  number: string;
+  number: number;
 }
 
 export type TModalProps = {
@@ -68,6 +68,21 @@ export type TLogin = Omit<TUser, 'username'>
 export type TReset = {
   password: string;
   token: string;
+}
+
+export type TUserResponse = {
+  user: {
+    name: string;
+    email: string;
+  };
+  accessToken: string;
+}
+
+export type TOrdersResponse = {
+  success: boolean;
+  orders: Array<TFeedOrder>;
+  total: number;
+  totalToday: number;
 }
 
 export type TFeedElementProps = TFeedOrder & { auth?: boolean }
