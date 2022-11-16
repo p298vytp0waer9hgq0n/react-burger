@@ -1,26 +1,27 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
+import { useForm } from "../../hooks/use-form";
 
 import styles from "./forms.module.css";
 
 export default function ProfileForm() {
   const { user, postUser } = useAuth();
+  const { values, handleChange, setValues } = useForm({ name: user.userName, email: user.email, password: '' });
   const [activeInput, setActiveInput] = useState<string | null>(null);
-  const [newName, setNewName] = useState<string>(user.userName);
-  const [newEmail, setNewEmail] = useState<string>(user.email);
-  const [newPassword, setNewPassword] = useState<string>('');
 
   function submitProfile (evt: React.FormEvent) {
     evt.preventDefault();
-    postUser({ username: newName, email: newEmail, password: newPassword });
+    postUser({ username: values.name, email: values.email, password: values.password });
     setActiveInput(null);
   }
 
   function resetForm () {
-    setNewName(user.userName);
-    setNewEmail(user.email);
-    setNewPassword('');
+    setValues({
+      name: user.userName,
+      email: user.email,
+      password: ''
+    });
     setActiveInput(null);
   }
 
@@ -33,8 +34,8 @@ export default function ProfileForm() {
         icon={activeInput === 'name' ? 'CloseIcon' : 'EditIcon'}
         name="name"
         placeholder="Имя"
-        value={newName}
-        onChange={(evt) => setNewName(evt.target.value)}
+        value={values.name}
+        onChange={handleChange}
       />
       <Input
         disabled={activeInput !== 'email'}
@@ -43,8 +44,8 @@ export default function ProfileForm() {
         icon={activeInput === 'email' ? 'CloseIcon' : 'EditIcon'}
         name="email"
         placeholder="Email"
-        value={newEmail}
-        onChange={(evt) => setNewEmail(evt.target.value)}
+        value={values.email}
+        onChange={handleChange}
       />
       <Input
         disabled={activeInput !== 'password'}
@@ -54,10 +55,10 @@ export default function ProfileForm() {
         name="password"
         type="password"
         placeholder="Пароль"
-        value={newPassword}
-        onChange={(evt) => setNewPassword(evt.target.value)}
+        value={values.password}
+        onChange={handleChange}
       />
-    { (newName !== user.userName || newEmail !== user.email || newPassword) &&
+    { (values.name !== user.userName || values.email !== user.email || values.password) &&
       <>
         <Button onClick={() => resetForm()} type="secondary" htmlType="button">Отмена</Button>
         <Button htmlType="submit">Сохранить</Button>
