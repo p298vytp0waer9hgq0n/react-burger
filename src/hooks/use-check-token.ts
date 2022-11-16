@@ -8,13 +8,11 @@ export default function useCheckToken() {
 
   async function checkToken() {
     if (user.accToken && user.expire > Date.now()) {
-      console.log('reuse token', user.expire, Date.now());
       return user.accToken;
     }
     let newToken = user.accToken;
     const token = getCookie('refToken') || null;
     if (token) {
-      console.log('trying to renew token');
       await renewToken(token).then((resp) => newToken = resp);
     } else {
       return false;

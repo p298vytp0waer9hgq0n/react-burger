@@ -21,17 +21,14 @@ export function useAuth () {
       // user is not logged in
       dispatch(setIsLoading(false));
       dispatch(setHasError(false));
-      console.log('not logged in');
       return;
     }
     if (user.userName && res === user.accToken) {
       // user info up to date, no action necessary
-      console.log('no action necessary');
       dispatch(setIsLoading(false));
       dispatch(setHasError(false));
       return;
     }
-    console.log(res);
     getUserDetails(res).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));

@@ -10,7 +10,6 @@ export const socketMiddleware = (url: string, actions: TSocketMiddlewareActionsM
     const { doConnect, onMessage, onError, doSend, onClose, doClose } = actions;
     if (type === doConnect) {
       socket = new WebSocket(payload ? `${url}?token=${payload}` : url);
-      console.log('new socket');
     }
     if (socket) {
       if (type === doSend) {

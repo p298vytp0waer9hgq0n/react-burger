@@ -11,7 +11,6 @@ export default function getNewToken (token: string) {
       'token': token
     })
   }).then((resp) => {
-    console.log('saving new refToken');
     if (resp.refreshToken) setCookie('refToken', resp.refreshToken, { path: '/react-burger' });
     return resp;
   });

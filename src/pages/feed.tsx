@@ -13,10 +13,8 @@ export default function FeedPage () {
   const dispatch = useAppDispatch();
   const { path, url } = useRouteMatch();
   const socketConnect = useRef(false);
-  console.log(path);
 
   useEffect(() => {
-    console.log('socket connect');
     if (!socketConnect.current) dispatch(connectAllOrders());
     return () => {
       // StrictMode
