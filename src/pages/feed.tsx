@@ -11,7 +11,7 @@ import OrderInfoPage from "./order-info";
 
 export default function FeedPage () {
   const dispatch = useAppDispatch();
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const socketConnect = useRef(false);
 
   useEffect(() => {
