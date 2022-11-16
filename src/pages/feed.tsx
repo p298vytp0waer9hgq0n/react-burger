@@ -3,7 +3,6 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { useAppDispatch } from "../components/app/hooks";
 import FeedStats from "../components/feed-stats/feed-stats";
 import Feed from "../components/feed/feed";
-import OrderInfo from "../components/order-info/order-info";
 import { closeAllOrders, connectAllOrders } from "../services/all-orders/all-orders-slice";
 
 import styles from './home.module.css';
@@ -30,12 +29,7 @@ export default function FeedPage () {
       <p>Loading...</p>
     )
   }
-  /* return (
-        <main className={styles.main}>
-          <Feed />
-          <FeedStats />
-        </main>
-  ) */
+
   return (
     <Switch>
       <Route path={`${path}/:id`}>
