@@ -85,6 +85,16 @@ export type TOrdersResponse = {
   totalToday: number;
 }
 
+// export type TSocketMiddlewareActionsMap = Record<('doConnect' | 'onMessage' | 'onError' | 'doSend' | 'onClose' | 'doClose'), string | Function>;
+export type TSocketMiddlewareActionsMap = {
+  doConnect: string;
+  onMessage: Function;
+  onError: Function;
+  doSend: string;
+  onClose: Function;
+  doClose: string;
+}
+
 export type TFeedElementProps = TFeedOrder & { auth?: boolean }
 
 export type TFeedOrder = TOrder & { status: ('done' | 'pending' | 'created') }
