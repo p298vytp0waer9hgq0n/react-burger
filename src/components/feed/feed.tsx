@@ -9,7 +9,7 @@ export default function Feed () {
   const { orders } = useAppSelector((store) => store.allOrders);
   const children = orders.map((order) => {
     return (
-      <Link className={styles.feed__link} key={order._id} to={{pathname: `/feed/${order._id}`}}>
+      <Link className={styles.feed__link} key={order._id} to={{pathname: `/feed/${order._id}`, state: { background: location }}}>
         <FeedElement  {...order} />
       </Link>
     )

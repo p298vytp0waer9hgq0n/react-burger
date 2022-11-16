@@ -26,6 +26,7 @@ import FeedPage from '../../pages/feed';
 import OrderInfoPage from '../../pages/order-info';
 import { TLocationState } from '../../utils/types';
 import { useAppDispatch, useAppSelector } from './hooks';
+import OrderInfo from '../order-info/order-info';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -92,7 +93,7 @@ export default function App() {
         <ProtectedRoute path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
         </ProtectedRoute>
-        <Route path="/feed">
+        <Route exact path="/feed">
           <FeedPage />
         </Route>
         <Route path="*">
@@ -110,6 +111,20 @@ export default function App() {
         <ProtectedRoute auth={true} redirect="/login" path="/order">
           <Modal title="" close={closeModal}>
             <OrderDetail />
+          </Modal>
+        </ProtectedRoute>
+      }
+      {background &&
+        <Route path="/feed/:id">
+          <Modal title="" close={closeModal}>
+            <OrderInfo />
+          </Modal>
+        </Route>
+      }
+      {background &&
+        <ProtectedRoute auth={true} redirect="/login" path="/profile/orders/:id">
+          <Modal title="" close={closeModal}>
+            <OrderInfo />
           </Modal>
         </ProtectedRoute>
       }
