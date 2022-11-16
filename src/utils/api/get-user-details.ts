@@ -1,4 +1,3 @@
-import checkResponse from "../check-response";
 import { baseUrl, userUrl } from "../constants";
 import request from "../request";
 

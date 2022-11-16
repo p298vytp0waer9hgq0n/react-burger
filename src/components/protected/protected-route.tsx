@@ -7,7 +7,7 @@ import { getCookie } from "../../utils/get-cookie";
 import { IProtectedProps, TLocationState } from "../../utils/types";
 
 export default function ProtectedRoute ({ children, path, auth, redirect, ...rest }: IProtectedProps) {
-  const { getUser, user } = useAuth();
+  const { getUser, user: { isLoading, hasError } } = useAuth();
   const location = useLocation<TLocationState>();
 
   const hasAuth = Boolean(getCookie('refToken'));
@@ -16,13 +16,13 @@ export default function ProtectedRoute ({ children, path, auth, redirect, ...res
     getUser();
   }, []);
 
-  if (user.isLoading && !location.state?.background) {
+  if (isLoading && !location.state?.background) {
     return (
       <LoadingPage />
     )
   }
 
-  if (user.hasError) {
+  if (hasError) {
     return (
       <p>error</p>
     )

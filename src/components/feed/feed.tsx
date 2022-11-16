@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import FeedElement from "../feed-element/feed-element";
 
 import styles from './feed.module.css';
 
 export default function Feed () {
+  const location = useLocation();
   const { orders } = useAppSelector((store) => store.allOrders);
   const children = orders.map((order) => {
     return (
-      <Link className={styles.feed__link} key={order._id} to={`/feed/${order._id}`}>
+      <Link className={styles.feed__link} key={order._id} to={{pathname: `/feed/${order._id}`}}>
         <FeedElement  {...order} />
       </Link>
     )

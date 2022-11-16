@@ -89,17 +89,11 @@ export default function App() {
         <ProtectedRoute path="/profile/logout" auth={true} redirect="/login">
           <LogoutPage />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/profile/orders" auth={true} redirect="/login" comeback>
+        <ProtectedRoute path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id" auth={true} redirect="/login" comeback>
-          <OrderInfoPage />
-        </ProtectedRoute>
-        <Route exact path="/feed">
+        <Route path="/feed">
           <FeedPage />
-        </Route>
-        <Route path="/feed/:id">
-          <OrderInfoPage />
         </Route>
         <Route path="*">
           <MissingPage />
@@ -122,3 +116,19 @@ export default function App() {
     </div>
   );
 }
+
+        /* <Route path="/feed/:id">
+          <OrderInfoPage />
+        </Route>
+      {background &&
+        <Route path="/feed/:id">
+          <Modal title="" close={closeModal}>
+            <OrderInfoPage />
+          </Modal>
+        </Route>
+      }
+        <ProtectedRoute path="/profile/orders/:id" auth={true} redirect="/login" comeback>
+          <OrderInfoPage />
+        </ProtectedRoute>
+       */
+

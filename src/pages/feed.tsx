@@ -1,16 +1,22 @@
 import { useEffect, useRef } from "react";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { useAppDispatch } from "../components/app/hooks";
 import FeedStats from "../components/feed-stats/feed-stats";
 import Feed from "../components/feed/feed";
+import OrderInfo from "../components/order-info/order-info";
 import { closeAllOrders, connectAllOrders } from "../services/all-orders/all-orders-slice";
 
 import styles from './home.module.css';
+import OrderInfoPage from "./order-info";
 
 export default function FeedPage () {
   const dispatch = useAppDispatch();
+  const { path, url } = useRouteMatch();
   const socketConnect = useRef(false);
+  console.log(path);
 
   useEffect(() => {
+    console.log('socket connect');
     if (!socketConnect.current) dispatch(connectAllOrders());
     return () => {
       // StrictMode
@@ -21,10 +27,28 @@ export default function FeedPage () {
     }
   }, [dispatch])
 
+  if (!socketConnect) {
+    return (
+      <p>Loading...</p>
+    )
+  }
+  /* return (
+        <main className={styles.main}>
+          <Feed />
+          <FeedStats />
+        </main>
+  ) */
   return (
-    <main className={styles.main}>
-      <Feed />
-      <FeedStats />
-    </main>
+    <Switch>
+      <Route path={`${path}/:id`}>
+        <OrderInfoPage />
+      </Route>
+      <Route path={path}>
+        <main className={styles.main}>
+          <Feed />
+          <FeedStats />
+        </main>
+      </Route>
+    </Switch>
   )
 }

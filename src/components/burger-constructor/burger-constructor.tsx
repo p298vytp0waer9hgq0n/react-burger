@@ -41,7 +41,7 @@ export default function BurgerConstructor () {
       thumbnail={burgerBun.image}
     /> : null;
   const burgerElems = useMemo(() => {
-    return burger.ingredients.map((item: TConstructorIngredient) => {
+    return burger.ingredients.map((item) => {
         return (
           <BurgerConstructorElement key={item.uid} item={item} />
         )

@@ -14,35 +14,43 @@ export function useAuth () {
 
   const { checkToken } = useCheckToken();
 
-  async function getUser () {
+  function getUser () {
     dispatch(setIsLoading(true));
-    const token = checkToken();
-    if (token === false) {
+    checkToken().then((res) => {
+    if (res === false) {
       // user is not logged in
-      return;
-    }
-    if (user.userName && token === user.accToken) {
-      // user info up to date, no action necessary
       dispatch(setIsLoading(false));
+      dispatch(setHasError(false));
+      console.log('not logged in');
       return;
     }
-    getUserDetails(token).then((resp) => {
+    if (user.userName && res === user.accToken) {
+      // user info up to date, no action necessary
+      console.log('no action necessary');
+      dispatch(setIsLoading(false));
+      dispatch(setHasError(false));
+      return;
+    }
+    console.log(res);
+    getUserDetails(res).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));
       dispatch(setIsLoading(false));
+      dispatch(setHasError(false))
       return resp.success;
     }).catch((err) => {
       dispatch(setHasError(true));
       dispatch(setIsLoading(false));
       console.error('Ошибка загрузки профиля пользователя: ', err)
     });
+  });
   }
 
   async function postUser({ username, email, password }: TUser) {
     dispatch(setIsLoading(true));
-    const token = checkToken();
-    if (!token) throw new Error('Token check failed');
-    updateUserInfo({ token, username, email, password }).then((resp) => {
+    checkToken().then((res) => {
+    if (!res) throw new Error('Token check failed');
+    updateUserInfo({ token: res, username, email, password }).then((resp) => {
       dispatch(setUserName(resp.user.name));
       dispatch(setEmail(resp.user.email));
       dispatch(setIsLoading(false));
@@ -51,6 +59,7 @@ export function useAuth () {
         dispatch(setIsLoading(false));
         console.error('Ошибка обновления профиля пользователя: ', err);
       });
+    });
   }
 
   function logoutUser () {

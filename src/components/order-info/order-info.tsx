@@ -8,6 +8,7 @@ import styles from "./order-info.module.css";
 import { useParams } from "react-router-dom";
 import { TCounter, TFeedOrder, TIngredient } from "../../utils/types";
 import { useAppSelector } from "../app/hooks";
+import LoadingPage from "../../pages/loading";
 
 export default function OrderInfo () {
   const {id} = useParams<{ id: string }>();
@@ -16,10 +17,10 @@ export default function OrderInfo () {
   const ingList = useAppSelector((store) => store.ingredients.ingredients);
 
   const order: TFeedOrder = orders.find((ele: TFeedOrder) => ele._id === id) || userOrders.find((ele: TFeedOrder) => ele._id === id)!;
-  const { number, name, status, ingredients, createdAt } = order;
 
   const { elements, total } = useMemo<{ elements: JSX.Element[]; total: number }>(() => {
-    const ingCounter = ingredients.reduce((counter: TCounter, id: string) => {
+    if (!order) return { elements: [], total: 0};
+    const ingCounter = order.ingredients.reduce((counter: TCounter, id: string) => {
       const curCount = counter[id] ?? 0;
       return { ...counter, [id]: curCount + 1 };
     }, {});
@@ -43,17 +44,23 @@ export default function OrderInfo () {
       elements.push(element);
     }
     return { elements, total };
-  }, [ingredients]);
+  }, [order]);
+
+  if (orders.length < 1 && userOrders.length < 1) {
+    return (
+      <LoadingPage />
+    )
+  }
 
   return (
     <section className={`${styles.container} text text_type_main-default`}>
-      <p className={`${styles.number} text_type_digits-default`}>#{number}</p>
-      <h1 className={`${styles.name} text_type_main-medium mt-10 mb-3`}>{name}</h1>
-      <p className={status === 'done' ? styles.success : ''}>{statusText[status]}</p>
+      <p className={`${styles.number} text_type_digits-default`}>#{order.number}</p>
+      <h1 className={`${styles.name} text_type_main-medium mt-10 mb-3`}>{order.name}</h1>
+      <p className={order.status === 'done' ? styles.success : ''}>{statusText[order.status]}</p>
       <h2 className="mt-15">Состав:</h2>
       <div className={`${styles.list} custom-scroll`}>{elements}</div>
       <div className={`${styles.footer} mt-5`}>
-        <p className="text_color_inactive">{convertDate(createdAt)}</p>
+        <p className="text_color_inactive">{convertDate(order.createdAt)}</p>
         <div className={`${styles.price} text_type_digits-default`}>
           <p>{total}</p>
           <CurrencyIcon type="primary" />

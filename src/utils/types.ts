@@ -85,7 +85,6 @@ export type TOrdersResponse = {
   totalToday: number;
 }
 
-// export type TSocketMiddlewareActionsMap = Record<('doConnect' | 'onMessage' | 'onError' | 'doSend' | 'onClose' | 'doClose'), string | Function>;
 export type TSocketMiddlewareActionsMap = {
   doConnect: string;
   onMessage: Function;
