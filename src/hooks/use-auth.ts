@@ -16,9 +16,13 @@ export function useAuth () {
 
   async function getUser () {
     dispatch(setIsLoading(true));
-    const token = await checkToken();
-    if (typeof token !== 'string' || token === user.accToken) {
-      // either user is not logged in or access token is fine, no action necessary
+    const token = checkToken();
+    if (token === false) {
+      // user is not logged in
+      return;
+    }
+    if (user.userName && token === user.accToken) {
+      // user info up to date, no action necessary
       dispatch(setIsLoading(false));
       return;
     }

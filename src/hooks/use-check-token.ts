@@ -15,7 +15,7 @@ export default function useCheckToken() {
     if (token) {
       renewToken(token).then((resp) => newToken = resp);
     } else {
-      return;
+      return false;
     }
     return newToken;
   }
