@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import type {} from 'redux-thunk/extend-redux';
 
 import AppHeader from '../app-header/app-header';
@@ -25,18 +24,21 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetail from '../order-details/order-details';
 import FeedPage from '../../pages/feed';
 import OrderInfoPage from '../../pages/order-info';
+import { TLocationState } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from './hooks';
+import OrderInfo from '../order-info/order-info';
 
 export default function App() {
-  const dispatch = useDispatch();
-  const { isLoading, hasError } = useSelector((store: any) => store.ingredients);
-  const location:any = useLocation();
-  const history:any = useHistory();
+  const dispatch = useAppDispatch();
+  const { isLoading, hasError } = useAppSelector((store) => store.ingredients);
+  const location = useLocation<TLocationState>();
+  const history = useHistory<History>();
   const background = location.state?.background;
   const tokenSent = location.state?.tokenSent;
 
-  const fetchRan = useRef(false); // чтобы фетч не гонял дважды в деве
+  const fetchRan = useRef<boolean>(false); // чтобы фетч не гонял дважды в деве
 
-  function closeModal (evt:any) {
+  function closeModal (evt: React.MouseEvent | React.KeyboardEvent) {
     evt.stopPropagation();
     history.goBack();
   }
@@ -61,7 +63,7 @@ export default function App() {
   return (
     <div className={styles.page}>
       <AppHeader />
-      <Switch location={ background || location }>
+      <Switch location={background ? background : location}>
         <Route exact path="/">
           <HomePage />
         </Route>
@@ -88,17 +90,11 @@ export default function App() {
         <ProtectedRoute path="/profile/logout" auth={true} redirect="/login">
           <LogoutPage />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/profile/orders" auth={true} redirect="/login" comeback>
+        <ProtectedRoute path="/profile/orders" auth={true} redirect="/login" comeback>
           <OrdersPage />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id" auth={true} redirect="/login" comeback>
-          <OrderInfoPage auth={true} />
-        </ProtectedRoute>
-        <Route exact path="/feed">
+        <Route path="/feed">
           <FeedPage />
-        </Route>
-        <Route path="/feed/:id">
-          <OrderInfoPage auth={false} />
         </Route>
         <Route path="*">
           <MissingPage />
@@ -118,6 +114,36 @@ export default function App() {
           </Modal>
         </ProtectedRoute>
       }
+      {background &&
+        <Route path="/feed/:id">
+          <Modal title="" close={closeModal}>
+            <OrderInfo />
+          </Modal>
+        </Route>
+      }
+      {background &&
+        <ProtectedRoute auth={true} redirect="/login" path="/profile/orders/:id">
+          <Modal title="" close={closeModal}>
+            <OrderInfo />
+          </Modal>
+        </ProtectedRoute>
+      }
     </div>
   );
 }
+
+        /* <Route path="/feed/:id">
+          <OrderInfoPage />
+        </Route>
+      {background &&
+        <Route path="/feed/:id">
+          <Modal title="" close={closeModal}>
+            <OrderInfoPage />
+          </Modal>
+        </Route>
+      }
+        <ProtectedRoute path="/profile/orders/:id" auth={true} redirect="/login" comeback>
+          <OrderInfoPage />
+        </ProtectedRoute>
+       */
+
