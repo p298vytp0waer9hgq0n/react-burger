@@ -11,7 +11,7 @@ import BurgerConstructorElement from "../burger-constructor-element/burger-const
 import { dragTypes } from "../../utils/constants";
 
 import styles from './burger-constructor.module.css';
-import { TConstructorIngredient, TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 export default function BurgerConstructor () {
