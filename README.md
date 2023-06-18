@@ -2,10 +2,12 @@
 
 ### Обзор
 
-Страница "react-burger" для седьмого спринта. React/CRA.
+<!-- Страница "react-burger" для седьмого спринта. React/CRA.
 Она же для восьмого спринта. CRA/Redux.
 Она же для девятого спринта. CRA/Redux/React Router.
-Она же для десятого спринта.... CRA/Redux/React Router/TS.
+Она же для десятого спринта.... CRA/Redux/React Router/TS. -->
+
+Учебный проект. Страница-мок онлайн-ресторана Stellar Burger для спринтов с восьмого по десятый. Typescript/React/Redux.
 
 **Figma**
 
