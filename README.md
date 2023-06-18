@@ -7,7 +7,7 @@
 Она же для девятого спринта. CRA/Redux/React Router.
 Она же для десятого спринта.... CRA/Redux/React Router/TS. -->
 
-Учебный проект. Страница-мок онлайн-ресторана Stellar Burger для спринтов с восьмого по десятый. Typescript/React/Redux.
+Учебный проект. Страница-мок онлайн-ресторана Stellar Burger для спринтов с седьмого по десятый. Typescript/React/Redux.
 
 Десктопная вёрстка.
 
